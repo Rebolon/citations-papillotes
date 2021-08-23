@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --hmr",
-    "build": "ng build --configuration production --base-href /",
+    "build": "ng build --configuration production --base-href / && cp -R ./docs/websiteroot/* ./docs/githubpages/ && ./bin/sed-html-base-ref.sh",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
