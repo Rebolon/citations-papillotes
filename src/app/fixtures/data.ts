@@ -470,6 +470,7 @@ const data: FixtureCiteI[] = [
   {cite: `Un mois avant, un mois après Noël, le froid est bon et naturel.`, author: `Proverbe français`, tags: ['adage', 'proverbe', 'noël']},
   {cite: `Noël, c'est le printemps de l'esprit ; c'est tout promesse.`, author: `Alain`, tags: ['noël', 'Emile-Auguste Chartier', 'extrait', `Les saisons de l'esprit`]},
   {cite: `Il ne faut pas chercher à rajouter des années à sa vie, mais plutôt essayer de rajouter de la vie à ses années.`, author: `John Fitzgerald Kennedy`, tags: ['vie']},
+  {cite: `Qu'elle soit nécessaire, ou même justifiée, ne croyez jamais que la guerre n'est pas un crime.`, author: `Ernest Hemingway`, tags: ['guerre', 'crime']},
   // {cite: `.`, author: ``, tags: []},
   ];
 // 2 juillet / 10 juin
