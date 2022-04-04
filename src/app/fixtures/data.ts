@@ -469,6 +469,7 @@ const data: FixtureCiteI[] = [
   {cite: `C'est Noël dans le coeur qui met Noël dans l'air.`, author: `William Thomas Ellis`, tags: ['noël']},
   {cite: `Un mois avant, un mois après Noël, le froid est bon et naturel.`, author: `Proverbe français`, tags: ['adage', 'proverbe', 'noël']},
   {cite: `Noël, c'est le printemps de l'esprit ; c'est tout promesse.`, author: `Alain`, tags: ['noël', 'Emile-Auguste Chartier', 'extrait', `Les saisons de l'esprit`]},
+  {cite: `Il ne faut pas chercher à rajouter des années à sa vie, mais plutôt essayer de rajouter de la vie à ses années.`, author: `John Fitzgerald Kennedy`, tags: ['vie']},
   // {cite: `.`, author: ``, tags: []},
   ];
 // 2 juillet / 10 juin
