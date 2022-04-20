@@ -237,7 +237,7 @@ const data: FixtureCiteI[] = [
   {cite: `Rêver c'est se désintéresser.`, author: `Henri Bergson`},
   {cite: `Quoi que tu rêves d'entreprendre, commence-le. L'audace a du génie, du pouvoir, de la magie.`, author: `Johann Wolfgang Von Goethe`},
   {cite: `En matière de sentiment, le manque de logique est la meilleure preuve de la sincérité.`, author: `Léon Tolstoï`},
-  {cite: `Le défaut de l'égalité, c'est que nous ne la voulons qu'avec nos supérieurs.`, author: `Henri Becquet`},
+  {cite: `Le défaut de l'égalité, c'est que nous ne la voulons qu'avec nos supérieurs.`, author: `Henri Becque`},
   {cite: `Papillon, ce billet doux plié cherche une adresse de fleur.`, author: `Jules Renard`},
   {cite: `Si vous voulez que vos rêves se réalisent, ne dormez pas.`, author: `Proverbe juif`, tags: ['proverbe']},
   {cite: `Si les cieux pleurent, la terre vivra.`, author: `Proverbe hawaiien`, tags: ['proverbe']},
@@ -469,6 +469,7 @@ const data: FixtureCiteI[] = [
   {cite: `C'est Noël dans le coeur qui met Noël dans l'air.`, author: `William Thomas Ellis`, tags: ['noël']},
   {cite: `Un mois avant, un mois après Noël, le froid est bon et naturel.`, author: `Proverbe français`, tags: ['adage', 'proverbe', 'noël']},
   {cite: `Noël, c'est le printemps de l'esprit ; c'est tout promesse.`, author: `Alain`, tags: ['noël', 'Emile-Auguste Chartier', 'extrait', `Les saisons de l'esprit`]},
+  {cite: `Il ne faut pas chercher à rajouter des années à sa vie, mais plutôt essayer de rajouter de la vie à ses années.`, author: `John Fitzgerald Kennedy`, tags: ['vie']},
   {cite: `Qu'elle soit nécessaire, ou même justifiée, ne croyez jamais que la guerre n'est pas un crime.`, author: `Ernest Hemingway`, tags: ['guerre', 'crime']},
   // {cite: `.`, author: ``, tags: []},
   ];
