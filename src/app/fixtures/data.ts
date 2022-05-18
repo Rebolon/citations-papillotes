@@ -306,7 +306,6 @@ const data: FixtureCiteI[] = [
   {cite: `Trois bougies repoussent les ténèbres ; la vérité, la connaissance et les lois de la nature.`, author: `Proverbe celtique`, tags: ['proverbe']},
   {cite: `Aimez les yeux ouverts.`, author: `Jorge Bucay`, tags: ['extrait']},
   {cite: `La beauté des choses existe dans l'esprit de celui qui les contemple.`, author: `David Hume`},
-  {cite: `Une fleur fane même si on l'aime ; une mauvaise herbe croit même si on ne l'aime pas.`, author: `Dögen`},
   {cite: `Lire, c'est voyager ; voyager, c'est lire.`, author: `Victor Hugo`},
   {cite: `Le bonheur n'est pas la destination, mais la manière de voyager.`, author: `Proverbe brésilien`, tags: ['proverbe']},
   {cite: `Un roman, c'est un miroir qu'on promène le long du chemin.`, author: `Stendhal`},
