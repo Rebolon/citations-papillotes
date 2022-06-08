@@ -15,6 +15,7 @@ import {Device} from '../../tools/Device';
 export class ListCitesComponent implements OnInit {
   q: string;
   cites: CiteI[] = [];
+  paginatedCites: CiteI[] = [];
   protected currentPage: number;
   protected itemsPerPage = 12;
 
@@ -51,7 +52,12 @@ export class ListCitesComponent implements OnInit {
 
   protected fillCites(citesList: CiteI[]): void {
     this.cites = [];
-    citesList.forEach(cite => this.cites.push(cite));
+    citesList.forEach((cite, index) => {
+      this.cites.push(cite)
+      if (index < this.itemsPerPage) {
+        this.paginatedCites.push(cite)
+      }
+    });
   }
 
   getCurrentPage(): number {
@@ -64,5 +70,9 @@ export class ListCitesComponent implements OnInit {
 
   getItemsPerPage(): number {
     return this.itemsPerPage;
+  }
+
+  setPaginatedList(ev: CiteI[]): void {
+    this.paginatedCites = ev;
   }
 }

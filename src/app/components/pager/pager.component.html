@@ -1,0 +1,31 @@
+<nav>
+      <ul class="ng-pager nav" aria-label="Pagination">
+        <li>
+          <a (click)="pager.goToFirstPage()" [ngClass]="{disabled: previousIsDisabled()}">
+            <span>{{pager.getPagerItemList().getFirstEdges()[0].label}}</span>
+          </a>
+        </li>
+        <li>
+          <a (click)="pager.goToPreviousPage()" [ngClass]="{disabled: nextIsDisabled()}">
+            <span>{{pager.getPagerItemList().getFirstEdges()[1].label}}</span>
+          </a>
+        </li>
+
+        <li *ngFor="let item of pager.getPagerItemList().getNumbers()">
+          <a (click)="pager.goToPage(item.index)" [ngClass]="{'current': isCurrentPage(item.index)}">
+            <span>{{item.label}}</span>
+          </a>
+        </li>
+
+        <li>
+          <a (click)="pager.goToNextPage()" [ngClass]="{disabled: nextIsDisabled()}">
+            <span>{{pager.getPagerItemList().getLastEdges()[0].label}}</span>
+          </a>
+        </li>
+        <li>
+          <a (click)="pager.goToLastPage()" [ngClass]="{disabled: nextIsDisabled()}">
+            <span>{{pager.getPagerItemList().getLastEdges()[1].label}}</span>
+          </a>
+        </li>
+      </ul>
+</nav>

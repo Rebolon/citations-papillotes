@@ -20,6 +20,7 @@ import {ListCitesByAuthorsComponent} from './components/list-cites-by-authors/li
 import {NavbarDesktopComponent} from './components/navbar-desktop/navbar-desktop.component';
 import {NavbarMobileComponent} from './components/navbar-mobile/navbar-mobile.component';
 import {LinkCitesByAuthorComponent} from './components/link-cites-by-author/link-cites-by-author.component';
+import {PagerComponent} from './components/pager/pager.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {LinkCitesByAuthorComponent} from './components/link-cites-by-author/link
     ListCitesByAuthorsComponent,
     RandomComponent,
     SearchComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    PagerComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
