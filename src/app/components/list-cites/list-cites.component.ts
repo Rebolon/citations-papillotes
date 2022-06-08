@@ -52,6 +52,7 @@ export class ListCitesComponent implements OnInit {
 
   protected fillCites(citesList: CiteI[]): void {
     this.cites = [];
+    this.paginatedCites = [];
     citesList.forEach((cite, index) => {
       this.cites.push(cite)
       if (index < this.itemsPerPage) {

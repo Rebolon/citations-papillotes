@@ -14,6 +14,11 @@ In the last few days, i also added the package @angular/pwa to allow the lightho
 
 I also added ngUniversal for prerendering on /cites and /authors(and ssr if i want to serve page with node-express)
 
+@TODO :
+ * remove ngx-pagination (coz it's still on ng13, and i finally don't really needs it)
+ * externalize app-pager into a standalone component on npm with ng-pager as name
+ * use app-pager in cites by author, authors
+ * improve styles of ng-pager with responsive mode ? in mobile only use next/prev and display currentPage / totalPage
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

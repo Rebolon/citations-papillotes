@@ -1,5 +1,5 @@
 <nav>
-      <ul class="ng-pager nav" aria-label="Pagination">
+      <ul *ngIf="hasList()" class="ng-pager nav" aria-label="Pagination">
         <li>
           <a (click)="pager.goToFirstPage()" [ngClass]="{disabled: previousIsDisabled()}">
             <span>{{pager.getPagerItemList().getFirstEdges()[0].label}}</span>

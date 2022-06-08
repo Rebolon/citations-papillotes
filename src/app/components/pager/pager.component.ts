@@ -40,4 +40,13 @@ export class PagerComponent implements OnInit {
   {
     return this.pager.isCurrentPage(index)
   }
+
+  hasList(): boolean
+  {
+    if (typeof this.list === 'object') {
+      return !!this.list.length
+    }
+
+    return !!this.list
+  }
 }
