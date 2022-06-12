@@ -15,6 +15,7 @@ import {Device} from '../../tools/Device';
 export class ListCitesByAuthorsComponent implements OnInit {
   author: string;
   cites: CiteI[] = [];
+  paginatedCites: CiteI[] = [];
   protected currentPage: number;
   protected itemsPerPage = 10;
 
@@ -41,7 +42,14 @@ export class ListCitesByAuthorsComponent implements OnInit {
 
   protected fillCites(citesList: CiteI[]): void {
     this.cites = [];
-    citesList.forEach(cite => this.cites.push(cite));
+    this.paginatedCites = [];
+    citesList.forEach((cite, index) => {
+      this.cites.push(cite)
+
+      if (index < this.itemsPerPage) {
+        this.paginatedCites.push(cite)
+      }
+    });
   }
 
   getCurrentPage(): number {
@@ -54,5 +62,9 @@ export class ListCitesByAuthorsComponent implements OnInit {
 
   getItemsPerPage(): number {
     return this.itemsPerPage;
+  }
+
+  setPaginatedList(ev: CiteI[]): void {
+    this.paginatedCites = ev;
   }
 }

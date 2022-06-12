@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1652907638539,
+  "timestamp": 1655061505143,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,11 +13,11 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.3c6a7addb2d30188.js",
+        "/main.07ab701fae6ca2d7.js",
         "/manifest.webmanifest",
-        "/polyfills.9f50e8f73873e914.js",
+        "/polyfills.873120cbb7383b80.js",
         "/runtime.e9128f7abcce0a53.js",
-        "/styles.3c16b641508dc4b6.css"
+        "/styles.266b8bba0136067e.css"
       ],
       "patterns": []
     },
@@ -86,12 +86,12 @@
     "/assets/icons/ms-icon-310x310.png": "f33c3bded112fbecea6ca545b2789b1b80f682fc",
     "/assets/icons/ms-icon-70x70.png": "0456d449ef58b6f15d7cf84f16cf1ce4101d009d",
     "/favicon.ico": "800c8aabaf313c4b2a4b109094ba502b51d2b366",
-    "/index.html": "46dd487b8f98709bd05d18e960a6625d9b995cd6",
-    "/main.3c6a7addb2d30188.js": "420d45dd2802a6e4ae5bd36236ce8985fa829b79",
+    "/index.html": "4b6f0f5397cbcbbd7d8a6dd870195c44223e565f",
+    "/main.07ab701fae6ca2d7.js": "7e2de850fe09979f035d4215dea9defe8dadf98e",
     "/manifest.webmanifest": "7b51d6433e9cd72422b49aa28a455e0c57b445d6",
-    "/polyfills.9f50e8f73873e914.js": "ebce67539e55c60b382e04ed63ea45e7b24fa739",
+    "/polyfills.873120cbb7383b80.js": "be9e6e6dd0faec9d01682e4165e322f0a955722d",
     "/runtime.e9128f7abcce0a53.js": "758799ffb6eddd4c1073dd0f7cb25ba0d5fc53f9",
-    "/styles.3c16b641508dc4b6.css": "41e7d83942ed72317c080e6eb7b0c071a3f504e1"
+    "/styles.266b8bba0136067e.css": "b29ad9ff766587d7fd3cd4c6952e684cdcc46f1f"
   },
   "navigationUrls": [
     {

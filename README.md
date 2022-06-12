@@ -16,9 +16,10 @@ I also added ngUniversal for prerendering on /cites and /authors(and ssr if i wa
 
 @TODO :
  * remove ngx-pagination (coz it's still on ng13, and i finally don't really needs it)
- * externalize app-pager into a standalone component on npm with ng-pager as name
+ * externalize app-pager into a standalone component on npm with ng-pager as name (https://jasonwatmore.com/post/2020/06/16/angular-npm-how-to-publish-an-angular-component-to-npm)
  * use app-pager in cites by author, authors
  * improve styles of ng-pager with responsive mode ? in mobile only use next/prev and display currentPage / totalPage
+ * migrate on angular 14 and use standalone component for ng-pager
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

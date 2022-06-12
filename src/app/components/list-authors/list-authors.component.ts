@@ -4,6 +4,7 @@ import {Authors} from '../../services/Cites/Authors';
 import {AuthorI} from '../../models/Authors';
 import {Title} from '@angular/platform-browser';
 import {Device} from '../../tools/Device';
+import {CiteI} from '../../models/Cite';
 
 @Component({
   selector: 'app-list-authors',
@@ -13,6 +14,7 @@ import {Device} from '../../tools/Device';
 })
 export class ListAuthorsComponent implements OnInit {
   authors: AuthorI[] = [];
+  paginatedAuthors: AuthorI[] = [];
   protected currentPage: number;
   protected itemsPerPage = 11;
   protected sort: 'text'|'total' = 'text';
@@ -69,5 +71,9 @@ export class ListAuthorsComponent implements OnInit {
 
   isSortByTotal(): boolean {
     return this.sort === 'total';
+  }
+
+  setPaginatedList(ev: AuthorI[]): void {
+    this.paginatedAuthors = ev;
   }
 }
