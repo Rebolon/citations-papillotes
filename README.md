@@ -12,6 +12,8 @@ But with Angular 11.2, it's more simpler and there is no more needs to all these
 
 In the last few days, i also added the package @angular/pwa to allow the lighthouse benchmark to improve the notation.
 
+I also added ngUniversal for prerendering on /cites and /authors(and ssr if i want to serve page with node-express)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

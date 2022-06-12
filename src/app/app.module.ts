@@ -36,7 +36,7 @@ import {LinkCitesByAuthorComponent} from './components/link-cites-by-author/link
     PageNotFoundComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
     NgxPaginationModule,
