@@ -47,9 +47,9 @@ export class PagerComponent implements OnInit {
   hasList(): boolean
   {
     if (typeof this.list === 'object') {
-      return !!this.list.length
+      return this.pager.getTotalPage() > 1
     }
 
-    return !!this.list
+    return false
   }
 }
