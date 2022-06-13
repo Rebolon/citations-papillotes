@@ -55,10 +55,8 @@ export class ListCitesComponent implements OnInit {
     this.paginatedCites = [];
     citesList.forEach((cite, index) => {
       this.cites.push(cite)
-      if (index < this.itemsPerPage) {
-        this.paginatedCites.push(cite)
-      }
     });
+    this.paginatedCites = this.cites.slice(0, this.itemsPerPage)
   }
 
   getCurrentPage(): number {

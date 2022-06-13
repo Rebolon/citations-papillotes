@@ -143,6 +143,8 @@ export class PagerService implements PagerInterface, PagerNavigationInterface, P
       throw new PageIndexDoesNotExists
     }
 
+    console.log(this, this.currentPage.getValue(), this.getOffset())
+
     return this.currentPage.getValue()
   }
 
@@ -156,6 +158,8 @@ export class PagerService implements PagerInterface, PagerNavigationInterface, P
     this.calculateNextPage()
     this.createIndexList()
     this.buildPagerList()
+
+    console.log(this, this.currentPage.getValue(), this.getOffset())
 
     return this.currentPage.getValue()
   }
@@ -171,6 +175,8 @@ export class PagerService implements PagerInterface, PagerNavigationInterface, P
     this.createIndexList()
     this.buildPagerList()
 
+    console.log(this, this.currentPage.getValue(), this.getOffset())
+
     return this.currentPage.getValue()
   }
 
@@ -185,6 +191,9 @@ export class PagerService implements PagerInterface, PagerNavigationInterface, P
     this.createIndexList()
     this.buildPagerList()
 
+
+    console.log(this, this.currentPage.getValue(), this.getOffset())
+
     return this.currentPage.getValue()
   }
 
@@ -198,6 +207,9 @@ export class PagerService implements PagerInterface, PagerNavigationInterface, P
     this.calculatePreviousPage()
     this.createIndexList()
     this.buildPagerList()
+
+
+    console.log(this, this.currentPage.getValue(), this.getOffset())
 
     return this.currentPage.getValue()
   }

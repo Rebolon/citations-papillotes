@@ -55,7 +55,7 @@ export class ListAuthorsComponent implements OnInit {
         this.authors = next
       },
       complete: () => {
-        this.paginatedAuthors = this.authors.splice(0, this.itemsPerPage)
+        this.paginatedAuthors = this.authors.slice(0, this.itemsPerPage)
       }
     });
   }
@@ -75,7 +75,7 @@ export class ListAuthorsComponent implements OnInit {
         });
       },
       complete: () => {
-        this.paginatedAuthors = this.authors.splice(0, this.itemsPerPage)
+        this.paginatedAuthors = this.authors.slice(0, this.itemsPerPage)
       }});
   }
 
