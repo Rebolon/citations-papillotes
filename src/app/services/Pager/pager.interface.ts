@@ -38,5 +38,5 @@ export interface PagerListInterface {
 export interface PagerOptionsInterface {
   itemPerPage?: number,
   maxPagerItem?: number,
-  firstPage?: number
+  firstPage?: number,
 }

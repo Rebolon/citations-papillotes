@@ -49,20 +49,34 @@ export class ListAuthorsComponent implements OnInit {
 
   sortByAlpha(): void {
     this.sort = 'text';
-    this.authorService.authors$.subscribe(next => this.authors = next);
+
+    this.authorService.authors$.subscribe({
+      next: next => {
+        this.authors = next
+      },
+      complete: () => {
+        this.paginatedAuthors = this.authors.splice(0, this.itemsPerPage)
+      }
+    });
   }
 
   sortByCount(): void {
     this.sort = 'total';
-    this.authorService.authors$.subscribe(next => this.authors = next.sort((a, b) => {
-      if (a.getCount() > b.getCount()) {
-        return -1;
-      }
-      if (a.getCount() < b.getCount()) {
-        return 1;
-      }
-      return 0;
-    }));
+    this.authorService.authors$.subscribe({
+      next: next => {
+        this.authors = next.sort((a, b) => {
+          if (a.getCount() > b.getCount()) {
+            return -1;
+          }
+          if (a.getCount() < b.getCount()) {
+            return 1;
+          }
+          return 0;
+        });
+      },
+      complete: () => {
+        this.paginatedAuthors = this.authors.splice(0, this.itemsPerPage)
+      }});
   }
 
   isSortByText(): boolean {

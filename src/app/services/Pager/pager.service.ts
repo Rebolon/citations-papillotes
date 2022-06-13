@@ -224,10 +224,6 @@ export class PagerService implements PagerInterface, PagerNavigationInterface, P
       this.maxPagerItem = options.maxPagerItem
     }
 
-    if (typeof options.firstPage !== "undefined") {
-      this.setFirstPage(options.firstPage)
-    }
-
     return this;
   }
 

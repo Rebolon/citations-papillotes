@@ -13,9 +13,9 @@ import {Device} from '../../tools/Device';
   providers: [Device]
 })
 export class ListCitesComponent implements OnInit {
-  q: string;
   cites: CiteI[] = [];
   paginatedCites: CiteI[] = [];
+  q: string;
   protected currentPage: number;
   protected itemsPerPage = 12;
 
@@ -32,11 +32,11 @@ export class ListCitesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.citeService.cites$.subscribe((next: CiteI[]) => {
-        this.fillCites(next);
-      });
+    this.citeService.cites$.subscribe({next: (next: CiteI[]) => {
+      this.fillCites(next);
+    }});
 
-    this.route.queryParamMap.subscribe(params => {
+    this.route.queryParamMap.subscribe({next: params => {
       if (!params.get('q')) {
         this.citeService.reset().subscribe();
 
@@ -47,7 +47,7 @@ export class ListCitesComponent implements OnInit {
       this.citeService.search(this.q).pipe(
         tap(next => this.fillCites(next))
       ).subscribe();
-    });
+    }});
   }
 
   protected fillCites(citesList: CiteI[]): void {

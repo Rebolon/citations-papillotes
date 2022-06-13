@@ -7,7 +7,10 @@ import {filter} from 'rxjs/operators';
 @Component({
   selector: 'app-pager',
   templateUrl: './pager.component.html',
-  styleUrls: ['./pager.component.scss']
+  styleUrls: ['./pager.component.scss'],
+  providers: [
+    PagerService
+  ]
 })
 export class PagerComponent implements OnInit {
   @Input() list: Array<any> | number = 0
