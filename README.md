@@ -14,9 +14,9 @@ In the last few days, i also added the package @angular/pwa to allow the lightho
 
 I also added ngUniversal for prerendering on /cites and /authors(and ssr if i want to serve page with node-express)
 Use 
- * npm run prerender to render wished routes
  * npm run build:ssr to generate code with ngUniversal
- * npm run build to generate frontend code 
+ * npm run prerender to render wished routes
+ * optional coz it will remove all docs folder: npm run build to generate frontend code 
 
 @TODO :
  * remove ngx-pagination (coz it's still on ng13, and i finally don't really needs it)
