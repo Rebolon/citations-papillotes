@@ -88,6 +88,8 @@ export class ListAuthorsComponent implements OnInit {
   }
 
   setPaginatedList(ev: AuthorI[]): void {
+    console.log('author', 'setPaginatedList', ev)
+
     this.paginatedAuthors = ev;
   }
 }

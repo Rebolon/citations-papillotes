@@ -46,9 +46,10 @@ export class PagerService implements PagerInterface, PagerNavigationInterface, P
 
   init(list: Array<any> | number, options?: PagerOptionsInterface): void
   {
+    /** Seems to be a source of bug : authors page, swith between alpha and total fails because of this
     if (this.pagerIndexList.length) {
       return
-    }
+    }*/
 
     if (typeof list !== 'object') {
       this.originalList = new Array(list).fill(0);
@@ -58,6 +59,7 @@ export class PagerService implements PagerInterface, PagerNavigationInterface, P
 
     this
       .setOptions(options)
+      .resetPage()
       .setTotalPage(list)
       .calculateLastPage()
       .calculateCurrentPage()
@@ -240,6 +242,13 @@ export class PagerService implements PagerInterface, PagerNavigationInterface, P
     this.firstPage = firstPage >= 0 ? firstPage : this.firstPage;
 
     return this;
+  }
+
+  private resetPage(): PagerService
+  {
+    this.currentPage.next(this.firstPage)
+
+    return this
   }
 
   private calculateLastPage(): PagerService

@@ -62,6 +62,8 @@ export class ListCitesByAuthorsComponent implements OnInit {
   }
 
   setPaginatedList(ev: CiteI[]): void {
+    console.log('cites', 'setPaginatedList', ev)
+
     this.paginatedCites = ev;
   }
 }

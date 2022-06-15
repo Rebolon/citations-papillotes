@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {PagerService} from '../../services/Pager/pager.service';
 import {PagerOptionsInterface} from '../../services/Pager/pager.interface';
 import {BehaviorSubject} from 'rxjs';
@@ -12,7 +12,7 @@ import {filter} from 'rxjs/operators';
     PagerService
   ]
 })
-export class PagerComponent implements OnInit {
+export class PagerComponent implements OnInit, OnChanges {
   @Input() list: Array<any> | number = 0
   @Input() options?: PagerOptionsInterface
   private paginatedList: BehaviorSubject<Array<any>> = new BehaviorSubject(this.pager.getPaginatedList())
@@ -27,6 +27,20 @@ export class PagerComponent implements OnInit {
     this.pager.currentOffset$.subscribe(value => {
       this.paginatedList.next(this.pager.getPaginatedList())
     })
+  }
+
+  // for debug purpose on list input
+  ngOnChanges(changes: SimpleChanges)
+  {
+    if (!changes.list) {
+      return
+    }
+
+    if (changes.list.isFirstChange()) {
+      return
+    }
+
+    this.pager.init(changes.list.currentValue, this.options)
   }
 
   previousIsDisabled(): boolean
