@@ -9,9 +9,6 @@
             'font-normal': isSortByText() === false
           }"
           (click)="sortByAlpha()" title="Trier par nom" [disabled]="isSortByText()">
-    <!--svg class="w-3 h-3 mr-1 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-      <path fill-rule="evenodd"  clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"></path>
-    </svg-->
     Trier par nom
   </button>
 
@@ -21,14 +18,11 @@
             'font-normal': isSortByTotal() === false
           }"
           (click)="sortByCount()" title="Trier par total de citations" [disabled]="isSortByTotal()">
-    <!--svg class="w-3 h-3 mr-1 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-      <path fill-rule="evenodd" clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"></path>
-    </svg-->
     Trier par total
   </button>
 
   <ul class="list-none">
-    <li class="p-1" *ngFor="let item of authors | paginate: { itemsPerPage: getItemsPerPage(), currentPage: getCurrentPage() };">
+    <li class="p-1" *ngFor="let item of paginatedAuthors">
       <a routerLink="/authors/{{item.getName()}}">{{item.getName()}} <small>({{item.getCount()}})</small></a>
     </li>
   </ul>
@@ -37,8 +31,7 @@
 <div class="container">
   <div class="w-full">
     <section id="bottom-navigation" class="block fixed inset-x-0 bottom-10 z-10 bg-white">
-      <!-- pagination on top of cites coz i don't find a way for instance to set a fixed height for cites and put pagination after (for instance the pager moves in height with the number of rows in the cites) -->
-      <pagination-controls (pageChange)="setCurrentPage($event)" responsive="true" autoHide="true" class="p-8"></pagination-controls>
+      <app-pager [list]="authors" [options]="{itemPerPage: getItemsPerPage()}" (paginatedList$)="setPaginatedList($event)"></app-pager>
     </section>
   </div>
 </div>

@@ -8,7 +8,6 @@ import {ListCitesComponent} from './components/list-cites/list-cites.component';
 import {HomeComponent} from './components/home/home.component';
 import {PageNotFoundComponent} from './components/pageNotFound/page-not-found.component';
 import {Cites} from './services/Cites';
-import {NgxPaginationModule} from 'ngx-pagination';
 import {ListAuthorsComponent} from './components/list-authors/list-authors.component';
 import {SearchComponent} from './components/search/search.component';
 import {RandomComponent} from './components/random/random.component';
@@ -20,6 +19,7 @@ import {ListCitesByAuthorsComponent} from './components/list-cites-by-authors/li
 import {NavbarDesktopComponent} from './components/navbar-desktop/navbar-desktop.component';
 import {NavbarMobileComponent} from './components/navbar-mobile/navbar-mobile.component';
 import {LinkCitesByAuthorComponent} from './components/link-cites-by-author/link-cites-by-author.component';
+import {PagerComponent} from './components/pager/pager.component';
 
 @NgModule({
   declarations: [
@@ -33,13 +33,14 @@ import {LinkCitesByAuthorComponent} from './components/link-cites-by-author/link
     ListCitesByAuthorsComponent,
     RandomComponent,
     SearchComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    PagerComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgxPaginationModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable

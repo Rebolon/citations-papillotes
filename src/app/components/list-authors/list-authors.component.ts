@@ -4,6 +4,7 @@ import {Authors} from '../../services/Cites/Authors';
 import {AuthorI} from '../../models/Authors';
 import {Title} from '@angular/platform-browser';
 import {Device} from '../../tools/Device';
+import {CiteI} from '../../models/Cite';
 
 @Component({
   selector: 'app-list-authors',
@@ -13,6 +14,7 @@ import {Device} from '../../tools/Device';
 })
 export class ListAuthorsComponent implements OnInit {
   authors: AuthorI[] = [];
+  paginatedAuthors: AuthorI[] = [];
   protected currentPage: number;
   protected itemsPerPage = 11;
   protected sort: 'text'|'total' = 'text';
@@ -47,20 +49,34 @@ export class ListAuthorsComponent implements OnInit {
 
   sortByAlpha(): void {
     this.sort = 'text';
-    this.authorService.authors$.subscribe(next => this.authors = next);
+
+    this.authorService.authors$.subscribe({
+      next: next => {
+        this.authors = next
+      },
+      complete: () => {
+        this.paginatedAuthors = this.authors.slice(0, this.itemsPerPage)
+      }
+    });
   }
 
   sortByCount(): void {
     this.sort = 'total';
-    this.authorService.authors$.subscribe(next => this.authors = next.sort((a, b) => {
-      if (a.getCount() > b.getCount()) {
-        return -1;
-      }
-      if (a.getCount() < b.getCount()) {
-        return 1;
-      }
-      return 0;
-    }));
+    this.authorService.authors$.subscribe({
+      next: next => {
+        this.authors = next.sort((a, b) => {
+          if (a.getCount() > b.getCount()) {
+            return -1;
+          }
+          if (a.getCount() < b.getCount()) {
+            return 1;
+          }
+          return 0;
+        });
+      },
+      complete: () => {
+        this.paginatedAuthors = this.authors.slice(0, this.itemsPerPage)
+      }});
   }
 
   isSortByText(): boolean {
@@ -69,5 +85,11 @@ export class ListAuthorsComponent implements OnInit {
 
   isSortByTotal(): boolean {
     return this.sort === 'total';
+  }
+
+  setPaginatedList(ev: AuthorI[]): void {
+    console.log('author', 'setPaginatedList', ev)
+
+    this.paginatedAuthors = ev;
   }
 }
