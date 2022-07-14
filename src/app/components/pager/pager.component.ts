@@ -22,6 +22,7 @@ export class PagerComponent implements OnInit, OnChanges {
 
   constructor(public pager: PagerService) { }
 
+  // do i need ngOnInit, or ngOnChanges is enough ?
   ngOnInit(): void {
     this.pager.init(this.list, this.options)
     this.pager.currentOffset$.subscribe(value => {
@@ -29,7 +30,6 @@ export class PagerComponent implements OnInit, OnChanges {
     })
   }
 
-  // for debug purpose on list input
   ngOnChanges(changes: SimpleChanges)
   {
     if (!changes.list) {

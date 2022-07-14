@@ -23,8 +23,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.citesService.cites$.subscribe(next => {
-
-
       this.cite = this.citeOfTheDay.getCiteOfTheDay(next);
     });
   }

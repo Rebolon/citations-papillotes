@@ -74,7 +74,7 @@ export class CiteOfTheDay {
 
     let citeIndex = 0;
     for (let i = 1 ; i <= days ; i++) {
-      if (i === cites.length) {
+      if (citeIndex === cites.length) {
         citeIndex = 0;
         continue;
       }

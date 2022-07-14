@@ -19,8 +19,7 @@ Use
  * optional coz it will remove all docs folder: npm run build to generate frontend code 
 
 @TODO :
- * remove ngx-pagination (coz it's still on ng13, and i finally don't really needs it)
  * externalize app-pager into a standalone component on npm with ng-pager as name (https://jasonwatmore.com/post/2020/06/16/angular-npm-how-to-publish-an-angular-component-to-npm)
  * use app-pager in cites by author, authors
  * improve styles of ng-pager with responsive mode ? in mobile only use next/prev and display currentPage / totalPage
- * migrate on angular 14 and use standalone component for ng-pager
+ * use standalone component of ng14 for ng-pager
