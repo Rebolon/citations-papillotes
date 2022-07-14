@@ -22,8 +22,10 @@ export class HomeComponent implements OnInit {
   cite: CiteI;
 
   ngOnInit(): void {
-    this.citesService.cites$.subscribe(next => {
-      this.cite = this.citeOfTheDay.getCiteOfTheDay(next);
-    });
+    this.citesService.cites$.subscribe({
+      next: (cites) => {
+        this.cite = this.citeOfTheDay.getCiteOfTheDay(cites);
+      }
+    })
   }
 }
