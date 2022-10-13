@@ -3,8 +3,23 @@ import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  template: `
+<div id="app" class="container min-h-screen flex flex-col">
+  <header class="top-0 fixed bg-white w-full">
+    <app-navbar-desktop></app-navbar-desktop>
+  </header>
+
+  <main class="grow p-4 pt-24">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="w-full">
+    <app-navbar-mobile></app-navbar-mobile>
+  </footer>
+
+</div>
+`,
+  styles: [],
 })
 export class AppComponent {
   constructor(

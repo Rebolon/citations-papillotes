@@ -1,5 +1,4 @@
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {debounceTime, filter, map, tap} from 'rxjs/operators';
+import {BehaviorSubject, Observable, Subject, debounceTime, filter} from 'rxjs';
 import {Injectable} from '@angular/core';
 
 @Injectable()

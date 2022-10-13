@@ -1,12 +1,43 @@
 import {Component, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {PagerService} from '../../services/Pager/pager.service';
 import {PagerOptionsInterface} from '../../services/Pager/pager.interface';
-import {BehaviorSubject} from 'rxjs';
-import {filter} from 'rxjs/operators';
+import {BehaviorSubject, filter} from 'rxjs';
 
 @Component({
   selector: 'app-pager',
-  templateUrl: './pager.component.html',
+  template: `
+<nav>
+  <ul *ngIf="hasList()" class="ng-pager nav" aria-label="Pagination">
+    <li class="w-12">
+      <a (click)="pager.goToFirstPage()" [ngClass]="{'disabled': previousIsDisabled()}">
+        <span>{{pager.getPagerItemList().getFirstEdges()[0].label}}</span>
+      </a>
+    </li>
+    <li class="w-12">
+      <a (click)="pager.goToPreviousPage()" [ngClass]="{'disabled': previousIsDisabled()}">
+        <span>{{pager.getPagerItemList().getFirstEdges()[1].label}}</span>
+      </a>
+    </li>
+
+    <li  class="w-12" *ngFor="let item of pager.getPagerItemList().getNumbers()">
+      <a (click)="pager.goToPage(item.index)" [ngClass]="{'current': isCurrentPage(item.index)}">
+        <span>{{item.label}}</span>
+      </a>
+    </li>
+
+    <li class="w-12">
+      <a (click)="pager.goToNextPage()" [ngClass]="{disabled: nextIsDisabled()}">
+        <span>{{pager.getPagerItemList().getLastEdges()[0].label}}</span>
+      </a>
+    </li>
+    <li class="w-12">
+      <a (click)="pager.goToLastPage()" [ngClass]="{disabled: nextIsDisabled()}">
+        <span>{{pager.getPagerItemList().getLastEdges()[1].label}}</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+`,
   styleUrls: ['./pager.component.scss'],
   providers: [
     PagerService
@@ -26,18 +57,18 @@ export class PagerComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.pager.init(this.list, this.options)
     this.pager.currentOffset$.subscribe(value => {
-      this.paginatedList.next(this.pager.getPaginatedList())
-    })
+      this.paginatedList.next(this.pager.getPaginatedList());
+    });
   }
 
   ngOnChanges(changes: SimpleChanges)
   {
     if (!changes.list) {
-      return
+      return;
     }
 
     if (changes.list.isFirstChange()) {
-      return
+      return;
     }
 
     this.pager.init(changes.list.currentValue, this.options)
@@ -55,15 +86,15 @@ export class PagerComponent implements OnInit, OnChanges {
 
   isCurrentPage(index: number): boolean
   {
-    return this.pager.isCurrentPage(index)
+    return this.pager.isCurrentPage(index);
   }
 
   hasList(): boolean
   {
     if (typeof this.list === 'object') {
-      return this.pager.getTotalPage() > 1
+      return this.pager.getTotalPage() > 1;
     }
 
-    return false
+    return false;
   }
 }

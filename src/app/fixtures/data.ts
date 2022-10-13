@@ -1,5 +1,4 @@
-import {from, Observable, of, distinct} from 'rxjs';
-import {map, take, toArray} from 'rxjs/operators';
+import {from, Observable, of, distinct, map, take, toArray} from 'rxjs';
 import {Cite, CiteI} from '../models/Cite';
 
 declare type FixtureCiteI = {
