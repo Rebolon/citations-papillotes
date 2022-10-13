@@ -6,8 +6,17 @@ import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-random',
-  templateUrl: './random.component.html',
-  styleUrls: [],
+  template: `
+<h1 *ngIf="cite"
+    class="my-4 text-3xl md:text-5xl text-violet-800 font-bold leading-tight text-center md:text-left slide-in-bottom-h1">
+  {{cite.getCite()}}
+</h1>
+<p *ngIf="cite"
+   class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left slide-in-bottom-subtitle">
+  <app-link-cites-by-author [author]="cite.getAuthor()"></app-link-cites-by-author>
+</p>
+`,
+  styles: [],
 })
 export class RandomComponent implements OnInit {
   cites: CiteI[];

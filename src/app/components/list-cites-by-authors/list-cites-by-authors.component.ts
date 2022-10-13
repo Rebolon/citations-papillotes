@@ -2,22 +2,44 @@ import {Component, OnInit} from '@angular/core';
 import {CiteI} from '../../models/Cite';
 import {ActivatedRoute} from '@angular/router';
 import {Cites} from '../../services/Cites';
-import {tap} from 'rxjs/operators';
 import {Title} from '@angular/platform-browser';
 import {Device} from '../../tools/Device';
+import {BasePaginatedComponent} from '../common/BasePaginatedComponent';
 
 @Component({
   selector: 'app-list-cites-by-authors',
-  templateUrl: './list-cites-by-authors.component.html',
-  styleUrls: [],
+  template: `
+<div class="container mb-36">
+  <h1 class="text-3xl font-bold text-stone-900 mb-2"
+    *ngIf="author" [ngPlural]="cites.length">
+    <ng-template ngPluralCase="=0">Aucune citation de "{{author}}"&nbsp;</ng-template>
+    <ng-template ngPluralCase="=1">{{cites.length}} citation de "{{author}}":&nbsp;</ng-template>
+    <ng-template ngPluralCase="other">{{cites.length}} citations de "{{author}}":&nbsp;</ng-template>
+  </h1>
+
+  <ul class="list-none">
+    <li *ngFor="let item of paginatedCites; trackBy: trackByCiteId"
+        class="p-1">
+      <cite>”{{item.getCite()}}”</cite>
+    </li>
+  </ul>
+</div>
+
+<div class="container">
+  <div class="w-full">
+    <section id="bottom-navigation" class="block fixed inset-x-0 bottom-10 z-10 bg-white">
+      <app-pager [list]="cites" [options]="{itemPerPage: getItemsPerPage()}" (paginatedList$)="setPaginatedList($event)"></app-pager>
+    </section>
+  </div>
+</div>
+`,
+  styles: [],
   providers: [Device]
 })
-export class ListCitesByAuthorsComponent implements OnInit {
+export class ListCitesByAuthorsComponent extends BasePaginatedComponent implements OnInit {
   author: string;
   cites: CiteI[] = [];
   paginatedCites: CiteI[] = [];
-  protected currentPage: number;
-  protected itemsPerPage = 10;
 
   constructor(
     protected route: ActivatedRoute,
@@ -25,7 +47,9 @@ export class ListCitesByAuthorsComponent implements OnInit {
     protected title: Title,
     protected device: Device
   ) {
+    super();
     this.title.setTitle('Citations - Liste des citations');
+    this.itemsPerPage = 10;
     if (device.isMobile()) {
       this.itemsPerPage = 4;
     }
@@ -34,9 +58,9 @@ export class ListCitesByAuthorsComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.author = params.get('author');
-      this.citeService.searchByAuthor(this.author).pipe(
-        tap(next => this.fillCites(next))
-      ).subscribe();
+      this.citeService.searchByAuthor(this.author).subscribe(
+        next => this.fillCites(next)
+      );
     });
   }
 
@@ -49,21 +73,11 @@ export class ListCitesByAuthorsComponent implements OnInit {
     this.paginatedCites = this.cites.slice(0, this.itemsPerPage)
   }
 
-  getCurrentPage(): number {
-    return this.currentPage;
-  }
-
-  setCurrentPage(event): void {
-    this.currentPage = event;
-  }
-
-  getItemsPerPage(): number {
-    return this.itemsPerPage;
+  protected trackByCiteId(index, cite: CiteI): number {
+    return cite.getId();
   }
 
   setPaginatedList(ev: CiteI[]): void {
-    console.log('cites', 'setPaginatedList', ev)
-
     this.paginatedCites = ev;
   }
 }

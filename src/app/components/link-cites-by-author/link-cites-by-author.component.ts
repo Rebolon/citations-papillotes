@@ -2,7 +2,13 @@ import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-link-cites-by-author',
-  templateUrl: './link-cites-by-author.component.html',
+  template: `
+<a routerLink="/authors/{{author}}"
+   title="Liste des citations de {{author}}"
+   attr.aria-label="Liste des citations de {{author}}">
+   {{author}}
+</a>
+`,
   styleUrls: [],
 })
 export class LinkCitesByAuthorComponent {

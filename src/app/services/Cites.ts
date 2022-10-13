@@ -1,7 +1,6 @@
-import {BehaviorSubject, EMPTY, from, Observable, of} from 'rxjs';
+import {BehaviorSubject, EMPTY, from, Observable, of, distinct, filter, map, switchMap, take, tap, toArray} from 'rxjs';
 import {cites} from '../fixtures/data';
 import {Cite, CiteI} from '../models/Cite';
-import {distinct, filter, map, switchMap, take, tap, toArray} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 

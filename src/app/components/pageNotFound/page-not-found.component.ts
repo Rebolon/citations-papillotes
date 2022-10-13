@@ -7,6 +7,6 @@ import {Title} from '@angular/platform-browser';
 })
 export class PageNotFoundComponent {
   constructor(protected title: Title) {
-    this.title.setTitle('Citations - Page non trouvée')
+    this.title.setTitle('Citations - Page non trouvée');
   }
 }
