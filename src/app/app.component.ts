@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {Title} from '@angular/platform-browser';
+import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -22,9 +22,7 @@ import {Title} from '@angular/platform-browser';
   styles: [],
 })
 export class AppComponent {
-  constructor(
-    public title: Title
-  ) {
+  constructor(public title: Title) {
     this.title.setTitle('Liste de Citations');
   }
 }

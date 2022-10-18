@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {BaseNavbarComponent} from '../common/BaseNavbarComponent';
+import { Component } from '@angular/core';
+import { BaseNavbarComponent } from '../common/BaseNavbarComponent';
 
 @Component({
   selector: 'app-navbar-mobile',
@@ -55,4 +55,4 @@ import {BaseNavbarComponent} from '../common/BaseNavbarComponent';
 `,
   styles: []
 })
-export class NavbarMobileComponent extends BaseNavbarComponent { }
+export class NavbarMobileComponent extends BaseNavbarComponent {}

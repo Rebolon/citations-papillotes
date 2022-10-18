@@ -1,6 +1,13 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {fromEvent, Subject, debounceTime, map, takeUntil, tap} from 'rxjs';
-import {ActivatedRoute, Router} from '@angular/router';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { fromEvent, Subject, debounceTime, map, takeUntil, tap } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -22,12 +29,14 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   // #1 the properties that will clear Observable
   protected ngUnsubscribe: Subject<void> = new Subject();
 
-  constructor(protected activatedRouter: ActivatedRoute, protected router: Router) {
-  }
+  constructor(
+    protected activatedRouter: ActivatedRoute,
+    protected router: Router
+  ) {}
 
   ngOnInit(): any {
     // reset q input when route change
-    this.activatedRouter.queryParamMap.subscribe(params => {
+    this.activatedRouter.queryParamMap.subscribe((params) => {
       if (!params.get('q')) {
         this.elSearchCite.nativeElement.value = '';
 

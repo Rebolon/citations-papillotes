@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {CiteI} from '../../models/Cite';
-import {ActivatedRoute} from '@angular/router';
-import {Cites} from '../../services/Cites';
-import {Title} from '@angular/platform-browser';
-import {Device} from '../../tools/Device';
+import { Component, OnInit } from '@angular/core';
+import { CiteI } from '../../models/Cite';
+import { ActivatedRoute } from '@angular/router';
+import { Cites } from '../../services/Cites';
+import { Title } from '@angular/platform-browser';
+import { Device } from '../../tools/Device';
 import {BasePaginatedComponent} from '../common/BasePaginatedComponent';
 
 @Component({
@@ -56,7 +56,7 @@ export class ListCitesByAuthorsComponent extends BasePaginatedComponent implemen
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       this.author = params.get('author');
       this.citeService.searchByAuthor(this.author).subscribe(
         next => this.fillCites(next)
@@ -68,9 +68,9 @@ export class ListCitesByAuthorsComponent extends BasePaginatedComponent implemen
     this.cites = [];
     this.paginatedCites = [];
     citesList.forEach((cite, index) => {
-      this.cites.push(cite)
+      this.cites.push(cite);
     });
-    this.paginatedCites = this.cites.slice(0, this.itemsPerPage)
+    this.paginatedCites = this.cites.slice(0, this.itemsPerPage);
   }
 
   protected trackByCiteId(index, cite: CiteI): number {

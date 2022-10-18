@@ -23,5 +23,14 @@ e2e:
 start:
 	docker run -it --rm -w /app -p 4200:4200  -v $(CUR_DIR):/app $(CONTAINER_NAME) npm run start
 
+dev-ssr:
+	docker run -it --rm -w /app -p 4200:4200  -v $(CUR_DIR):/app $(CONTAINER_NAME) npm run dev:ssr
+
+serve-ssr:
+	docker run -it --rm -w /app -p 4200:4200  -v $(CUR_DIR):/app $(CONTAINER_NAME) npm run serve:ssr
+
+build-ssr:
+	docker run -it --rm -w /app -p 4200:4200  -v $(CUR_DIR):/app $(CONTAINER_NAME) npm run build:ssr
+
 clean:
 	rm -rf .angular/cache/*

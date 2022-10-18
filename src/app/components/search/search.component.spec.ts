@@ -5,12 +5,8 @@ import { SearchComponent } from './search.component';
 describe('SearchComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        SearchComponent
-      ],
+      imports: [RouterTestingModule],
+      declarations: [SearchComponent],
     }).compileComponents();
   });
 
@@ -24,6 +20,8 @@ describe('SearchComponent', () => {
     const fixture = TestBed.createComponent(SearchComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('angular-citations app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain(
+      'angular-citations app is running!'
+    );
   });
 });

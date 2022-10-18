@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {Title} from '@angular/platform-browser';
-import {CiteI} from '../../models/Cite';
-import {Cites} from '../../services/Cites';
-import {CiteOfTheDay} from '../../tools/CiteOfTheDay.service';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { CiteI } from '../../models/Cite';
+import { Cites } from '../../services/Cites';
+import { CiteOfTheDay } from '../../tools/CiteOfTheDay.service';
 
 @Component({
   selector: 'app-home',
@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
     this.citesService.cites$.subscribe({
       next: (cites) => {
         this.cite = this.citeOfTheDay.getCiteOfTheDay(cites);
-      }
+      },
     });
   }
 }

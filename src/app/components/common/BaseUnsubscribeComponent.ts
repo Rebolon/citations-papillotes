@@ -1,11 +1,10 @@
-import {Component, OnDestroy} from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  template: ''
+  template: '',
 })
-export abstract class BaseUnsubscribeComponent<T = any> implements OnDestroy
-{
+export abstract class BaseUnsubscribeComponent<T = any> implements OnDestroy {
   protected subscriptions: Subscription[] = [];
 
   ngOnDestroy(): void {

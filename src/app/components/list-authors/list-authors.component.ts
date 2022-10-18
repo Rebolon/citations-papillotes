@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Authors} from '../../services/Cites/Authors';
-import {AuthorI} from '../../models/Authors';
-import {Title} from '@angular/platform-browser';
-import {Device} from '../../tools/Device';
-import {CiteI} from '../../models/Cite';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Authors } from '../../services/Cites/Authors';
+import { AuthorI } from '../../models/Authors';
+import { Title } from '@angular/platform-browser';
+import { Device } from '../../tools/Device';
+import { CiteI } from '../../models/Cite';
 import {BasePaginatedComponent} from '../common/BasePaginatedComponent';
 
 @Component({
@@ -54,7 +54,9 @@ import {BasePaginatedComponent} from '../common/BasePaginatedComponent';
 export class ListAuthorsComponent extends BasePaginatedComponent implements OnInit {
   authors: AuthorI[] = [];
   paginatedAuthors: AuthorI[] = [];
-  protected sort: 'text'|'total' = 'text';
+  protected currentPage: number;
+  protected itemsPerPage = 11;
+  protected sort: 'text' | 'total' = 'text';
 
   constructor(
     protected route: ActivatedRoute,
@@ -78,19 +80,19 @@ export class ListAuthorsComponent extends BasePaginatedComponent implements OnIn
     this.sort = 'text';
 
     this.authorService.authors$.subscribe({
-      next: next => {
-        this.authors = next
+      next: (next) => {
+        this.authors = next;
       },
       complete: () => {
-        this.paginatedAuthors = this.authors.slice(0, this.itemsPerPage)
-      }
+        this.paginatedAuthors = this.authors.slice(0, this.itemsPerPage);
+      },
     });
   }
 
   sortByCount(): void {
     this.sort = 'total';
     this.authorService.authors$.subscribe({
-      next: next => {
+      next: (next) => {
         this.authors = next.sort((a, b) => {
           if (a.getCount() > b.getCount()) {
             return -1;
@@ -102,8 +104,9 @@ export class ListAuthorsComponent extends BasePaginatedComponent implements OnIn
         });
       },
       complete: () => {
-        this.paginatedAuthors = this.authors.slice(0, this.itemsPerPage)
-      }});
+        this.paginatedAuthors = this.authors.slice(0, this.itemsPerPage);
+      },
+    });
   }
 
   isSortByText(): boolean {

@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {CiteI} from '../../models/Cite';
-import {ActivatedRoute} from '@angular/router';
-import {Cites} from '../../services/Cites';
-import {Title} from '@angular/platform-browser';
-import {Device} from '../../tools/Device';
+import { Component, OnInit } from '@angular/core';
+import { CiteI } from '../../models/Cite';
+import { ActivatedRoute } from '@angular/router';
+import { Cites } from '../../services/Cites';
+import { Title } from '@angular/platform-browser';
+import { Device } from '../../tools/Device';
 import {BasePaginatedComponent} from '../common/BasePaginatedComponent';
 
 @Component({
@@ -58,16 +58,19 @@ export class ListCitesComponent extends BasePaginatedComponent implements OnInit
   }
 
   ngOnInit(): void {
-    this.citeService.cites$.subscribe({next: (next: CiteI[]) => {
-      this.fillCites(next);
-    }});
+    this.citeService.cites$.subscribe({
+      next: (next: CiteI[]) => {
+        this.fillCites(next);
+      },
+    });
 
-    this.route.queryParamMap.subscribe({next: params => {
-      if (!params.get('q')) {
-        this.citeService.reset().subscribe();
+    this.route.queryParamMap.subscribe({
+      next: (params) => {
+        if (!params.get('q')) {
+          this.citeService.reset().subscribe();
 
-        return;
-      }
+          return;
+        }
 
       this.q = params.get('q');
       this.citeService.search(this.q)

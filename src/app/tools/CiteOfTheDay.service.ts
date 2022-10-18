@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {CiteI} from '../models/Cite';
+import { Injectable } from '@angular/core';
+import { CiteI } from '../models/Cite';
 
 @Injectable()
 export class CiteOfTheDay {
@@ -15,7 +15,10 @@ export class CiteOfTheDay {
 
     const startYearDate = new Date();
     startYearDate.setFullYear(
-      parseInt((new Date()).getFullYear().toString(10).substr(0, substrLength) + padding, 0)
+      parseInt(
+        new Date().getFullYear().toString(10).substr(0, substrLength) + padding,
+        0
+      )
     );
 
     return startYearDate.getFullYear();
@@ -29,7 +32,7 @@ export class CiteOfTheDay {
   }
 
   static getLastDayOfMonth(iYear: number, jMonth: number): number {
-    return (new Date(iYear, jMonth + 1, 0)).getDate();
+    return new Date(iYear, jMonth + 1, 0).getDate();
   }
 
   static getNumberOfDayInCurrentYear(today: Date, iYear: number): number {
@@ -50,12 +53,15 @@ export class CiteOfTheDay {
     const currentYear = aDate.getFullYear();
 
     if (currentYear === startYear) {
-      years[currentYear] = CiteOfTheDay.getNumberOfDayInCurrentYear(aDate, currentYear);
+      years[currentYear] = CiteOfTheDay.getNumberOfDayInCurrentYear(
+        aDate,
+        currentYear
+      );
 
       return years;
     }
 
-    for (let iYear = startYear ; iYear <= currentYear ; iYear++) {
+    for (let iYear = startYear; iYear <= currentYear; iYear++) {
       if (iYear === currentYear) {
         years[iYear] = CiteOfTheDay.getNumberOfDayInCurrentYear(aDate, iYear);
         break;
@@ -73,7 +79,7 @@ export class CiteOfTheDay {
     const days = years.reduce((previous, current) => previous + current);
 
     let citeIndex = 0;
-    for (let i = 1 ; i <= days ; i++) {
+    for (let i = 1; i <= days; i++) {
       if (citeIndex === cites.length) {
         citeIndex = 0;
         continue;

@@ -1,7 +1,14 @@
-import {Component, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {PagerService} from '../../services/Pager/pager.service';
-import {PagerOptionsInterface} from '../../services/Pager/pager.interface';
-import {BehaviorSubject, filter} from 'rxjs';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { PagerService } from '../../services/Pager/pager.service';
+import { PagerOptionsInterface } from '../../services/Pager/pager.interface';
+import { BehaviorSubject, filter } from 'rxjs';
 
 @Component({
   selector: 'app-pager',
@@ -44,14 +51,16 @@ import {BehaviorSubject, filter} from 'rxjs';
   ]
 })
 export class PagerComponent implements OnInit, OnChanges {
-  @Input() list: Array<any> | number = 0
-  @Input() options?: PagerOptionsInterface
-  private paginatedList: BehaviorSubject<Array<any>> = new BehaviorSubject(this.pager.getPaginatedList())
-  @Output() paginatedList$ = this.paginatedList.asObservable().pipe(
-    filter(value => !!value)
-  )
+  @Input() list: Array<any> | number = 0;
+  @Input() options?: PagerOptionsInterface;
+  private paginatedList: BehaviorSubject<Array<any>> = new BehaviorSubject(
+    this.pager.getPaginatedList()
+  );
+  @Output() paginatedList$ = this.paginatedList
+    .asObservable()
+    .pipe(filter((value) => !!value));
 
-  constructor(public pager: PagerService) { }
+  constructor(public pager: PagerService) {}
 
   // do i need ngOnInit, or ngOnChanges is enough ?
   ngOnInit(): void {
@@ -61,8 +70,7 @@ export class PagerComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges)
-  {
+  ngOnChanges(changes: SimpleChanges) {
     if (!changes.list) {
       return;
     }
@@ -71,26 +79,22 @@ export class PagerComponent implements OnInit, OnChanges {
       return;
     }
 
-    this.pager.init(changes.list.currentValue, this.options)
+    this.pager.init(changes.list.currentValue, this.options);
   }
 
-  previousIsDisabled(): boolean
-  {
-    return this.pager.getCurrentPage() === this.pager.getPreviousPage()
+  previousIsDisabled(): boolean {
+    return this.pager.getCurrentPage() === this.pager.getPreviousPage();
   }
 
-  nextIsDisabled(): boolean
-  {
-    return this.pager.getCurrentPage() === this.pager.getNextPage()
+  nextIsDisabled(): boolean {
+    return this.pager.getCurrentPage() === this.pager.getNextPage();
   }
 
-  isCurrentPage(index: number): boolean
-  {
+  isCurrentPage(index: number): boolean {
     return this.pager.isCurrentPage(index);
   }
 
-  hasList(): boolean
-  {
+  hasList(): boolean {
     if (typeof this.list === 'object') {
       return this.pager.getTotalPage() > 1;
     }
