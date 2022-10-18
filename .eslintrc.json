@@ -4,7 +4,7 @@
     "projects/**/*"
   ],
   "rules": {
-    "max-len": ["error", { "code": 120, "tabWidth": 4 }]
+    "max-len": ["error", { "code": 120, "tabWidth": 2 }]
   },
   "overrides": [
     {
