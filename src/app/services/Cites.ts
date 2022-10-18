@@ -10,7 +10,8 @@ import {
   switchMap,
   take,
   tap,
-  toArray, } from 'rxjs';
+  toArray,
+} from 'rxjs';
 import { cites } from '../fixtures/data';
 import { Cite, CiteI } from '../models/Cite';
 import { Injectable } from '@angular/core';

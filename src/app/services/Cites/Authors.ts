@@ -11,7 +11,7 @@ import {
   skipUntil,
   switchMap,
   take,
-  toArray
+  toArray,
 } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Cites } from '../Cites';
