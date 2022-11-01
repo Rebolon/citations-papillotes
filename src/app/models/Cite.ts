@@ -2,11 +2,11 @@ export interface CiteI {
   getId(): number;
   getAuthor(): string;
   getCite(): string;
-  getTags(): Array<string|null>;
+  getTags(): Array<string | null>;
   setId(id: number): CiteI;
   setAuthor(author: string): CiteI;
   setCite(cite: string): CiteI;
-  setTags(tags: Array<string|null>): CiteI;
+  setTags(tags: Array<string | null>): CiteI;
   addTag(tag: string): CiteI;
   hasTags(): boolean;
 }
@@ -51,11 +51,11 @@ export class Cite implements CiteI {
     return this;
   }
 
-  getTags(): Array<string|null> {
+  getTags(): Array<string | null> {
     return this.tags;
   }
 
-  setTags(tags: Array<string|null> = []): CiteI {
+  setTags(tags: Array<string | null> = []): CiteI {
     this.tags = tags;
 
     return this;

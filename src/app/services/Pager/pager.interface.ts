@@ -21,22 +21,22 @@ export interface PagerNavigationInterface {
 
 export interface PagerTemplateInterface {
   getPagerIndexList(): Array<number>;
-  getPagerItemList(): PagerListPartsInterface
+  getPagerItemList(): PagerListPartsInterface;
 }
 
 export interface PagerListPartsInterface {
-  getFirstEdges(): Array<PagerListInterface>
-  getLastEdges(): Array<PagerListInterface>
-  getNumbers(): Array<PagerListInterface>
-  getAll(): Array<PagerListInterface>
+  getFirstEdges(): Array<PagerListInterface>;
+  getLastEdges(): Array<PagerListInterface>;
+  getNumbers(): Array<PagerListInterface>;
+  getAll(): Array<PagerListInterface>;
 }
 export interface PagerListInterface {
-  index: number,
-  label: string
+  index: number;
+  label: string;
 }
 
 export interface PagerOptionsInterface {
-  itemPerPage?: number,
-  maxPagerItem?: number,
-  firstPage?: number,
+  itemPerPage?: number;
+  maxPagerItem?: number;
+  firstPage?: number;
 }

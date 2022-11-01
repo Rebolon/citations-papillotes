@@ -7,9 +7,8 @@ describe('LinkCitesByAuthorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LinkCitesByAuthorComponent ]
-    })
-    .compileComponents();
+      declarations: [LinkCitesByAuthorComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

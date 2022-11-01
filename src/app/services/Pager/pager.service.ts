@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import {
   PagerInterface,
   PagerListInterface,
-  PagerListPartsInterface, PagerNavigationInterface,
+  PagerListPartsInterface,
+  PagerNavigationInterface,
   PagerOptionsInterface,
-  PagerTemplateInterface
+  PagerTemplateInterface,
 } from './pager.interface';
-import {PagerListParts} from './pager-list-parts';
-import {BehaviorSubject, filter, map} from 'rxjs';
+import { PagerListParts } from './pager-list-parts';
+import { BehaviorSubject, filter, map } from 'rxjs';
 
 export class TotalPageNotSet extends Error {}
 export class FirstPageNotSet extends Error {}
@@ -18,9 +19,11 @@ export class PagerAlreadyInitialized extends Error {}
 export class PageIndexDoesNotExists extends Error {}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class PagerService implements PagerInterface, PagerNavigationInterface, PagerTemplateInterface {
+export class PagerService
+  implements PagerInterface, PagerNavigationInterface, PagerTemplateInterface
+{
   private originalList = [];
   private itemPerPage = 5;
   private maxPagerItem = 5;
@@ -31,21 +34,21 @@ export class PagerService implements PagerInterface, PagerNavigationInterface, P
   private nextPage = 1;
   private currentPage = new BehaviorSubject(1);
   private pagerIndexList: Array<number> = [];
-  private pagerItemList: PagerListPartsInterface = {} as PagerListPartsInterface;
-  public currentPage$ = this.currentPage.asObservable().pipe(
-    filter(value => !!value),
-  )
+  private pagerItemList: PagerListPartsInterface =
+    {} as PagerListPartsInterface;
+  public currentPage$ = this.currentPage
+    .asObservable()
+    .pipe(filter((value) => !!value));
   public currentOffset$ = this.currentPage.asObservable().pipe(
-    filter(value => !!value),
-    map(value => {
-      return this.getOffsetForPage(value)
+    filter((value) => !!value),
+    map((value) => {
+      return this.getOffsetForPage(value);
     })
-  )
+  );
 
   constructor() {}
 
-  init(list: Array<any> | number, options?: PagerOptionsInterface): void
-  {
+  init(list: Array<any> | number, options?: PagerOptionsInterface): void {
     /** Seems to be a source of bug : authors page, swith between alpha and total fails because of this
     if (this.pagerIndexList.length) {
       return
@@ -57,8 +60,7 @@ export class PagerService implements PagerInterface, PagerNavigationInterface, P
       this.originalList = list;
     }
 
-    this
-      .setOptions(options)
+    this.setOptions(options)
       .resetPage()
       .setTotalPage(list)
       .calculateLastPage()
@@ -66,142 +68,132 @@ export class PagerService implements PagerInterface, PagerNavigationInterface, P
       .calculatePreviousPage()
       .calculateNextPage()
       .createIndexList()
-      .buildPagerList()
+      .buildPagerList();
   }
 
-  isCurrentPage(pageIndex: number): boolean
-  {
+  isCurrentPage(pageIndex: number): boolean {
     return this.currentPage.getValue() === pageIndex;
   }
 
-  getOffset(): number
-  {
+  getOffset(): number {
     return this.getOffsetForPage(this.getCurrentPage());
   }
 
-  getOffsetForPage(page: number): number
-  {
+  getOffsetForPage(page: number): number {
     if (page < this.firstPage) {
-      throw new PageRequestedIsLessThanFirstPage
+      throw new PageRequestedIsLessThanFirstPage();
     }
 
     if (page === this.firstPage) {
-      return 0
+      return 0;
     }
 
-    return (page-1) * this.itemPerPage;
+    return (page - 1) * this.itemPerPage;
   }
 
-  getTotalPage(): number
-  {
+  getTotalPage(): number {
     return this.totalPage;
   }
 
-  getFirstPage(): number
-  {
+  getFirstPage(): number {
     return this.firstPage;
   }
 
-  getLastPage(): number
-  {
+  getLastPage(): number {
     return this.lastPage;
   }
 
-  getCurrentPage(): number
-  {
+  getCurrentPage(): number {
     return this.currentPage.getValue();
   }
 
-  getPreviousPage(): number
-  {
+  getPreviousPage(): number {
     return this.previousPage;
   }
 
-  getNextPage(): number
-  {
+  getNextPage(): number {
     return this.nextPage;
   }
 
-  getPaginatedList(): Array<any>
-  {
-    const startOffset = this.getOffset()
-    const endOffset = startOffset + this.itemPerPage
+  getPaginatedList(): Array<any> {
+    const startOffset = this.getOffset();
+    const endOffset = startOffset + this.itemPerPage;
 
-    return this.originalList.slice(startOffset, endOffset)
+    return this.originalList.slice(startOffset, endOffset);
   }
 
   goToPage(pageIndex: number): number {
     if (this.getCurrentPage() === pageIndex) {
-      return this.getCurrentPage()
+      return this.getCurrentPage();
     }
 
     if (this.pagerIndexList.includes(pageIndex)) {
-      this.currentPage.next(pageIndex)
-      this.calculatePreviousPage()
-      this.calculateNextPage()
-      this.createIndexList()
-      this.buildPagerList()
+      this.currentPage.next(pageIndex);
+      this.calculatePreviousPage();
+      this.calculateNextPage();
+      this.createIndexList();
+      this.buildPagerList();
     } else {
-      throw new PageIndexDoesNotExists
+      throw new PageIndexDoesNotExists();
     }
 
-    return this.currentPage.getValue()
+    return this.currentPage.getValue();
   }
 
   goToFirstPage(): number {
     if (this.currentPage.getValue() === this.firstPage) {
-      return this.currentPage.getValue()
+      return this.currentPage.getValue();
     }
 
-    this.currentPage.next(this.firstPage)
-    this.previousPage = this.firstPage
-    this.calculateNextPage()
-    this.createIndexList()
-    this.buildPagerList()
+    this.currentPage.next(this.firstPage);
+    this.previousPage = this.firstPage;
+    this.calculateNextPage();
+    this.createIndexList();
+    this.buildPagerList();
 
-    return this.currentPage.getValue()
+    return this.currentPage.getValue();
   }
 
   goToLastPage(): number {
     if (this.currentPage.getValue() === this.lastPage) {
-      return this.currentPage.getValue()
+      return this.currentPage.getValue();
     }
 
-    this.currentPage.next(this.lastPage)
-    this.nextPage = this.lastPage
-    this.calculatePreviousPage()
-    this.createIndexList()
-    this.buildPagerList()
+    this.currentPage.next(this.lastPage);
+    this.nextPage = this.lastPage;
+    this.calculatePreviousPage();
+    this.createIndexList();
+    this.buildPagerList();
 
-    return this.currentPage.getValue()
+    return this.currentPage.getValue();
   }
 
   goToNextPage(): number {
     if (this.currentPage.getValue() === this.nextPage) {
-      return this.currentPage.getValue()
+      return this.currentPage.getValue();
     }
 
-    this.previousPage = this.currentPage.getValue()
-    this.currentPage.next(this.nextPage)
-    this.calculateNextPage()
-    this.createIndexList()
-    this.buildPagerList()
+    this.previousPage = this.currentPage.getValue();
+    this.currentPage.next(this.nextPage);
+    this.calculateNextPage();
+    this.createIndexList();
+    this.buildPagerList();
 
-    return this.currentPage.getValue()
+    return this.currentPage.getValue();
   }
 
   goToPreviousPage(): number {
     if (this.currentPage.getValue() === this.previousPage) {
-      return this.currentPage.getValue()
+      return this.currentPage.getValue();
     }
 
-    this.nextPage = this.currentPage.getValue()
-    this.currentPage.next(this.previousPage)
-    this.calculatePreviousPage()
-    this.createIndexList()
-    this.buildPagerList()
+    this.nextPage = this.currentPage.getValue();
+    this.currentPage.next(this.previousPage);
+    this.calculatePreviousPage();
+    this.createIndexList();
+    this.buildPagerList();
 
-    return this.currentPage.getValue()
+    return this.currentPage.getValue();
   }
 
   getPagerIndexList(): Array<number> {
@@ -209,56 +201,51 @@ export class PagerService implements PagerInterface, PagerNavigationInterface, P
   }
 
   getPagerItemList(): PagerListPartsInterface {
-    return this.pagerItemList
+    return this.pagerItemList;
   }
 
-  private setOptions(options?: PagerOptionsInterface): PagerService
-  {
+  private setOptions(options?: PagerOptionsInterface): PagerService {
     if (!options) {
-      return this
+      return this;
     }
 
-    if (typeof options.itemPerPage !== "undefined") {
-      this.itemPerPage = options.itemPerPage
+    if (typeof options.itemPerPage !== 'undefined') {
+      this.itemPerPage = options.itemPerPage;
     }
 
-    if (typeof options.maxPagerItem !== "undefined") {
-      this.maxPagerItem = options.maxPagerItem
+    if (typeof options.maxPagerItem !== 'undefined') {
+      this.maxPagerItem = options.maxPagerItem;
     }
 
     return this;
   }
 
-  private setTotalPage(list: Array<any> | number): PagerService
-  {
-    let count = typeof list === "object" ? list.length : list
+  private setTotalPage(list: Array<any> | number): PagerService {
+    let count = typeof list === 'object' ? list.length : list;
     this.totalPage = Math.ceil(count / this.itemPerPage);
 
     return this;
   }
 
-  private setFirstPage(firstPage: number): PagerService
-  {
+  private setFirstPage(firstPage: number): PagerService {
     this.firstPage = firstPage >= 0 ? firstPage : this.firstPage;
 
     return this;
   }
 
-  private resetPage(): PagerService
-  {
-    this.currentPage.next(this.firstPage)
+  private resetPage(): PagerService {
+    this.currentPage.next(this.firstPage);
 
-    return this
+    return this;
   }
 
-  private calculateLastPage(): PagerService
-  {
+  private calculateLastPage(): PagerService {
     if (this.totalPage === null) {
-      throw new TotalPageNotSet;
+      throw new TotalPageNotSet();
     }
 
     if (this.firstPage === null) {
-      throw new FirstPageNotSet;
+      throw new FirstPageNotSet();
     }
 
     this.lastPage = this.totalPage - 1 + this.firstPage;
@@ -266,53 +253,52 @@ export class PagerService implements PagerInterface, PagerNavigationInterface, P
     return this;
   }
 
-  private calculateCurrentPage(): PagerService
-  {
+  private calculateCurrentPage(): PagerService {
     if (this.lastPage === null) {
-      throw new LastPageNotSet;
+      throw new LastPageNotSet();
     }
 
     if (this.firstPage === null) {
-      throw new FirstPageNotSet;
+      throw new FirstPageNotSet();
     }
 
     const currentPage = this.getCurrentPage();
 
     this.currentPage.next(
-      (this.currentPage.getValue() < this.firstPage) ?
-        this.firstPage : (
-          (currentPage > this.lastPage) ? this.lastPage : currentPage
-        )
+      this.currentPage.getValue() < this.firstPage
+        ? this.firstPage
+        : currentPage > this.lastPage
+        ? this.lastPage
+        : currentPage
     );
 
     return this;
   }
 
-  private calculatePreviousPage(): PagerService
-  {
+  private calculatePreviousPage(): PagerService {
     if (this.currentPage === null) {
-      throw new CurrentPageNotSet;
+      throw new CurrentPageNotSet();
     }
     if (this.firstPage === null) {
-      throw new FirstPageNotSet;
+      throw new FirstPageNotSet();
     }
 
     const previousPage = this.currentPage.getValue() - 1;
-    this.previousPage = previousPage >= this.firstPage ? previousPage : this.firstPage;
+    this.previousPage =
+      previousPage >= this.firstPage ? previousPage : this.firstPage;
 
     return this;
-}
+  }
 
   /**
-  * @todo _nextPage depends on curPage and lastPage => there must be events to modify this property when one of those are modified
-  */
-  private calculateNextPage(): PagerService
-  {
+   * @todo _nextPage depends on curPage and lastPage => there must be events to modify this property when one of those are modified
+   */
+  private calculateNextPage(): PagerService {
     if (this.lastPage === null) {
-      throw new LastPageNotSet;
+      throw new LastPageNotSet();
     }
     if (this.currentPage === null) {
-      throw new CurrentPageNotSet;
+      throw new CurrentPageNotSet();
     }
 
     const nextPage = this.currentPage.getValue() + 1;
@@ -321,38 +307,43 @@ export class PagerService implements PagerInterface, PagerNavigationInterface, P
     return this;
   }
 
-  private createIndexList(): PagerService
-  {
+  private createIndexList(): PagerService {
     if (this.lastPage === null) {
-      throw new LastPageNotSet;
+      throw new LastPageNotSet();
     }
 
     if (this.currentPage === null) {
-      throw new CurrentPageNotSet;
+      throw new CurrentPageNotSet();
     }
 
-    if (this.totalPage  === null) {
-      throw new TotalPageNotSet;
+    if (this.totalPage === null) {
+      throw new TotalPageNotSet();
     }
 
-    if (this.firstPage  === null) {
-      throw new FirstPageNotSet;
+    if (this.firstPage === null) {
+      throw new FirstPageNotSet();
     }
 
     const nbItemOnSide = Math.floor(this.maxPagerItem / 2);
-    const nbItemPerPageFromEnd = this.lastPage - this.maxPagerItem + 1
+    const nbItemPerPageFromEnd = this.lastPage - this.maxPagerItem + 1;
     let startOffset;
 
     if (this.currentPage.getValue() <= nbItemOnSide) {
-       startOffset = this.firstPage;
-    } else if ((this.lastPage - this.currentPage.getValue()) <= nbItemOnSide) {
-      startOffset = nbItemPerPageFromEnd <= this.firstPage ? this.firstPage : nbItemPerPageFromEnd;
+      startOffset = this.firstPage;
+    } else if (this.lastPage - this.currentPage.getValue() <= nbItemOnSide) {
+      startOffset =
+        nbItemPerPageFromEnd <= this.firstPage
+          ? this.firstPage
+          : nbItemPerPageFromEnd;
     } else {
       startOffset = this.currentPage.getValue() - nbItemOnSide;
     }
 
-    const nbItemPerPageFromStart = startOffset + (this.maxPagerItem - 1)
-    const endOffset = nbItemPerPageFromStart > this.lastPage ? this.lastPage : nbItemPerPageFromStart;
+    const nbItemPerPageFromStart = startOffset + (this.maxPagerItem - 1);
+    const endOffset =
+      nbItemPerPageFromStart > this.lastPage
+        ? this.lastPage
+        : nbItemPerPageFromStart;
 
     this.pagerIndexList = [];
     for (let i = startOffset; i <= endOffset; i++) {
@@ -362,43 +353,42 @@ export class PagerService implements PagerInterface, PagerNavigationInterface, P
     return this;
   }
 
-  private buildPagerList(): PagerListPartsInterface
-  {
+  private buildPagerList(): PagerListPartsInterface {
     let pager: Array<PagerListInterface> = [];
 
     if (this.pagerIndexList.length) {
-      this.pagerIndexList.forEach(item => {
+      this.pagerIndexList.forEach((item) => {
         pager.push({
-          'index': item,
-          'label': item.toString(),
-        })
-      })
+          index: item,
+          label: item.toString(),
+        });
+      });
 
       pager = pager.filter((item, index) => {
-        return index < this.maxPagerItem
-      })
+        return index < this.maxPagerItem;
+      });
     }
 
     pager.unshift({
-      'index': this.getPreviousPage(),
-      'label': '<',
+      index: this.getPreviousPage(),
+      label: '<',
     });
 
     pager.unshift({
-      'index': this.getFirstPage(),
-      'label': '<<',
+      index: this.getFirstPage(),
+      label: '<<',
     });
 
     pager.push({
-      'index': this.getNextPage(),
-      'label': '>',
-    })
+      index: this.getNextPage(),
+      label: '>',
+    });
     pager.push({
-      'index': this.getLastPage(),
-      'label': '>>',
-    })
+      index: this.getLastPage(),
+      label: '>>',
+    });
 
-    this.pagerItemList = new PagerListParts(pager)
+    this.pagerItemList = new PagerListParts(pager);
 
     return this.pagerItemList;
   }

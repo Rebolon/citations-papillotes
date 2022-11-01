@@ -1,5 +1,5 @@
-import {from, Observable, of, distinct, map, take, toArray} from 'rxjs';
-import {Cite, CiteI} from '../models/Cite';
+import { from, Observable, of, distinct, map, take, toArray } from 'rxjs';
+import { Cite, CiteI } from '../models/Cite';
 
 declare type FixtureCiteI = {
   cite: string;
@@ -475,19 +475,18 @@ const data: FixtureCiteI[] = [
 // 2 juillet / 10 juin
 
 // Because RxJs is the life, so we don't export array, but an Observable. It will be used by the service to share data with the application
-export const cites: Observable<CiteI[]> = from(data)
-  .pipe(
-    // filter to prevent duplicated rows
-    distinct(({ cite }) => cite),
-    // transform each item into a Cite Object
-    map((next, index) => {
-      return (new Cite())
-        .setId(index)
-        .setCite(next.cite)
-        .setAuthor(next.author)
-        .setTags(next.tags);
-    }),
-    // restore into one stream of items (from() will send a complete event that allows toArray() to be triggered)
-    toArray(),
-    take(1) // auto unsubscribe, force complete
-  );
+export const cites: Observable<CiteI[]> = from(data).pipe(
+  // filter to prevent duplicated rows
+  distinct(({ cite }) => cite),
+  // transform each item into a Cite Object
+  map((next, index) => {
+    return new Cite()
+      .setId(index)
+      .setCite(next.cite)
+      .setAuthor(next.author)
+      .setTags(next.tags);
+  }),
+  // restore into one stream of items (from() will send a complete event that allows toArray() to be triggered)
+  toArray(),
+  take(1) // auto unsubscribe, force complete
+);
