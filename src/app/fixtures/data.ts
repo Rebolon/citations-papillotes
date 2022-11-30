@@ -504,6 +504,16 @@ const data: FixtureCiteI[] = [
   {cite: `La fin d'une chose marque le commencement d'une nouvelle.`, author: `Antoine de Saint-Exupéry`, tags: []},
   {cite: `La musique donne une âme à nos coeurs et des ailes à la pensée.`, author: `Platon`, tags: []},
   {cite: `Un sourire coûte moins cher que l'électricité, mais donne autant de lumière.`, author: `Abbé Pierre`, tags: []},
+  {cite: `Les grandes choses peuvent se manifester par de petits signes.`, author: `Freud`, tags: []},
+  {cite: `Aimer une personne pour son apparence, c'est comme aimer un livre pour sa reliure.`, author: `Laure Conan`, tags: ['amour']},
+  {cite: `Si nous voulons nous pardonner les uns aux autres, commençons d'abord par nous comprendre les uns les autres.`, author: `Emma Goldman`, tags: ['pardon']},
+  {cite: `Ceux qui ne bougent pas, ne remarquent pas leur chaînes.`, author: `Rosa Luxemburg`, tags: ['liberté']},
+  {cite: `La révolution sera la floraison de l'humanité comme l'amour est la floraison du coeur.`, author: `Louise Michel`, tags: ['amour', 'liberté']},
+  {cite: `Ne jamais se laisser abattre par des personnes ou par des événements.`, author: `Marie Curie`, tags: []},
+  {cite: `Si nous faisions tout ce que nous sommes capables de faire, nous en serions abasourdis.`, author: `Thomas Edison`, tags: []},
+  {cite: `Si ta volonté te lâche, dépasse-la !.`, author: `Emily Dickinson`, tags: ['ostination']},
+  {cite: `Que cette année vous soit heureuse ; que la paix, le repos et la santé vous tiennent lieu de fortune.`, author: `Madame de Sévigné`, tags: []},
+  {cite: `Le véritable amour ne connaît ni le soupçon ni la méfiance.`, author: `George Sand`, tags: ['amour']},
   // {cite: `.`, author: ``, tags: []},
   ];
 // 2 juillet / 10 juin

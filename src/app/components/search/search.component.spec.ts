@@ -21,7 +21,7 @@ describe('SearchComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
     expect(compiled.querySelector('.content span').textContent).toContain(
-      'angular-citations app is running!'
+      'citations app is running!'
     );
   });
 });
