@@ -514,23 +514,39 @@ const data: FixtureCiteI[] = [
   {cite: `Si ta volonté te lâche, dépasse-la !.`, author: `Emily Dickinson`, tags: ['ostination']},
   {cite: `Que cette année vous soit heureuse ; que la paix, le repos et la santé vous tiennent lieu de fortune.`, author: `Madame de Sévigné`, tags: []},
   {cite: `Le véritable amour ne connaît ni le soupçon ni la méfiance.`, author: `George Sand`, tags: ['amour']},
+  {cite: `Un des bonheurs de l'amitié c'est d'avoir à qui confier un secret.`, author: `Alessandro Mansoni`, tags: ['amitié']},
+  {cite: `Le bonheur tient dans la main, il suffit d'un tout petit rien, mais beaucoup de coeur pour qu'il sonne l'heure.`, author: `Josiane Coeijmans`, tags: ['bonheur']},
+  {cite: `Tout s'arrange sous l'influence d'une pensée heureuse et optimiste.`, author: `George Sand`, tags: []},
+  {cite: `Le courage est le prix que la vie exige pour accorder la paix.`, author: `Amelia Earhart`, tags: ['courage']},
+  {cite: `Impossible de bien réfléchir, de bien aimer, de bien dormir si on n'a pas mangé.`, author: `Virginia Woolf`, tags: ['nourriture']},
+  {cite: `Chacun recèle en lui une forêt vierge, une étendue de neige où nul oiseau n'a laissé son empreinte.`, author: `Virginia Woolf`, tags: []},
+  {cite: `Ma devise - sans limites.`, author: `Isadora Duncan`, tags: []},
+  {cite: `Forte comme un homme, plus forte que la plupart d'entre eux.`, author: `Lozen`, tags: ['féminisme']},
+  {cite: `L'amour a d'autres yeux que le commun des hommes.`, author: `Jean Racine`, tags: ['amour']},
+  {cite: `N'oublions jamais que Noël est le souci du vrai partage, ce n'est pas un miracle, mais une façon de vivre quotidien.`, author: `Josiane Coeijmans`, tags: ['Noël']},
+  {cite: `Une lumière ici requiert une ombre là-bas.`, author: `Virginia Woolf`, tags: []},
+  {cite: `La femme est précieuse, elle donne naissance aux enfants.`, author: `Olympe de Gouges`, tags: []},
+  {cite: `Les plus beaux livres sont ceux qui n'ont jamais été écrits.`, author: `Anatole France`, tags: ['litérature']},
+  {cite: `Je n'enseigne pas aux enfants, je leur donne de la joie.`, author: `Isadora Duncan`, tags: ['bonheur']},
+  {cite: `La danse est le mouvement de l'univers concentré dans un individu.`, author: `Isadora Duncan`, tags: []},
   // {cite: `.`, author: ``, tags: []},
   ];
 // 2 juillet / 10 juin
 
 // Because RxJs is the life, so we don't export array, but an Observable. It will be used by the service to share data with the application
-export const cites: Observable<CiteI[]> = from(data).pipe(
-  // filter to prevent duplicated rows
-  distinct(({ cite }) => cite),
-  // transform each item into a Cite Object
-  map((next, index) => {
-    return new Cite()
-      .setId(index)
-      .setCite(next.cite)
-      .setAuthor(next.author)
-      .setTags(next.tags);
-  }),
-  // restore into one stream of items (from() will send a complete event that allows toArray() to be triggered)
-  toArray(),
-  take(1) // auto unsubscribe, force complete
-);
+export const cites: Observable<CiteI[]> = from(data)
+  .pipe(
+    // filter to prevent duplicated rows
+    distinct(({ cite }) => cite),
+    // transform each item into a Cite Object
+    map((next, index) => {
+      return (new Cite())
+        .setId(index)
+        .setCite(next.cite)
+        .setAuthor(next.author)
+        .setTags(next.tags);
+    }),
+    // restore into one stream of items (from() will send a complete event that allows toArray() to be triggered)
+    toArray(),
+    take(1) // auto unsubscribe, force complete
+  );
