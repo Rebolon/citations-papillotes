@@ -507,7 +507,7 @@ const data: FixtureCiteI[] = [
   {cite: `Les grandes choses peuvent se manifester par de petits signes.`, author: `Freud`, tags: []},
   {cite: `Aimer une personne pour son apparence, c'est comme aimer un livre pour sa reliure.`, author: `Laure Conan`, tags: ['amour']},
   {cite: `Si nous voulons nous pardonner les uns aux autres, commençons d'abord par nous comprendre les uns les autres.`, author: `Emma Goldman`, tags: ['pardon']},
-  {cite: `Ceux qui ne bougent pas, ne remarquent pas leur chaînes.`, author: `Rosa Luxemburg`, tags: ['liberté']},
+  {cite: `Ceux qui ne bougent pas, ne remarquent pas leur chaînes.`, author: `Rosa Luxembourg`, tags: ['liberté']},
   {cite: `La révolution sera la floraison de l'humanité comme l'amour est la floraison du coeur.`, author: `Louise Michel`, tags: ['amour', 'liberté']},
   {cite: `Ne jamais se laisser abattre par des personnes ou par des événements.`, author: `Marie Curie`, tags: []},
   {cite: `Si nous faisions tout ce que nous sommes capables de faire, nous en serions abasourdis.`, author: `Thomas Edison`, tags: []},
@@ -529,6 +529,12 @@ const data: FixtureCiteI[] = [
   {cite: `Les plus beaux livres sont ceux qui n'ont jamais été écrits.`, author: `Anatole France`, tags: ['litérature']},
   {cite: `Je n'enseigne pas aux enfants, je leur donne de la joie.`, author: `Isadora Duncan`, tags: ['bonheur']},
   {cite: `La danse est le mouvement de l'univers concentré dans un individu.`, author: `Isadora Duncan`, tags: []},
+  {cite: `La paresse peut paraître attrayante, mais le travail apporte la satisfaction.`, author: `Anne Frank`, tags: ['travail']},
+  {cite: `Un livre, c'est un billet de voyage à la portée de tous.`, author: `Josiane Coeijmans`, tags: ['litérature']},
+  {cite: `Tous les secrets de l'âme d'un auteur, toutes sses expériences, toutes les qualités de son esprit sont gravés dans son oeuvre.`, author: `Virginia Woolf`, tags: ['litérature']},
+  {cite: `N'oubliez pas qu'il faut prendre la vie avec sérénité et joie quoi qu'il arrive.`, author: `Rosa Luxembourg`, tags: ['bonjeur', 'joie']},
+  {cite: `L'humour est le premier des dons à périr dans une langue étrangère.`, author: `Virginia Woolf`, tags: ['humour']},
+  {cite: `D'une façon générale, on ne doit pas oublier d'être bon, car la bonté, dans les relations avec les hommes, fait bien plus qua la sévérité.`, author: `Rosa Luxembourg`, tags: []},
   // {cite: `.`, author: ``, tags: []},
   ];
 // 2 juillet / 10 juin
