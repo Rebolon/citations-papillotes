@@ -25,14 +25,14 @@ import { BaseNavbarComponent } from '../common/BaseNavbarComponent';
           <text
             class="text-4xl text-violet-700 font-sans subpixel-antialiased"
             x="36"
-            y="36"
+            y="35"
           >
             Citations
           </text>
         </svg>
       </a>
 
-      <app-search class="text-sm text-gray-600 sm:flex"></app-search>
+      <app-search class="text-sm text-gray-600 sm:flex" style="padding-top: 16px"></app-search>
 
       <div class="text-lg hidden lg:flex">
         <a
