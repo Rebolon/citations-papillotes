@@ -384,7 +384,7 @@ const data: FixtureCiteI[] = [
   {cite: `Qui sème le silence récolte la paix.`, author: `Proverbe thaïlandais`, tags: ['proverbe']},
   {cite: `La vie a beaucoup plus d'imagination que nous.`, author: `François Truffaut`},
   {cite: `Le vrai bonheur serait de se souvenir du présent.`, author: `Jules Renard`},
-  {cite: `Les erreurs ne se regrettent pas, elles s'assument. La peur ne se fuit pas, elle se surmonte. L'amour ne se crie pas, il se prouve !`, author: `Simone Veil`},
+  {cite: `Les erreurs ne se regrettent pas, elles s'assument. La peur ne se fuit pas, elle se surmonte. L'amour ne se crie pas, il se prouve !`, author: `Simone Weil`},
   {cite: `Il ne faut pas se mettre en colère contre les choses, cela ne leur fait absolument rien.`, author: `Germaine de Staël`},
   {cite: `Le bout du monde est le fond du jardin contiennent la même quantité de merveilles.`, author: `Christian Bobin`},
   {cite: `Vivre c'est aider un autre à vivre.`, author: `Jacques de Bourbon Busser`},
@@ -549,6 +549,13 @@ const data: FixtureCiteI[] = [
   {cite: `Cultive tes pensées, des fleurs pourraient en fleurir.`, author: `Josiane Coeijmans`, tags: ['pensée']},
   {cite: `Il n'appartient qu'à celle que le hasard a élevée à une place éminente, de donner du poids à l'essor des Droits de la Femme et d'en accélérer les succès.`, author: `Olympe de Gouges`, tags: []},
   {cite: `L'amour a un caractère si particulier qu'on ne peut le cacher où il est, ni le feindre où il n'est pas.`, author: `Madeleine de Souvré`, tags: ['amour']},
+  {cite: `La vie chante aussi dans le sable qui craque sous les pas lents et lourds des gardes, quand on sait l'écouter.`, author: `Rosa Luxemburg`, tags: []},
+  {cite: `En tentant l'impossible, on peut atteindre le plus haut niveau du possible.`, author: `Auguste Strindberg`, tags: []},
+  {cite: `La gastronomie fait trembler d'intelligence nos narines.`, author: `Charles Monselet`, tags: ['épicurien']},
+  {cite: `Quand on rentre en soi-même, on s'aperçoit qu'on possède exactement ce que l'on désirait.`, author: `Simone Weil`, tags: []},
+  {cite: `L'important n'est pas ce que l'on regarde mais ce que l'on voit.`, author: `Henri David Thomas`, tags: []},
+  {cite: `Les choses ne sont pas bonnes parce qu'elles sont vieilles, elles sont vieilles parce qu'elles sont bonnes.`, author: `A. Toulouse`, tags: []},
+  {cite: `Nous devons croire que nous sommes doués pour quelque chose, et que cette chose, à n'importe quel prix, doit être atteinte.`, author: `Marie Curie`, tags: ['confiance']},
   // {cite: `.`, author: ``, tags: []},
   ];
 // 2 juillet / 10 juin
