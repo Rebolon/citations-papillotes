@@ -18,7 +18,7 @@ test:
 	docker run -it --rm -w /app -p 9876:9876 -v $(CUR_DIR):/app $(CONTAINER_NAME) npm run test
 
 e2e:
-	docker run -it --rm -w /app -v $(CUR_DIR):/app $(CONTAINER_NAME) npm run e2e
+	docker run -it --rm -w /app -v $(CUR_DIR):/app $(CONTAINER_NAME) npx playwright test
 
 start:
 	docker run -it --rm -w /app -p 4200:4200  -v $(CUR_DIR):/app $(CONTAINER_NAME) npm run start

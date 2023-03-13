@@ -556,6 +556,7 @@ const data: FixtureCiteI[] = [
   {cite: `Nous devons croire que nous sommes doués pour quelque chose, et que cette chose, à n'importe quel prix, doit être atteinte.`, author: `Marie Curie`, tags: ['confiance']},
   {cite: `Soyez des hommes ou mieux : des surhommes. Soyez fidèles aux buts tracés.`, author: `Mary Shelley`, tags: []},
   {cite: `Je suis une femme libre.`, author: `Olympe de Gouges`, tags: ['féminisme']},
+  {cite: `Je fais le plus de choses que je peux par amour pour me reposer d'en faire tant par nécessité.`, author: `Marie Noël`, tags: []},
   // {cite: `.`, author: ``, tags: []},
   ];
 // 2 juillet / 10 juin
