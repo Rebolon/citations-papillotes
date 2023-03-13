@@ -550,12 +550,12 @@ const data: FixtureCiteI[] = [
   {cite: `Il n'appartient qu'à celle que le hasard a élevée à une place éminente, de donner du poids à l'essor des Droits de la Femme et d'en accélérer les succès.`, author: `Olympe de Gouges`, tags: []},
   {cite: `L'amour a un caractère si particulier qu'on ne peut le cacher où il est, ni le feindre où il n'est pas.`, author: `Madeleine de Souvré`, tags: ['amour']},
   {cite: `La vie chante aussi dans le sable qui craque sous les pas lents et lourds des gardes, quand on sait l'écouter.`, author: `Rosa Luxemburg`, tags: []},
-  {cite: `En tentant l'impossible, on peut atteindre le plus haut niveau du possible.`, author: `Auguste Strindberg`, tags: []},
   {cite: `La gastronomie fait trembler d'intelligence nos narines.`, author: `Charles Monselet`, tags: ['épicurien']},
   {cite: `Quand on rentre en soi-même, on s'aperçoit qu'on possède exactement ce que l'on désirait.`, author: `Simone Weil`, tags: []},
-  {cite: `L'important n'est pas ce que l'on regarde mais ce que l'on voit.`, author: `Henri David Thomas`, tags: []},
   {cite: `Les choses ne sont pas bonnes parce qu'elles sont vieilles, elles sont vieilles parce qu'elles sont bonnes.`, author: `A. Toulouse`, tags: []},
   {cite: `Nous devons croire que nous sommes doués pour quelque chose, et que cette chose, à n'importe quel prix, doit être atteinte.`, author: `Marie Curie`, tags: ['confiance']},
+  {cite: `Soyez des hommes ou mieux : des surhommes. Soyez fidèles aux buts tracés.`, author: `Mary Shelley`, tags: []},
+  {cite: `Je suis une femme libre.`, author: `Olympe de Gouges`, tags: ['féminisme']},
   // {cite: `.`, author: ``, tags: []},
   ];
 // 2 juillet / 10 juin
