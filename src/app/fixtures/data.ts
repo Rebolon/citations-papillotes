@@ -557,7 +557,15 @@ const data: FixtureCiteI[] = [
   {cite: `Soyez des hommes ou mieux : des surhommes. Soyez fidèles aux buts tracés.`, author: `Mary Shelley`, tags: []},
   {cite: `Je suis une femme libre.`, author: `Olympe de Gouges`, tags: ['féminisme']},
   {cite: `Je fais le plus de choses que je peux par amour pour me reposer d'en faire tant par nécessité.`, author: `Marie Noël`, tags: []},
+  {cite: `Les chefs-d'oeuvres ne sont jamais que des tentatives heureuses.`, author: `George Sand`, tags: ['chance']},
+  {cite: `Les détails font la perfection, et la perfection n'est pas un détail.`, author: `Léonard de Vinci`, tags: []},
+  {cite: `Je fais le plus de choses que je peux par amour pour me reposer d'en faire tant par nécessité.`, author: `Marie Noël`, tags: ['amour']},
+  {cite: `Celui même qui veut écrire son rêve se doit d'être infiniment éveillé.`, author: `Paul Valéry`, tags: []},
+  {cite: `Le beau est ce qu'on ne peut pas vouloir change.`, author: `Simone Weil`, tags: []},
+  {cite: `C'est le miracle de l'amour de n'avoir pas besoin de mots pour se comprendre.`, author: `Laure Conan`, tags: ['amour']},
+  {cite: `L'attention est la forme la plus rare et la plus pure de la générosité.`, author: `Simone Weil`, tags: []},
   // {cite: `.`, author: ``, tags: []},
+  
   ];
 // 2 juillet / 10 juin
 
