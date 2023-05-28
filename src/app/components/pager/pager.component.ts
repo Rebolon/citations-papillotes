@@ -9,10 +9,11 @@ import {
 import { PagerService } from '../../services/Pager/pager.service';
 import { PagerOptionsInterface } from '../../services/Pager/pager.interface';
 import { BehaviorSubject, filter } from 'rxjs';
+import { NgIf, NgClass, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-pager',
-  template: `
+    selector: 'app-pager',
+    template: `
     <nav>
       <ul *ngIf="hasList()" class="ng-pager nav" aria-label="Pagination">
         <li class="w-12">
@@ -63,8 +64,14 @@ import { BehaviorSubject, filter } from 'rxjs';
       </ul>
     </nav>
   `,
-  styleUrls: ['./pager.component.scss'],
-  providers: [PagerService],
+    styleUrls: ['./pager.component.scss'],
+    providers: [PagerService],
+    standalone: true,
+    imports: [
+        NgIf,
+        NgClass,
+        NgFor,
+    ],
 })
 export class PagerComponent implements OnInit, OnChanges {
   @Input() list: Array<any> | number = 0;

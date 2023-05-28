@@ -3,10 +3,12 @@ import { CiteI } from '../../models/Cite';
 import { Cites } from '../../services/Cites';
 import { Click } from '../../services/Click';
 import { Title } from '@angular/platform-browser';
+import { LinkCitesByAuthorComponent } from '../link-cites-by-author/link-cites-by-author.component';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-random',
-  template: `
+    selector: 'app-random',
+    template: `
     <h1
       *ngIf="cite"
       class="my-4 text-3xl md:text-5xl text-violet-800 font-bold leading-tight text-center md:text-left slide-in-bottom-h1"
@@ -23,7 +25,9 @@ import { Title } from '@angular/platform-browser';
       ></app-link-cites-by-author>
     </p>
   `,
-  styles: [],
+    styles: [],
+    standalone: true,
+    imports: [NgIf, LinkCitesByAuthorComponent],
 })
 export class RandomComponent implements OnInit {
   cites: CiteI[];

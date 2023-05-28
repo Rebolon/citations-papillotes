@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Authors } from '../../services/Cites/Authors';
 import { AuthorI } from '../../models/Authors';
 import { Title } from '@angular/platform-browser';
 import { Device } from '../../tools/Device';
 import { CiteI } from '../../models/Cite';
 import { BasePaginatedComponent } from '../common/BasePaginatedComponent';
+import { PagerComponent } from '../pager/pager.component';
+import { NgClass, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-list-authors',
-  template: `
+    selector: 'app-list-authors',
+    template: `
     <div class="container mb-36">
       <h1 class="text-3xl font-bold text-stone-900 mb-2">
         {{ authors?.length }} Auteurs.
@@ -68,8 +70,15 @@ import { BasePaginatedComponent } from '../common/BasePaginatedComponent';
       </div>
     </div>
   `,
-  styles: [],
-  providers: [Device],
+    styles: [],
+    providers: [Device],
+    standalone: true,
+    imports: [
+        NgClass,
+        NgFor,
+        RouterLink,
+        PagerComponent,
+    ],
 })
 export class ListAuthorsComponent
   extends BasePaginatedComponent
@@ -82,7 +91,6 @@ export class ListAuthorsComponent
   protected sort: 'text' | 'total' = 'text';
 
   constructor(
-    protected route: ActivatedRoute,
     public authorService: Authors,
     protected title: Title,
     protected device: Device

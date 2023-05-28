@@ -5,9 +5,8 @@ import { SearchComponent } from './search.component';
 describe('SearchComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [SearchComponent],
-    }).compileComponents();
+    imports: [RouterTestingModule, SearchComponent],
+}).compileComponents();
   });
 
   it('should create the app', () => {

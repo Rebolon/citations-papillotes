@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CiteI } from '../../models/Cite';
-import { ActivatedRoute } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { Cites } from '../../services/Cites';
 import { Title } from '@angular/platform-browser';
 import { Device } from '../../tools/Device';
 import { BasePaginatedComponent } from '../common/BasePaginatedComponent';
+import { PagerComponent } from '../pager/pager.component';
+import { LinkCitesByAuthorComponent } from '../link-cites-by-author/link-cites-by-author.component';
+import { NgIf, NgPlural, NgPluralCase, NgFor } from '@angular/common';
+import { BehaviorSubject, filter } from 'rxjs';
 
 @Component({
-  selector: 'app-list-cites',
-  template: `
+    selector: 'app-list-cites',
+    template: `
     <div class="container mb-36">
       <h1 class="text-3xl font-bold text-stone-900 mb-2">
         <a routerLink="/cites" queryParams=""
@@ -62,19 +66,31 @@ import { BasePaginatedComponent } from '../common/BasePaginatedComponent';
       </div>
     </div>
   `,
-  styles: [],
-  providers: [Device],
+    styles: [],
+    providers: [Device],
+    standalone: true,
+    imports: [
+        RouterLink,
+        NgIf,
+        NgPlural,
+        NgPluralCase,
+        NgFor,
+        LinkCitesByAuthorComponent,
+        PagerComponent,
+    ],
 })
 export class ListCitesComponent
   extends BasePaginatedComponent
   implements OnInit
 {
-  cites: CiteI[] = [];
-  paginatedCites: CiteI[] = [];
-  q: string;
+  @Input() set q(search: string) {
+    this._q.next(search);
+  };
+  protected cites: CiteI[] = [];
+  protected paginatedCites: CiteI[] = [];
+  private _q = new BehaviorSubject('');
 
   constructor(
-    protected route: ActivatedRoute,
     public citeService: Cites,
     protected title: Title,
     protected device: Device
@@ -94,17 +110,16 @@ export class ListCitesComponent
       },
     });
 
-    this.route.queryParamMap.subscribe({
-      next: (params) => {
-        if (!params.get('q')) {
+    this._q.pipe().subscribe({
+      next: (search) => {
+        if (search.trim() === "") {
           this.citeService.reset().subscribe();
 
           return;
         }
 
-        this.q = params.get('q');
         this.citeService
-          .search(this.q)
+          .search(search)
           .subscribe((next) => this.fillCites(next));
       },
     });

@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { NavbarMobileComponent } from './components/navbar-mobile/navbar-mobile.component';
+import { RouterOutlet } from '@angular/router';
+import { NavbarDesktopComponent } from './components/navbar-desktop/navbar-desktop.component';
 
 @Component({
-  selector: 'app-root',
-  template: `
+    selector: 'app-root',
+    template: `
     <div class="container min-h-screen flex flex-col" id="app">
       <header class="top-0 fixed bg-white w-full">
         <app-navbar-desktop></app-navbar-desktop>
@@ -18,7 +21,13 @@ import { Title } from '@angular/platform-browser';
       </footer>
     </div>
   `,
-  styles: [],
+    styles: [],
+    standalone: true,
+    imports: [
+        NavbarDesktopComponent,
+        RouterOutlet,
+        NavbarMobileComponent,
+    ],
 })
 export class AppComponent {
   constructor(public title: Title) {
