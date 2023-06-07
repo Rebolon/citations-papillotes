@@ -9,8 +9,8 @@ import { NgIf, NgPlural, NgPluralCase, NgFor } from '@angular/common';
 import { BehaviorSubject, filter, switchMap } from 'rxjs';
 
 @Component({
-    selector: 'app-list-cites-by-authors',
-    template: `
+  selector: 'app-list-cites-by-authors',
+  template: `
     <div class="container mb-36">
       <h1
         *ngIf="author"
@@ -53,25 +53,16 @@ import { BehaviorSubject, filter, switchMap } from 'rxjs';
       </div>
     </div>
   `,
-    styles: [],
-    providers: [Device],
-    standalone: true,
-    imports: [
-        NgIf,
-        NgPlural,
-        NgPluralCase,
-        NgFor,
-        PagerComponent,
-    ],
+  styles: [],
+  providers: [Device],
+  standalone: true,
+  imports: [NgIf, NgPlural, NgPluralCase, NgFor, PagerComponent],
 })
 export class ListCitesByAuthorsComponent
   extends BasePaginatedComponent
   implements OnInit
 {
-  @Input() set author(author: string) {
-    this._author.next(author);
-  }
-  private _author: BehaviorSubject<string> = new BehaviorSubject("");
+  @Input({ required: true }) author: string;
   cites: CiteI[] = [];
   paginatedCites: CiteI[] = [];
 
@@ -89,11 +80,8 @@ export class ListCitesByAuthorsComponent
   }
 
   ngOnInit(): void {
-    this._author
-      .pipe(
-        filter((author) => author && author !== ''), 
-        switchMap(author => this.citeService.searchByAuthor(author))
-      )
+    this.citeService
+      .searchByAuthor(this.author)
       .subscribe((cites) => this.fillCites(cites));
   }
 

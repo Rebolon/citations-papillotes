@@ -9,10 +9,11 @@ import { PagerComponent } from '../pager/pager.component';
 import { LinkCitesByAuthorComponent } from '../link-cites-by-author/link-cites-by-author.component';
 import { NgIf, NgPlural, NgPluralCase, NgFor } from '@angular/common';
 import { BehaviorSubject, filter } from 'rxjs';
+import { OnChanges } from '@angular/core';
 
 @Component({
-    selector: 'app-list-cites',
-    template: `
+  selector: 'app-list-cites',
+  template: `
     <div class="container mb-36">
       <h1 class="text-3xl font-bold text-stone-900 mb-2">
         <a routerLink="/cites" queryParams=""
@@ -66,29 +67,26 @@ import { BehaviorSubject, filter } from 'rxjs';
       </div>
     </div>
   `,
-    styles: [],
-    providers: [Device],
-    standalone: true,
-    imports: [
-        RouterLink,
-        NgIf,
-        NgPlural,
-        NgPluralCase,
-        NgFor,
-        LinkCitesByAuthorComponent,
-        PagerComponent,
-    ],
+  styles: [],
+  providers: [Device],
+  standalone: true,
+  imports: [
+    RouterLink,
+    NgIf,
+    NgPlural,
+    NgPluralCase,
+    NgFor,
+    LinkCitesByAuthorComponent,
+    PagerComponent,
+  ],
 })
 export class ListCitesComponent
   extends BasePaginatedComponent
-  implements OnInit
+  implements OnInit, OnChanges
 {
-  @Input() set q(search: string) {
-    this._q.next(search);
-  };
+  @Input() q: string;
   protected cites: CiteI[] = [];
   protected paginatedCites: CiteI[] = [];
-  private _q = new BehaviorSubject('');
 
   constructor(
     public citeService: Cites,
@@ -110,19 +108,21 @@ export class ListCitesComponent
       },
     });
 
-    this._q.pipe().subscribe({
-      next: (search) => {
-        if (search.trim() === "") {
-          this.citeService.reset().subscribe();
+    this.findCitesBySearch();
+  }
 
-          return;
-        }
+  ngOnChanges(): void {
+    this.findCitesBySearch();
+  }
 
-        this.citeService
-          .search(search)
-          .subscribe((next) => this.fillCites(next));
-      },
-    });
+  protected findCitesBySearch() {
+    if (this.q.trim() === '') {
+      this.citeService.reset().subscribe();
+
+      return;
+    }
+
+    this.citeService.search(this.q).subscribe((next) => this.fillCites(next));
   }
 
   protected fillCites(citesList: CiteI[]): void {
