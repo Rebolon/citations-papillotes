@@ -7,8 +7,8 @@ import { LinkCitesByAuthorComponent } from '../link-cites-by-author/link-cites-b
 import { NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-home',
-    template: `
+  selector: 'app-home',
+  template: `
     <h1
       *ngIf="cite"
       class="my-4 text-3xl md:text-5xl text-violet-800 font-bold leading-tight text-center md:text-left
@@ -25,10 +25,10 @@ import { NgIf } from '@angular/common';
       ></app-link-cites-by-author>
     </p>
   `,
-    styles: [],
-    providers: [CiteOfTheDay],
-    standalone: true,
-    imports: [NgIf, LinkCitesByAuthorComponent],
+  styles: [],
+  providers: [CiteOfTheDay],
+  standalone: true,
+  imports: [NgIf, LinkCitesByAuthorComponent],
 })
 export class HomeComponent implements OnInit {
   cite: CiteI;

@@ -7,3 +7,7 @@ const serverConfig: ApplicationConfig = {
 };
 
 export const config = mergeApplicationConfig(appConfig, serverConfig);
+
+// mock for prerender
+// @ts-ignore
+global.navigator = {};
