@@ -116,7 +116,8 @@ export class ListCitesComponent
   }
 
   protected findCitesBySearch() {
-    if (this.q.trim() === '') {
+    // prerender crash without the first check
+    if (this.q && this.q.trim() === '') {
       this.citeService.reset().subscribe();
 
       return;
