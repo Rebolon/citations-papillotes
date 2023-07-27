@@ -27,6 +27,7 @@ import { ActivatedRoute, Router } from '@angular/router';
     />
   `,
   styles: [],
+  standalone: true,
 })
 export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild('elSearchCite', { static: true }) elSearchCite: ElementRef;

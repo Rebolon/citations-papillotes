@@ -8,8 +8,8 @@ describe('RandomComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [RandomComponent],
-    }).compileComponents();
+    imports: [RandomComponent],
+}).compileComponents();
   });
 
   beforeEach(() => {

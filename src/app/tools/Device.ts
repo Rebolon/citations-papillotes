@@ -3,7 +3,10 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class Device {
   isMobile(): boolean {
-    return navigator.userAgent.includes('Mobile');
+    // This check is for prerender prevent errors
+    return Object.keys(navigator).length
+      ? navigator.userAgent.includes('Mobile')
+      : false;
   }
 
   isDesktop(): boolean {

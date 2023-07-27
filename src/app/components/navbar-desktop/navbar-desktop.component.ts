@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { BaseNavbarComponent } from '../common/BaseNavbarComponent';
+import { SearchComponent } from '../search/search.component';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
-  selector: 'app-navbar-desktop',
-  template: `
+    selector: 'app-navbar-desktop',
+    template: `
     <nav class="flex items-center justify-between p-6 container mx-auto">
       <a routerLink="/" title="Citation du jour" aria-label="Citation du jour">
         <svg
@@ -196,6 +198,12 @@ import { BaseNavbarComponent } from '../common/BaseNavbarComponent';
       </div>
     </nav>
   `,
-  styles: [],
+    styles: [],
+    standalone: true,
+    imports: [
+        RouterLink,
+        SearchComponent,
+        RouterLinkActive,
+    ],
 })
 export class NavbarDesktopComponent extends BaseNavbarComponent {}

@@ -3,6 +3,8 @@ import { Title } from '@angular/platform-browser';
 import { CiteI } from '../../models/Cite';
 import { Cites } from '../../services/Cites';
 import { CiteOfTheDay } from '../../tools/CiteOfTheDay.service';
+import { LinkCitesByAuthorComponent } from '../link-cites-by-author/link-cites-by-author.component';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +27,8 @@ import { CiteOfTheDay } from '../../tools/CiteOfTheDay.service';
   `,
   styles: [],
   providers: [CiteOfTheDay],
+  standalone: true,
+  imports: [NgIf, LinkCitesByAuthorComponent],
 })
 export class HomeComponent implements OnInit {
   cite: CiteI;

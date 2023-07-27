@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CiteI } from '../../models/Cite';
-import { ActivatedRoute } from '@angular/router';
 import { Cites } from '../../services/Cites';
 import { Title } from '@angular/platform-browser';
 import { Device } from '../../tools/Device';
 import { BasePaginatedComponent } from '../common/BasePaginatedComponent';
+import { PagerComponent } from '../pager/pager.component';
+import { NgIf, NgPlural, NgPluralCase, NgFor } from '@angular/common';
+import { BehaviorSubject, filter, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-list-cites-by-authors',
@@ -53,17 +55,18 @@ import { BasePaginatedComponent } from '../common/BasePaginatedComponent';
   `,
   styles: [],
   providers: [Device],
+  standalone: true,
+  imports: [NgIf, NgPlural, NgPluralCase, NgFor, PagerComponent],
 })
 export class ListCitesByAuthorsComponent
   extends BasePaginatedComponent
   implements OnInit
 {
-  author: string;
+  @Input({ required: true }) author: string;
   cites: CiteI[] = [];
   paginatedCites: CiteI[] = [];
 
   constructor(
-    protected route: ActivatedRoute,
     public citeService: Cites,
     protected title: Title,
     protected device: Device
@@ -77,12 +80,9 @@ export class ListCitesByAuthorsComponent
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      this.author = params.get('author');
-      this.citeService
-        .searchByAuthor(this.author)
-        .subscribe((next) => this.fillCites(next));
-    });
+    this.citeService
+      .searchByAuthor(this.author)
+      .subscribe((cites) => this.fillCites(cites));
   }
 
   protected fillCites(citesList: CiteI[]): void {
