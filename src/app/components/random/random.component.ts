@@ -4,34 +4,34 @@ import { Cites } from '../../services/Cites';
 import { Click } from '../../services/Click';
 import { Title } from '@angular/platform-browser';
 import { LinkCitesByAuthorComponent } from '../link-cites-by-author/link-cites-by-author.component';
-import { NgIf } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { BehaviorSubject, Observable, ReplaySubject, switchMap } from 'rxjs';
 
 @Component({
-    selector: 'app-random',
-    template: `
-    <h1
-      *ngIf="cite"
-      class="my-4 text-3xl md:text-5xl text-violet-800 font-bold leading-tight text-center md:text-left slide-in-bottom-h1"
-    >
-      {{ cite.getCite() }}
-    </h1>
-    <p
-      *ngIf="cite"
-      class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left
-             slide-in-bottom-subtitle"
-    >
-      <app-link-cites-by-author
-        [author]="cite.getAuthor()"
-      ></app-link-cites-by-author>
-    </p>
+  selector: 'app-random',
+  template: `
+    <ng-container *ngIf="cite$ | async">
+      <h1
+        class="my-4 text-3xl md:text-5xl text-violet-800 font-bold leading-tight text-center md:text-left slide-in-bottom-h1"
+      >
+        {{ cite$.getValue().getCite() }}
+      </h1>
+      <p
+        class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left
+              slide-in-bottom-subtitle"
+      >
+        <app-link-cites-by-author
+          [author]="cite$.getValue().getAuthor()"
+        ></app-link-cites-by-author>
+      </p>
+    </ng-container>
   `,
-    styles: [],
-    standalone: true,
-    imports: [NgIf, LinkCitesByAuthorComponent],
+  styles: [],
+  standalone: true,
+  imports: [NgIf, AsyncPipe, LinkCitesByAuthorComponent],
 })
 export class RandomComponent implements OnInit {
-  cites: CiteI[];
-  cite: CiteI;
+  protected cite$: BehaviorSubject<CiteI | null> = new BehaviorSubject(null);
 
   constructor(
     protected citesService: Cites,
@@ -42,13 +42,11 @@ export class RandomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.citesService.cites$.subscribe((next) => {
-      this.cites = next;
-    });
-
-    this.click.refresh$.subscribe((next) => {
-      this.cite = this.cites[Math.floor(Math.random() * this.cites.length)];
-    });
+    this.click.refresh$
+      .pipe(switchMap(() => this.citesService.getRandomCite()))
+      .subscribe({
+        next: (cite) => this.cite$.next(cite),
+      });
 
     // for a page refresh, no click are thrown from the navbar, so i have to simulate it here : is there a best pattern
     this.click.click();

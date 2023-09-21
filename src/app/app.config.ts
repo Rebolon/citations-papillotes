@@ -8,6 +8,7 @@ import { Cites } from './services/Cites';
 import { Click } from './services/Click';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
+import { CiteOfTheDay } from './tools/CiteOfTheDay.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,8 +24,9 @@ export const appConfig: ApplicationConfig = {
     ),
     Authors,
     Cites,
+    CiteOfTheDay,
     Click,
     Title,
     provideAnimations(),
-  ]
+  ],
 };

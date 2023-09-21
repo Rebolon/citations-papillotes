@@ -16,6 +16,7 @@ import { cites } from '../fixtures/data';
 import { Cite, CiteI } from '../models/Cite';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CiteOfTheDay } from '../tools/CiteOfTheDay.service';
 
 @Injectable()
 export class Cites {
@@ -47,7 +48,10 @@ export class Cites {
   // local cache for the counter
   protected count = 0;
 
-  public constructor(protected router: ActivatedRoute) {
+  public constructor(
+    protected router: ActivatedRoute,
+    protected citeOfTheDay: CiteOfTheDay
+  ) {
     cites
       .pipe(
         tap((next) => (this.originalCites = next)),
@@ -117,5 +121,17 @@ export class Cites {
     }
 
     return this.count;
+  }
+
+  getCiteOfTheDay(): Observable<CiteI> {
+    return this.cites$.pipe(
+      map((cites) => this.citeOfTheDay.getCiteOfTheDay(cites))
+    );
+  }
+
+  getRandomCite(): Observable<CiteI> {
+    return this.cites$.pipe(
+      map((cites) => cites[Math.floor(Math.random() * cites.length)])
+    );
   }
 }
