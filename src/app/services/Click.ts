@@ -1,5 +1,5 @@
-import { BehaviorSubject, debounceTime, filter, Observable } from "rxjs";
-import { Injectable } from "@angular/core";
+import { BehaviorSubject, debounceTime, filter, Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Click {

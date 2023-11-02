@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { Click } from "../../services/Click";
+import { Component } from '@angular/core';
+import { Click } from '../../services/Click';
 
 @Component({
   template: '',

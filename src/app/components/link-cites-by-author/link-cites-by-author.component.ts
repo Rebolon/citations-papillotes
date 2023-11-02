@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-    selector: 'app-link-cites-by-author',
-    template: `
+  selector: 'app-link-cites-by-author',
+  template: `
     <a
       routerLink="/authors/{{ author }}"
       title="Liste des citations de {{ author }}"
@@ -12,9 +12,9 @@ import { RouterLink } from '@angular/router';
       {{ author }}
     </a>
   `,
-    styleUrls: [],
-    standalone: true,
-    imports: [RouterLink],
+  styleUrls: [],
+  standalone: true,
+  imports: [RouterLink],
 })
 export class LinkCitesByAuthorComponent {
   @Input() author: string;

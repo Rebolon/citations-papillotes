@@ -3,8 +3,8 @@ import { BaseNavbarComponent } from '../common/BaseNavbarComponent';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
-    selector: 'app-navbar-mobile',
-    template: `
+  selector: 'app-navbar-mobile',
+  template: `
     <section
       class="md:hidden block fixed inset-x-0 bottom-0 z-10 bg-white shadow"
       id="bottom-navigation"
@@ -143,8 +143,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
       </div>
     </section>
   `,
-    styles: [],
-    standalone: true,
-    imports: [RouterLink, RouterLinkActive],
+  styles: [],
+  standalone: true,
+  imports: [RouterLink, RouterLinkActive],
 })
 export class NavbarMobileComponent extends BaseNavbarComponent {}

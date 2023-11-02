@@ -10,8 +10,8 @@ import { PagerComponent } from '../pager/pager.component';
 import { NgClass, NgFor } from '@angular/common';
 
 @Component({
-    selector: 'app-list-authors',
-    template: `
+  selector: 'app-list-authors',
+  template: `
     <div class="container mb-36">
       <h1 class="text-3xl font-bold text-stone-900 mb-2">
         {{ authors?.length }} Auteurs.
@@ -70,15 +70,10 @@ import { NgClass, NgFor } from '@angular/common';
       </div>
     </div>
   `,
-    styles: [],
-    providers: [Device],
-    standalone: true,
-    imports: [
-        NgClass,
-        NgFor,
-        RouterLink,
-        PagerComponent,
-    ],
+  styles: [],
+  providers: [Device],
+  standalone: true,
+  imports: [NgClass, NgFor, RouterLink, PagerComponent],
 })
 export class ListAuthorsComponent
   extends BasePaginatedComponent

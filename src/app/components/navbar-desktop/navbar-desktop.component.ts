@@ -4,8 +4,8 @@ import { SearchComponent } from '../search/search.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
-    selector: 'app-navbar-desktop',
-    template: `
+  selector: 'app-navbar-desktop',
+  template: `
     <nav class="flex items-center justify-between p-6 container mx-auto">
       <a routerLink="/" title="Citation du jour" aria-label="Citation du jour">
         <svg
@@ -34,7 +34,10 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         </svg>
       </a>
 
-      <app-search class="text-sm text-gray-600 sm:flex" style="padding-top: 16px"></app-search>
+      <app-search
+        class="text-sm text-gray-600 sm:flex"
+        style="padding-top: 16px"
+      ></app-search>
 
       <div class="text-lg hidden lg:flex">
         <a
@@ -198,12 +201,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
       </div>
     </nav>
   `,
-    styles: [],
-    standalone: true,
-    imports: [
-        RouterLink,
-        SearchComponent,
-        RouterLinkActive,
-    ],
+  styles: [],
+  standalone: true,
+  imports: [RouterLink, SearchComponent, RouterLinkActive],
 })
 export class NavbarDesktopComponent extends BaseNavbarComponent {}

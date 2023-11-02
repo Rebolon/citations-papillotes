@@ -5,8 +5,8 @@ import { RouterOutlet } from '@angular/router';
 import { NavbarDesktopComponent } from './components/navbar-desktop/navbar-desktop.component';
 
 @Component({
-    selector: 'app-root',
-    template: `
+  selector: 'app-root',
+  template: `
     <div class="container min-h-screen flex flex-col" id="app">
       <header class="top-0 fixed bg-white w-full">
         <app-navbar-desktop></app-navbar-desktop>
@@ -21,13 +21,9 @@ import { NavbarDesktopComponent } from './components/navbar-desktop/navbar-deskt
       </footer>
     </div>
   `,
-    styles: [],
-    standalone: true,
-    imports: [
-        NavbarDesktopComponent,
-        RouterOutlet,
-        NavbarMobileComponent,
-    ],
+  styles: [],
+  standalone: true,
+  imports: [NavbarDesktopComponent, RouterOutlet, NavbarMobileComponent],
 })
 export class AppComponent {
   constructor(public title: Title) {
