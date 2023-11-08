@@ -143,7 +143,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
       </div>
     </section>
   `,
-  styles: [],
   standalone: true,
   imports: [RouterLink, RouterLinkActive],
 })

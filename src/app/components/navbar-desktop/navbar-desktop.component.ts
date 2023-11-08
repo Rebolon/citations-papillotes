@@ -201,7 +201,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
       </div>
     </nav>
   `,
-  styles: [],
   standalone: true,
   imports: [RouterLink, SearchComponent, RouterLinkActive],
 })
