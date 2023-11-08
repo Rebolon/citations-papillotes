@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Component, Input, OnInit } from '@angular/core';
 import { CiteI } from '../../models/Cite';
 import { RouterLink } from '@angular/router';
@@ -21,7 +22,8 @@ import { OnChanges } from '@angular/core';
         >
       </h1>
 
-      <h2 *ngIf="q" [ngPlural]="cites.length" class="text-md text-gray-600">
+      @if (q) {
+      <h2 [ngPlural]="cites.length" class="text-md text-gray-600">
         <ng-template ngPluralCase="=0"
           >Aucune citation trouvée pour la recherche "{{
             q
@@ -38,10 +40,11 @@ import { OnChanges } from '@angular/core';
           }}":&nbsp;</ng-template
         >
       </h2>
+      }
 
       <ul class="list-none">
+        @for (item of paginatedCites; track trackByCiteId) {
         <li
-          *ngFor="let item of paginatedCites; trackBy: trackByCiteId"
           class="p-1"
         >
           <cite>”{{ item.getCite() }}”</cite> de
@@ -49,6 +52,7 @@ import { OnChanges } from '@angular/core';
             [author]="item.getAuthor()"
           ></app-link-cites-by-author>
         </li>
+        }
       </ul>
     </div>
 
@@ -67,15 +71,12 @@ import { OnChanges } from '@angular/core';
       </div>
     </div>
   `,
-  styles: [],
   providers: [Device],
   standalone: true,
   imports: [
     RouterLink,
-    NgIf,
     NgPlural,
     NgPluralCase,
-    NgFor,
     LinkCitesByAuthorComponent,
     PagerComponent,
   ],

@@ -44,14 +44,13 @@ import { NgClass, NgFor } from '@angular/common';
       </button>
 
       <ul class="list-none">
-        <li
-          *ngFor="let item of paginatedAuthors; trackBy: trackByAuthorName"
-          class="p-1"
-        >
+        @for (item of paginatedAuthors; track trackByAuthorName) {
+        <li class="p-1">
           <a routerLink="/authors/{{ item.getName() }}"
             >{{ item.getName() }} <small>({{ item.getCount() }})</small></a
           >
         </li>
+        }
       </ul>
     </div>
 
@@ -70,10 +69,9 @@ import { NgClass, NgFor } from '@angular/common';
       </div>
     </div>
   `,
-  styles: [],
   providers: [Device],
   standalone: true,
-  imports: [NgClass, NgFor, RouterLink, PagerComponent],
+  imports: [NgClass, RouterLink, PagerComponent],
 })
 export class ListAuthorsComponent
   extends BasePaginatedComponent

@@ -21,7 +21,6 @@ import { NavbarDesktopComponent } from './components/navbar-desktop/navbar-deskt
       </footer>
     </div>
   `,
-  styles: [],
   standalone: true,
   imports: [NavbarDesktopComponent, RouterOutlet, NavbarMobileComponent],
 })

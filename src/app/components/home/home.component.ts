@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { CiteI } from '../../models/Cite';
@@ -9,7 +10,7 @@ import { NgIf, AsyncPipe } from '@angular/common';
 @Component({
   selector: 'app-home',
   template: `
-    <ng-container *ngIf="citesService.getCiteOfTheDay() | async">
+    @if (citesService.getCiteOfTheDay() | async) {
       <h1
         class="my-4 text-3xl md:text-5xl text-violet-800 font-bold leading-tight text-center md:text-left
               slide-in-bottom-h1"
@@ -23,12 +24,12 @@ import { NgIf, AsyncPipe } from '@angular/common';
           [author]="(citesService.getCiteOfTheDay() | async).getAuthor()"
         ></app-link-cites-by-author>
       </p>
-    </ng-container>
+    }
   `,
   styles: [],
   providers: [CiteOfTheDay],
   standalone: true,
-  imports: [NgIf, AsyncPipe, LinkCitesByAuthorComponent],
+  imports: [AsyncPipe, LinkCitesByAuthorComponent],
 })
 export class HomeComponent {
   constructor(protected citesService: Cites, protected title: Title) {

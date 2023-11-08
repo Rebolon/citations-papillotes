@@ -12,7 +12,6 @@ import { RouterLink } from '@angular/router';
       {{ author }}
     </a>
   `,
-  styleUrls: [],
   standalone: true,
   imports: [RouterLink],
 })

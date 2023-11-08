@@ -26,7 +26,6 @@ import { ActivatedRoute, Router } from '@angular/router';
       placeholder="Rechercher..."
     />
   `,
-  styles: [],
   standalone: true,
 })
 export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {

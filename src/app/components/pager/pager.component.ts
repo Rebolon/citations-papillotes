@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   Component,
   Input,
@@ -15,7 +16,8 @@ import { NgIf, NgClass, NgFor } from '@angular/common';
   selector: 'app-pager',
   template: `
     <nav>
-      <ul *ngIf="hasList()" class="ng-pager nav" aria-label="Pagination">
+      @if (hasList()) {
+      <ul class="ng-pager nav" aria-label="Pagination">
         <li class="w-12">
           <a
             [ngClass]="{ disabled: previousIsDisabled() }"
@@ -33,9 +35,8 @@ import { NgIf, NgClass, NgFor } from '@angular/common';
           </a>
         </li>
 
-        <li
-          *ngFor="let item of pager.getPagerItemList().getNumbers()"
-          class="w-12"
+        @for (item of pager.getPagerItemList().getNumbers(); track item) {
+        <li class="w-12"
         >
           <a
             [ngClass]="{ current: isCurrentPage(item.index) }"
@@ -44,6 +45,7 @@ import { NgIf, NgClass, NgFor } from '@angular/common';
             <span>{{ item.label }}</span>
           </a>
         </li>
+        }
 
         <li class="w-12">
           <a
@@ -62,12 +64,13 @@ import { NgIf, NgClass, NgFor } from '@angular/common';
           </a>
         </li>
       </ul>
+      }
     </nav>
   `,
   styleUrls: ['./pager.component.scss'],
   providers: [PagerService],
   standalone: true,
-  imports: [NgIf, NgClass, NgFor],
+  imports: [NgClass],
 })
 export class PagerComponent implements OnInit, OnChanges {
   @Input() list: Array<any> | number = 0;
