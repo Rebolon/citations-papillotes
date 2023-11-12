@@ -24,7 +24,7 @@ export class PageIndexDoesNotExists extends Error {}
 export class PagerService
   implements PagerInterface, PagerNavigationInterface, PagerTemplateInterface
 {
-  private originalList = [];
+  private originalList: number[] = [];
   private itemPerPage = 5;
   private maxPagerItem = 5;
   private firstPage = 1;

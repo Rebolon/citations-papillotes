@@ -14,7 +14,7 @@ import { NgClass, NgFor } from '@angular/common';
   template: `
     <div class="container mb-36">
       <h1 class="text-3xl font-bold text-stone-900 mb-2">
-        {{ authors?.length }} Auteurs.
+        {{ authors.length }} Auteurs.
       </h1>
 
       <button
@@ -44,7 +44,7 @@ import { NgClass, NgFor } from '@angular/common';
       </button>
 
       <ul class="list-none">
-        @for (item of paginatedAuthors; track trackByAuthorName) {
+        @for (item of paginatedAuthors; track item.getName()) {
         <li class="p-1">
           <a routerLink="/authors/{{ item.getName() }}"
             >{{ item.getName() }} <small>({{ item.getCount() }})</small></a
@@ -69,7 +69,7 @@ import { NgClass, NgFor } from '@angular/common';
       </div>
     </div>
   `,
-  providers: [Device],
+  providers: [],
   standalone: true,
   imports: [NgClass, RouterLink, PagerComponent],
 })
@@ -79,8 +79,8 @@ export class ListAuthorsComponent
 {
   authors: AuthorI[] = [];
   paginatedAuthors: AuthorI[] = [];
-  protected currentPage: number;
-  protected itemsPerPage = 11;
+  protected override currentPage!: number;
+  protected override itemsPerPage = 11;
   protected sort: 'text' | 'total' = 'text';
 
   constructor(
@@ -139,10 +139,6 @@ export class ListAuthorsComponent
 
   isSortByTotal(): boolean {
     return this.sort === 'total';
-  }
-
-  protected trackByAuthorName(index, author: AuthorI): string {
-    return author.getName();
   }
 
   setPaginatedList(ev: AuthorI[]): void {

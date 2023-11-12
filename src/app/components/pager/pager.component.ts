@@ -68,7 +68,7 @@ import { NgIf, NgClass, NgFor } from '@angular/common';
     </nav>
   `,
   styleUrls: ['./pager.component.scss'],
-  providers: [PagerService],
+  providers: [],
   standalone: true,
   imports: [NgClass],
 })
@@ -93,15 +93,16 @@ export class PagerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!changes.list) {
+    const list = changes['list'];
+    if (!list) {
       return;
     }
 
-    if (changes.list.isFirstChange()) {
+    if (list.isFirstChange()) {
       return;
     }
 
-    this.pager.init(changes.list.currentValue, this.options);
+    this.pager.init(list.currentValue, this.options);
   }
 
   previousIsDisabled(): boolean {

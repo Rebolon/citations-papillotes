@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/services/Click.ts"],
+  "sourcesContent": ["import { BehaviorSubject, debounceTime, Observable, skip, tap } from 'rxjs';\nimport { Injectable } from '@angular/core';\n\n@Injectable()\nexport class Click {\n  protected refresh: BehaviorSubject<boolean> = new BehaviorSubject(false);\n  public refresh$: Observable<boolean> = this.refresh\n    .asObservable()\n    .pipe(debounceTime(250));\n\n  public click(): void {\n    this.refresh.next(true);\n  }\n}\n"],
+  "mappings": ";;;;;;;AAIA,IAAaA,QAAK,uBAAA;AAAZ,QAAOA,SAAP,MAAOA,OAAK;IADlBC,cAAA;AAEY,WAAAC,UAAoC,IAAIC,gBAAgB,KAAK;AAChE,WAAAC,WAAgC,KAAKF,QACzCG,aAAY,EACZC,KAAKC,aAAa,GAAG,CAAC;;IAElBC,QAAK;AACV,WAAKN,QAAQO,KAAK,IAAI;IACxB;;;qBARWT,QAAK;EAAA;;WAALA;IAAKU,SAALV,OAAKW;EAAA,CAAA;AAAZ,MAAOX,SAAP;SAAOA;AAAK,GAAA;",
+  "names": ["Click", "constructor", "refresh", "BehaviorSubject", "refresh$", "asObservable", "pipe", "debounceTime", "click", "next", "factory", "\u0275fac"]
+}

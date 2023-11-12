@@ -17,7 +17,7 @@ import { OnChanges } from '@angular/core';
   template: `
     <div class="container mb-36">
       <h1 class="text-3xl font-bold text-stone-900 mb-2">
-        <a routerLink="/cites" queryParams=""
+        <a [queryParams]="null" routerLink="/cites"
           >{{ citeService.countSearchFoundCites() }} Citations.</a
         >
       </h1>
@@ -43,7 +43,7 @@ import { OnChanges } from '@angular/core';
       }
 
       <ul class="list-none">
-        @for (item of paginatedCites; track trackByCiteId) {
+        @for (item of paginatedCites; track item.getId()) {
         <li
           class="p-1"
         >
@@ -71,7 +71,7 @@ import { OnChanges } from '@angular/core';
       </div>
     </div>
   `,
-  providers: [Device],
+  providers: [],
   standalone: true,
   imports: [
     RouterLink,
@@ -85,7 +85,7 @@ export class ListCitesComponent
   extends BasePaginatedComponent
   implements OnInit, OnChanges
 {
-  @Input() q: string;
+  @Input() q!: string;
   protected cites: CiteI[] = [];
   protected paginatedCites: CiteI[] = [];
 
@@ -134,10 +134,6 @@ export class ListCitesComponent
       this.cites.push(cite);
     });
     this.paginatedCites = this.cites.slice(0, this.itemsPerPage);
-  }
-
-  protected trackByCiteId(index, cite: CiteI): number {
-    return cite.getId();
   }
 
   setPaginatedList(ev: CiteI[]): void {

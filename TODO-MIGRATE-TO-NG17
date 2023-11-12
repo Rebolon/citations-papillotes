@@ -1,0 +1,3 @@
+* authors page 0 authors...
+* random page not refreshed when clicked on item even with onSameUrlNavigation strategry (or options it's not working ?)
+* fix responsive where above 768px and less than 1024 no navigation menu is displayed : should have desktop while > 768 insted of 1024 ;-)

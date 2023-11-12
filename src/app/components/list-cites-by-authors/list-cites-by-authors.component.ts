@@ -31,7 +31,7 @@ import { BehaviorSubject, filter, switchMap } from 'rxjs';
       }
 
       <ul class="list-none">
-        @for (item of paginatedCites; track trackByCiteId) {
+        @for (item of paginatedCites; track item.getId()) {
         <li
           class="p-1"
         >
@@ -56,7 +56,7 @@ import { BehaviorSubject, filter, switchMap } from 'rxjs';
       </div>
     </div>
   `,
-  providers: [Device],
+  providers: [],
   standalone: true,
   imports: [NgPlural, NgPluralCase, PagerComponent],
 })
@@ -64,7 +64,7 @@ export class ListCitesByAuthorsComponent
   extends BasePaginatedComponent
   implements OnInit
 {
-  @Input({ required: true }) author: string;
+  @Input({ required: true }) author!: string;
   cites: CiteI[] = [];
   paginatedCites: CiteI[] = [];
 
@@ -94,10 +94,6 @@ export class ListCitesByAuthorsComponent
       this.cites.push(cite);
     });
     this.paginatedCites = this.cites.slice(0, this.itemsPerPage);
-  }
-
-  protected trackByCiteId(index, cite: CiteI): number {
-    return cite.getId();
   }
 
   setPaginatedList(ev: CiteI[]): void {

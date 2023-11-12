@@ -16,5 +16,5 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink],
 })
 export class LinkCitesByAuthorComponent {
-  @Input() author: string;
+  @Input() author!: string;
 }

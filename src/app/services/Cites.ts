@@ -11,6 +11,7 @@ import {
   take,
   tap,
   toArray,
+  skip,
 } from 'rxjs';
 import { cites } from '../fixtures/data';
 import { Cite, CiteI } from '../models/Cite';
@@ -21,11 +22,8 @@ import { CiteOfTheDay } from '../tools/CiteOfTheDay.service';
 @Injectable()
 export class Cites {
   protected originalCites: CiteI[] = [];
-  protected cites: BehaviorSubject<CiteI[]> = new BehaviorSubject<CiteI[]>(
-    null
-  );
+  protected cites: BehaviorSubject<CiteI[]> = new BehaviorSubject<CiteI[]>([]);
   public cites$: Observable<CiteI[]> = this.cites.asObservable().pipe(
-    filter((value) => !!value),
     // this is for a kind of immutability: if something push/pop/shift/... the CiteI[] it
     // won't alter every subcriber that has saved the data
     // map(next => rfdc()(next)), // @todo find why it destroy the original object : Cite
@@ -48,10 +46,7 @@ export class Cites {
   // local cache for the counter
   protected count = 0;
 
-  public constructor(
-    protected router: ActivatedRoute,
-    protected citeOfTheDay: CiteOfTheDay
-  ) {
+  public constructor(protected router: ActivatedRoute) {
     cites
       .pipe(
         tap((next) => (this.originalCites = next)),
@@ -109,9 +104,10 @@ export class Cites {
 
   countSearchFoundCites(): number {
     // if there is a pending Search
+    // @todo i would like to remove ActivatedRoute From this service
     if (
-      this.router.snapshot.queryParams &&
-      this.router.snapshot.queryParams.q
+      //this.router.snapshot.queryParams &&
+      this.router.snapshot?.queryParams['q']
     ) {
       return this.count;
     }
@@ -124,13 +120,11 @@ export class Cites {
   }
 
   getCiteOfTheDay(): Observable<CiteI> {
-    return this.cites$.pipe(
-      map((cites) => this.citeOfTheDay.getCiteOfTheDay(cites))
-    );
+    return this.cites.pipe(map((cites) => CiteOfTheDay.getCiteOfTheDay(cites)));
   }
 
   getRandomCite(): Observable<CiteI> {
-    return this.cites$.pipe(
+    return this.cites.pipe(
       map((cites) => cites[Math.floor(Math.random() * cites.length)])
     );
   }

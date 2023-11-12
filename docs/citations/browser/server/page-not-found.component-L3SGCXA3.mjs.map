@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/components/pageNotFound/page-not-found.component.ts"],
+  "sourcesContent": ["import { Component } from '@angular/core';\nimport { Title } from '@angular/platform-browser';\n\n@Component({\n  selector: 'app-page-not-found',\n  template: `Lost In Space ?`,\n  standalone: true,\n})\nexport class PageNotFoundComponent {\n  constructor(protected title: Title) {\n    this.title.setTitle('Citations - Page non trouvée');\n  }\n}\n"],
+  "mappings": ";;;;;;;;;;;AAQA,IAAaA,wBAAqB,uBAAA;AAA5B,QAAOA,yBAAP,MAAOA,uBAAqB;IAChCC,YAAsBC,OAAY;AAAZ,WAAAA,QAAAA;AACpB,WAAKA,MAAMC,SAAS,iCAA8B;IACpD;;;qBAHWH,wBAAqBI,4BAAAC,KAAA,CAAA;EAAA;;UAArBL;IAAqBM,WAAA,CAAA,CAAA,oBAAA,CAAA;IAAAC,YAAA;IAAAC,UAAA,CAAAC,6BAAA;IAAAC,OAAA;IAAAC,MAAA;IAAAC,UAAA,SAAAC,+BAAAC,IAAAC,KAAA;AAAA,UAAAD,KAAA,GAAA;AAHrBE,QAAAC,iBAAA,GAAA,iBAAA;;;;;AAGP,MAAOjB,yBAAP;SAAOA;AAAqB,GAAA;",
+  "names": ["PageNotFoundComponent", "constructor", "title", "setTitle", "\u0275\u0275directiveInject", "Title", "selectors", "standalone", "features", "\u0275\u0275StandaloneFeature", "decls", "vars", "template", "PageNotFoundComponent_Template", "rf", "ctx", "i0", "\u0275\u0275text"]
+}
