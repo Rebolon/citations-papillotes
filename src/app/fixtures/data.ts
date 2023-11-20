@@ -564,8 +564,9 @@ const data: FixtureCiteI[] = [
   {cite: `Le beau est ce qu'on ne peut pas vouloir change.`, author: `Simone Weil`, tags: []},
   {cite: `C'est le miracle de l'amour de n'avoir pas besoin de mots pour se comprendre.`, author: `Laure Conan`, tags: ['amour']},
   {cite: `L'attention est la forme la plus rare et la plus pure de la générosité.`, author: `Simone Weil`, tags: []},
+  {cite: `On n'a jamais fait de grande découverte sans hypothèse audacieuse.`, author: `Isaac Newton`, tags: ['science', 'audace']},
   // {cite: `.`, author: ``, tags: []},
-  
+
   ];
 // 2 juillet / 10 juin
 
