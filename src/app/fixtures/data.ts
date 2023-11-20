@@ -265,7 +265,7 @@ const data: FixtureCiteI[] = [
   {cite: `Si on veut connaître un peuple, il faut écouter sa musique.`, author: `Platon`},
   {cite: `On peut peindre une fleur, mais pas son odeur.`, author: `Proverbe italien`, tags: ['proverbe']},
   {cite: `Parmi les cinq sens, la vue, l'ouïe et l'odorat connaissent moins d'interdits que le toucher et le goût.`, author: `Léonard de Vinci`},
-  {cite: `On n'a jamais fait de grande découverte sans hypothèse audacieuse.`, author: `Léonard de Vinci`},
+  {cite: `On n'a jamais fait de grande découverte sans hypothèse audacieuse.`, author: `Isaac Newton`, tags: ['science', 'audace']},
   {cite: `L'expérience prouve que celui qui n'a jamais confiance en personne ne sera jamais déçu.`, author: `Léonard de Vinci`},
   {cite: `L'attention de celui qui écoute sert d'accompagnement dans la musique du discours.`, author: `Joseph Joubert`},
   {cite: `L'homme n'a point de port, le temps n'a pas de rive ; Il coule et nous passons !`, author: `Alphonse de Lamartine`},
@@ -564,7 +564,6 @@ const data: FixtureCiteI[] = [
   {cite: `Le beau est ce qu'on ne peut pas vouloir change.`, author: `Simone Weil`, tags: []},
   {cite: `C'est le miracle de l'amour de n'avoir pas besoin de mots pour se comprendre.`, author: `Laure Conan`, tags: ['amour']},
   {cite: `L'attention est la forme la plus rare et la plus pure de la générosité.`, author: `Simone Weil`, tags: []},
-  {cite: `On n'a jamais fait de grande découverte sans hypothèse audacieuse.`, author: `Isaac Newton`, tags: ['science', 'audace']},
   // {cite: `.`, author: ``, tags: []},
 
   ];
