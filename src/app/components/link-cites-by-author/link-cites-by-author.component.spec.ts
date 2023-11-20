@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LinkCitesByAuthorComponent } from './link-cites-by-author.component';
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Cites } from '../../services/Cites';
 
 describe('LinkCitesByAuthorComponent', () => {
   let component: LinkCitesByAuthorComponent;
@@ -7,7 +10,16 @@ describe('LinkCitesByAuthorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LinkCitesByAuthorComponent],
+      imports: [LinkCitesByAuthorComponent, RouterTestingModule],
+      providers: [
+        Cites,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { params: {} },
+          },
+        },
+      ],
     }).compileComponents();
   });
 

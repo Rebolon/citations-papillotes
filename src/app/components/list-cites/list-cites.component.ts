@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Component, Input, OnInit } from '@angular/core';
 import { CiteI } from '../../models/Cite';
 import { RouterLink } from '@angular/router';
@@ -16,12 +17,13 @@ import { OnChanges } from '@angular/core';
   template: `
     <div class="container mb-36">
       <h1 class="text-3xl font-bold text-stone-900 mb-2">
-        <a routerLink="/cites" queryParams=""
+        <a [queryParams]="null" routerLink="/cites"
           >{{ citeService.countSearchFoundCites() }} Citations.</a
         >
       </h1>
 
-      <h2 *ngIf="q" [ngPlural]="cites.length" class="text-md text-gray-600">
+      @if (q) {
+      <h2 [ngPlural]="cites.length" class="text-md text-gray-600">
         <ng-template ngPluralCase="=0"
           >Aucune citation trouvée pour la recherche "{{
             q
@@ -38,10 +40,11 @@ import { OnChanges } from '@angular/core';
           }}":&nbsp;</ng-template
         >
       </h2>
+      }
 
       <ul class="list-none">
+        @for (item of paginatedCites; track item.getId()) {
         <li
-          *ngFor="let item of paginatedCites; trackBy: trackByCiteId"
           class="p-1"
         >
           <cite>”{{ item.getCite() }}”</cite> de
@@ -49,6 +52,7 @@ import { OnChanges } from '@angular/core';
             [author]="item.getAuthor()"
           ></app-link-cites-by-author>
         </li>
+        }
       </ul>
     </div>
 
@@ -67,15 +71,12 @@ import { OnChanges } from '@angular/core';
       </div>
     </div>
   `,
-  styles: [],
-  providers: [Device],
+  providers: [],
   standalone: true,
   imports: [
     RouterLink,
-    NgIf,
     NgPlural,
     NgPluralCase,
-    NgFor,
     LinkCitesByAuthorComponent,
     PagerComponent,
   ],
@@ -84,7 +85,7 @@ export class ListCitesComponent
   extends BasePaginatedComponent
   implements OnInit, OnChanges
 {
-  @Input() q: string;
+  @Input() q!: string;
   protected cites: CiteI[] = [];
   protected paginatedCites: CiteI[] = [];
 
@@ -133,10 +134,6 @@ export class ListCitesComponent
       this.cites.push(cite);
     });
     this.paginatedCites = this.cites.slice(0, this.itemsPerPage);
-  }
-
-  protected trackByCiteId(index, cite: CiteI): number {
-    return cite.getId();
   }
 
   setPaginatedList(ev: CiteI[]): void {

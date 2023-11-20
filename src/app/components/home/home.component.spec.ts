@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
+import { Cites } from '../../services/Cites';
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -8,8 +11,17 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [HomeComponent],
-}).compileComponents();
+      imports: [HomeComponent, RouterTestingModule],
+      providers: [
+        Cites,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { params: {} },
+          },
+        },
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

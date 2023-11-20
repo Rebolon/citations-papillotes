@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CiteI } from '../models/Cite';
 
-@Injectable()
 export class CiteOfTheDay {
   static getStartYear(citesCount: number): number {
     let startPoint = 1;
@@ -73,7 +72,7 @@ export class CiteOfTheDay {
     return years;
   }
 
-  getCiteOfTheDay(cites: CiteI[]): CiteI {
+  static getCiteOfTheDay(cites: CiteI[]): CiteI {
     const startYear = CiteOfTheDay.getStartYear(cites.length);
     const years = CiteOfTheDay.getStackOfYears(new Date(), startYear);
     const days = years.reduce((previous, current) => previous + current);

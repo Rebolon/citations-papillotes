@@ -6,7 +6,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { fromEvent, Subject, debounceTime, map, takeUntil, tap } from 'rxjs';
+import { fromEvent, Subject, debounceTime, map, takeUntil, tap, Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -26,11 +26,10 @@ import { ActivatedRoute, Router } from '@angular/router';
       placeholder="Rechercher..."
     />
   `,
-  styles: [],
   standalone: true,
 })
 export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
-  @ViewChild('elSearchCite', { static: true }) elSearchCite: ElementRef;
+  @ViewChild('elSearchCite', { static: true }) elSearchCite!: ElementRef;
 
   // Memory leak prevention: better implementation than an array of Subscription on which we wll loop over
   // (3 steps documented here)
@@ -62,13 +61,15 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   ngAfterViewInit(): void {
     fromEvent(this.elSearchCite.nativeElement, 'keyup')
       .pipe(
-        // #3 the function that will stop the Observable because of the complete event from Observable property
-        takeUntil(this.ngUnsubscribe),
-        map((event: Event) => (event.currentTarget as HTMLInputElement).value),
-        debounceTime(500)
+        map(
+          (event: unknown) =>
+            ((event as Event).currentTarget as HTMLInputElement).value
+        ),
+        debounceTime(500),
+        takeUntil(this.ngUnsubscribe)
       )
       .subscribe({
-        next: (next) => {
+        next: (next: string) => {
           this.router.navigate(['/search'], { queryParams: { q: next } });
         },
       });

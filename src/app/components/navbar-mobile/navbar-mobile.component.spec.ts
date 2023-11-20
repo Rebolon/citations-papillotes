@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavbarMobileComponent } from './navbar-mobile.component';
+import { Click } from '../../services/Click';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute } from '@angular/router';
 
 describe('NavbarMobileComponent', () => {
   let component: NavbarMobileComponent;
@@ -8,8 +11,17 @@ describe('NavbarMobileComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [NavbarMobileComponent],
-}).compileComponents();
+      imports: [NavbarMobileComponent, RouterTestingModule],
+      providers: [
+        Click,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { params: {} },
+          },
+        },
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

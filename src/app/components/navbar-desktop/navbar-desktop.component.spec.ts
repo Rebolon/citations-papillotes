@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavbarDesktopComponent } from './navbar-desktop.component';
+import { Click } from '../../services/Click';
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('NavbarDesktopComponent', () => {
   let component: NavbarDesktopComponent;
@@ -8,8 +11,17 @@ describe('NavbarDesktopComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [NavbarDesktopComponent],
-}).compileComponents();
+      imports: [NavbarDesktopComponent, RouterTestingModule],
+      providers: [
+        Click,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { params: {} },
+          },
+        },
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

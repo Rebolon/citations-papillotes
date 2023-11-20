@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { BaseNavbarComponent } from '../common/BaseNavbarComponent';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Click } from '../../services/Click';
 
 @Component({
   selector: 'app-navbar-mobile',
@@ -11,11 +12,11 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     >
       <div class="flex justify-between" id="tabs">
         <a
+          [queryParams]="null"
           class="w-full hover:text-stone-500 justify-center inline-block text-center pt-2 pb-1"
           routerLink="/"
           title="Citation du jour"
           aria-label="Citation du jour"
-          queryParams=""
           routerLinkActive="focus:text-violet-800"
         >
           <svg
@@ -45,11 +46,11 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         </a>
 
         <a
+          [queryParams]="null"
           class="w-full hover:text-stone-500 justify-center inline-block text-center pt-2 pb-1"
           routerLink="/cites"
           title="Liste des citations"
           aria-label="Liste des citations"
-          queryParams=""
           routerLinkActive="focus:text-violet-800"
         >
           <svg
@@ -77,11 +78,11 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         </a>
 
         <a
+        [queryParams]="null"
           class="w-full hover:text-stone-500 justify-center inline-block text-center pt-2 pb-1"
           routerLink="/authors"
           title="Liste des auteurs"
           aria-label="Liste des auteurs"
-          queryParams=""
           routerLinkActive="focus:text-violet-800"
         >
           <svg
@@ -109,12 +110,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         </a>
 
         <a
+          [queryParams]="null"
           (click)="refreshRandom()"
           class="w-full hover:text-stone-500 justify-center inline-block text-center pt-2 pb-1"
           routerLink="/random"
           title="Une citation au hasard"
           aria-label="Une citation au hasard"
-          queryParams=""
           routerLinkActive="focus:text-violet-800"
         >
           <svg
@@ -143,7 +144,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
       </div>
     </section>
   `,
-  styles: [],
   standalone: true,
   imports: [RouterLink, RouterLinkActive],
 })

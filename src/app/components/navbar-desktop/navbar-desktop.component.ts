@@ -41,11 +41,11 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 
       <div class="text-lg hidden lg:flex">
         <a
+          [queryParams]="null"
           class="block mt-4 lg:inline-block hover:text-violet-800 motion-safe:hover:scale-110 lg:mt-0 mr-10"
           routerLink="/"
           title="Citation du jour"
           aria-label="Citation du jour"
-          queryParams=""
           routerLinkActive="focus:text-violet-800"
         >
           <svg
@@ -73,11 +73,11 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         </a>
 
         <a
+          [queryParams]="null"
           class="block mt-4 lg:inline-block hover:text-violet-800 motion-safe:hover:scale-110 lg:mt-0 mr-10"
           routerLink="/cites"
           title="Liste des citations"
           aria-label="Liste des citations"
-          queryParams=""
           routerLinkActive="focus:text-violet-800"
         >
           <svg
@@ -105,11 +105,11 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         </a>
 
         <a
+          [queryParams]="null"
           class="block mt-4 lg:inline-block hover:text-violet-800 motion-safe:hover:scale-110 lg:mt-0 mr-10"
           routerLink="/authors"
           title="Liste des auteurs"
           aria-label="Liste des auteurs"
-          queryParams=""
           routerLinkActive="focus:text-violet-800"
         >
           <svg
@@ -137,12 +137,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         </a>
 
         <a
+          [queryParams]="null"
           (click)="refreshRandom()"
           class="block mt-4 lg:inline-block hover:text-violet-800 motion-safe:hover:scale-110 lg:mt-0 mr-10"
           routerLink="/random"
           title="Une citation au hasard"
           aria-label="Une citation au hasard"
-          queryParams=""
           routerLinkActive="focus:text-violet-800"
         >
           <svg
@@ -201,7 +201,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
       </div>
     </nav>
   `,
-  styles: [],
   standalone: true,
   imports: [RouterLink, SearchComponent, RouterLinkActive],
 })

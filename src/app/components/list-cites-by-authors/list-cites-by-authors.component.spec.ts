@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListCitesByAuthorsComponent } from './list-cites-by-authors.component';
+import { Cites } from '../../services/Cites';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute } from '@angular/router';
+import { Device } from '../../tools/Device';
 
 describe('ListCiteByAuthorsComponent', () => {
   let component: ListCitesByAuthorsComponent;
@@ -8,8 +12,18 @@ describe('ListCiteByAuthorsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [ListCitesByAuthorsComponent],
-}).compileComponents();
+      imports: [ListCitesByAuthorsComponent, RouterTestingModule],
+      providers: [
+        Cites,
+        Device,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { params: {} },
+          },
+        },
+      ],
+   }).compileComponents();
   });
 
   beforeEach(() => {

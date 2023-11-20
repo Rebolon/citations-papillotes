@@ -4,7 +4,6 @@ import {
   Observable,
   concatAll,
   distinct,
-  filter,
   groupBy,
   map,
   mergeMap,
@@ -12,6 +11,7 @@ import {
   switchMap,
   take,
   toArray,
+  skip,
 } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Cites } from '../Cites';
@@ -21,9 +21,8 @@ import { Author, AuthorI } from '../../models/Authors';
 export class Authors {
   protected authors: BehaviorSubject<AuthorI[]> = new BehaviorSubject<
     AuthorI[]
-  >(null);
+  >([]);
   public authors$: Observable<AuthorI[]> = this.authors.asObservable().pipe(
-    filter((value) => !!value),
     // this is for a kind of immutability: if something push/pop/shift/... the CiteI[] it
     // won't alter every subcriber that has saved the data
     // map(next => rfdc({proto: true})(next)), // @todo find why it destroy the original object : Author
@@ -72,10 +71,10 @@ export class Authors {
                 const aParts = a.getName().split(' ');
                 const bParts = b.getName().split(' ');
                 const aLastname =
-                  aParts.length > 1 ? aParts.pop() : aParts.shift();
+                  (aParts.length > 1 ? aParts.pop() : aParts.shift()) ?? '';
                 const aFirstname = aParts[0];
                 const bLastname =
-                  bParts.length > 1 ? bParts.pop() : bParts.shift();
+                  (bParts.length > 1 ? bParts.pop() : bParts.shift()) ?? '';
                 const bFirstname = bParts[0];
 
                 if (aLastname.toLowerCase() < bLastname.toLowerCase()) {

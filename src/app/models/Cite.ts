@@ -2,20 +2,20 @@ export interface CiteI {
   getId(): number;
   getAuthor(): string;
   getCite(): string;
-  getTags(): Array<string | null>;
+  getTags(): Array<string>;
   setId(id: number): CiteI;
   setAuthor(author: string): CiteI;
   setCite(cite: string): CiteI;
-  setTags(tags: Array<string | null>): CiteI;
+  setTags(tags: Array<string> | undefined): CiteI;
   addTag(tag: string): CiteI;
   hasTags(): boolean;
 }
 
 export class Cite implements CiteI {
-  private id: number;
-  private author: string;
-  private cite: string;
-  private tags?: Array<string> = [];
+  private id!: number;
+  private author!: string;
+  private cite!: string;
+  private tags: Array<string> = [];
 
   constructor() {
     this.tags = [];
@@ -51,18 +51,22 @@ export class Cite implements CiteI {
     return this;
   }
 
-  getTags(): Array<string | null> {
-    return this.tags;
+  getTags(): Array<string> {
+    return this.tags ?? [];
   }
 
-  setTags(tags: Array<string | null> = []): CiteI {
+  setTags(tags: Array<string> | undefined = []): CiteI {
+    if (tags === undefined) {
+      return this;
+    }
+
     this.tags = tags;
 
     return this;
   }
 
   addTag(tag: string): CiteI {
-    if (!this.tags.includes(tag.trim())) {
+    if (this.tags && !this.tags.includes(tag.trim())) {
       this.tags.push(tag.trim());
     }
 

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Component, Input, OnInit } from '@angular/core';
 import { CiteI } from '../../models/Cite';
 import { Cites } from '../../services/Cites';
@@ -12,8 +13,8 @@ import { BehaviorSubject, filter, switchMap } from 'rxjs';
   selector: 'app-list-cites-by-authors',
   template: `
     <div class="container mb-36">
+      @if (author) {
       <h1
-        *ngIf="author"
         [ngPlural]="cites.length"
         class="text-3xl font-bold text-stone-900 mb-2"
       >
@@ -27,14 +28,16 @@ import { BehaviorSubject, filter, switchMap } from 'rxjs';
           >{{ cites.length }} citations de "{{ author }}":&nbsp;</ng-template
         >
       </h1>
+      }
 
       <ul class="list-none">
+        @for (item of paginatedCites; track item.getId()) {
         <li
-          *ngFor="let item of paginatedCites; trackBy: trackByCiteId"
           class="p-1"
         >
           <cite>”{{ item.getCite() }}”</cite>
         </li>
+        }
       </ul>
     </div>
 
@@ -53,16 +56,15 @@ import { BehaviorSubject, filter, switchMap } from 'rxjs';
       </div>
     </div>
   `,
-  styles: [],
-  providers: [Device],
+  providers: [],
   standalone: true,
-  imports: [NgIf, NgPlural, NgPluralCase, NgFor, PagerComponent],
+  imports: [NgPlural, NgPluralCase, PagerComponent],
 })
 export class ListCitesByAuthorsComponent
   extends BasePaginatedComponent
   implements OnInit
 {
-  @Input({ required: true }) author: string;
+  @Input({ required: true }) author!: string;
   cites: CiteI[] = [];
   paginatedCites: CiteI[] = [];
 
@@ -92,10 +94,6 @@ export class ListCitesByAuthorsComponent
       this.cites.push(cite);
     });
     this.paginatedCites = this.cites.slice(0, this.itemsPerPage);
-  }
-
-  protected trackByCiteId(index, cite: CiteI): number {
-    return cite.getId();
   }
 
   setPaginatedList(ev: CiteI[]): void {
