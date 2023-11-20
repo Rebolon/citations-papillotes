@@ -1,0 +1,135 @@
+{
+  "configVersion": 1,
+  "timestamp": 1700509032456,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/chunk-3CQLS226.js",
+        "/chunk-AG3ITT5Y.js",
+        "/chunk-CYPVO6LT.js",
+        "/chunk-GEY5NTYQ.js",
+        "/chunk-HBENKB2T.js",
+        "/chunk-J5VY44AZ.js",
+        "/chunk-JB7GNIGW.js",
+        "/chunk-K6SGS56U.js",
+        "/chunk-L475XAUT.js",
+        "/chunk-O5DFN2CU.js",
+        "/chunk-WAV63YEA.js",
+        "/chunk-XZLZDIO5.js",
+        "/chunk-YYOGFEPU.js",
+        "/favicon.ico",
+        "/main-TVJD3SYT.js",
+        "/manifest.webmanifest",
+        "/polyfills-LZBJRJJE.js",
+        "/styles-ZFFCLQVE.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/icons/android-icon-144x144.png",
+        "/assets/icons/android-icon-192x192.png",
+        "/assets/icons/android-icon-36x36.png",
+        "/assets/icons/android-icon-48x48.png",
+        "/assets/icons/android-icon-72x72.png",
+        "/assets/icons/android-icon-96x96.png",
+        "/assets/icons/apple-icon-114x114.png",
+        "/assets/icons/apple-icon-120x120.png",
+        "/assets/icons/apple-icon-144x144.png",
+        "/assets/icons/apple-icon-152x152.png",
+        "/assets/icons/apple-icon-180x180.png",
+        "/assets/icons/apple-icon-57x57.png",
+        "/assets/icons/apple-icon-60x60.png",
+        "/assets/icons/apple-icon-72x72.png",
+        "/assets/icons/apple-icon-76x76.png",
+        "/assets/icons/apple-icon-precomposed.png",
+        "/assets/icons/apple-icon.png",
+        "/assets/icons/favicon-16x16.png",
+        "/assets/icons/favicon-32x32.png",
+        "/assets/icons/favicon-96x96.png",
+        "/assets/icons/ms-icon-144x144.png",
+        "/assets/icons/ms-icon-150x150.png",
+        "/assets/icons/ms-icon-310x310.png",
+        "/assets/icons/ms-icon-70x70.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/assets/icons/android-icon-144x144.png": "bf0f455ccd04c613b65682323c8783df53110251",
+    "/assets/icons/android-icon-192x192.png": "99e72419c8a56645cf9a932ac0cdf9939d0ebff7",
+    "/assets/icons/android-icon-36x36.png": "e1fbba8411fa4c5e06166e7cff2772284cb7550b",
+    "/assets/icons/android-icon-48x48.png": "cc855da5f5d475243dc363fcbe44f81a9d04daa9",
+    "/assets/icons/android-icon-72x72.png": "1885dbfa2d2720cc033f06a0c27594f621975357",
+    "/assets/icons/android-icon-96x96.png": "8707dc89c05c744563b905b31456474943e68ebb",
+    "/assets/icons/apple-icon-114x114.png": "08a3e0f4bdf8468c7d23c9972be7218c264e832f",
+    "/assets/icons/apple-icon-120x120.png": "81da05ae03ed3ca491261efb08c494f387623286",
+    "/assets/icons/apple-icon-144x144.png": "bf0f455ccd04c613b65682323c8783df53110251",
+    "/assets/icons/apple-icon-152x152.png": "d45665921e7834a59b03ba32347f736185b4648e",
+    "/assets/icons/apple-icon-180x180.png": "1e8013172e6d756659839d25c51ccb66064c6d97",
+    "/assets/icons/apple-icon-57x57.png": "a600e757039e7f35185c68e844afe31a1526d5b5",
+    "/assets/icons/apple-icon-60x60.png": "96d79bf8c1ea32f690c892ccc6e703b1f3231c73",
+    "/assets/icons/apple-icon-72x72.png": "1885dbfa2d2720cc033f06a0c27594f621975357",
+    "/assets/icons/apple-icon-76x76.png": "40b5ae54d66bf0e9c05ed6d591688acb47c47d4c",
+    "/assets/icons/apple-icon-precomposed.png": "cbf01a459d4502c56d4225c6185e5f62ca51e8b2",
+    "/assets/icons/apple-icon.png": "cbf01a459d4502c56d4225c6185e5f62ca51e8b2",
+    "/assets/icons/favicon-16x16.png": "2a0f3cc7341e4f9b96f25b260590aaafda1e9cc4",
+    "/assets/icons/favicon-32x32.png": "7b945522c300428d1e33cbb220f90e8c6eb551b8",
+    "/assets/icons/favicon-96x96.png": "8707dc89c05c744563b905b31456474943e68ebb",
+    "/assets/icons/ms-icon-144x144.png": "bf0f455ccd04c613b65682323c8783df53110251",
+    "/assets/icons/ms-icon-150x150.png": "bdbca3e8c50ffb8e6b990fb8f7a978e9a656a6a3",
+    "/assets/icons/ms-icon-310x310.png": "f33c3bded112fbecea6ca545b2789b1b80f682fc",
+    "/assets/icons/ms-icon-70x70.png": "0456d449ef58b6f15d7cf84f16cf1ce4101d009d",
+    "/chunk-3CQLS226.js": "5c4771b1afc6dce610694c113dcfd573d30c999e",
+    "/chunk-AG3ITT5Y.js": "0778607a88a45bfc379d78746710695b0335051f",
+    "/chunk-CYPVO6LT.js": "b4d68a345b8818e602e97195fb4396dc4fb409ab",
+    "/chunk-GEY5NTYQ.js": "40a069f21636a31748118c3b0b7effc9fa04dd15",
+    "/chunk-HBENKB2T.js": "53ce7c18195096f7baf8d7004e29343ff277099e",
+    "/chunk-J5VY44AZ.js": "98dae0995f7c0aa96ef64e9dec387a2bd87ad125",
+    "/chunk-JB7GNIGW.js": "4e47ee6916d69baf6519f3173c18a49cdbcdbb0c",
+    "/chunk-K6SGS56U.js": "99f105c6cfb96e092fee1fd99dba809355348cf5",
+    "/chunk-L475XAUT.js": "59f4c7c54795926d140860c54cae873085de1f7a",
+    "/chunk-O5DFN2CU.js": "b21c13a14e54ef8dfb10f0c51217d3c004152db2",
+    "/chunk-WAV63YEA.js": "4b68b802e5f19b989931dc1f9906f740f5e287eb",
+    "/chunk-XZLZDIO5.js": "1a58c97cab3da0f86f3b661b9d47636c9bb460bf",
+    "/chunk-YYOGFEPU.js": "10e8dd68bef4b792b1c6ba5fb2b658f63b5db4d6",
+    "/favicon.ico": "800c8aabaf313c4b2a4b109094ba502b51d2b366",
+    "/main-TVJD3SYT.js": "4d0ccec7dd971d4eff070df322244dac0f4ceacf",
+    "/manifest.webmanifest": "f385472fca63328bd8cd8761e6a7cae990ac4050",
+    "/polyfills-LZBJRJJE.js": "fda1c82c5c620f1fa442f687b3df45a037f6fcc9",
+    "/styles-ZFFCLQVE.css": "9ed4b8c9524702631ed0a5ea213174dbe1536ba5"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
