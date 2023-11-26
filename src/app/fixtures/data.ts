@@ -564,6 +564,10 @@ const data: FixtureCiteI[] = [
   {cite: `Le beau est ce qu'on ne peut pas vouloir change.`, author: `Simone Weil`, tags: []},
   {cite: `C'est le miracle de l'amour de n'avoir pas besoin de mots pour se comprendre.`, author: `Laure Conan`, tags: ['amour']},
   {cite: `L'attention est la forme la plus rare et la plus pure de la générosité.`, author: `Simone Weil`, tags: []},
+  {cite: `La famille est le plus doux des liens.`, author: `Henri-Frédéric Amiel`, tags: ['famille']},
+  {cite: `Sans mes cadeaux, Noël ne serait pas Noël.`, author: `Louisa May Alcott`, tags: ['noël']},
+  {cite: `L'esprit cherche et c'est le coeur qui trouve.`, author: `George Sand`, tags: []},
+  {cite: `Hâtons-nous de succomber à la tentation avant qu'elle ne s'éloigne.`, author: `Epicure`, tags: []},
   // {cite: `.`, author: ``, tags: []},
 
   ];

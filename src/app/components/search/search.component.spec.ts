@@ -5,8 +5,8 @@ import { SearchComponent } from './search.component';
 describe('SearchComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [RouterTestingModule, SearchComponent],
-}).compileComponents();
+      imports: [RouterTestingModule, SearchComponent],
+    }).compileComponents();
   });
 
   it('should create the app', () => {
@@ -20,7 +20,7 @@ describe('SearchComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
     expect(compiled.querySelector('.content span').textContent).toContain(
-      'citations app is running!'
+      'citations app is running!',
     );
   });
 });
