@@ -8,8 +8,7 @@ import { Device } from '../../tools/Device';
 import { BasePaginatedComponent } from '../common/BasePaginatedComponent';
 import { PagerComponent } from '../pager/pager.component';
 import { LinkCitesByAuthorComponent } from '../link-cites-by-author/link-cites-by-author.component';
-import { NgIf, NgPlural, NgPluralCase, NgFor } from '@angular/common';
-import { BehaviorSubject, filter } from 'rxjs';
+import { NgPlural, NgPluralCase } from '@angular/common';
 import { OnChanges } from '@angular/core';
 
 @Component({

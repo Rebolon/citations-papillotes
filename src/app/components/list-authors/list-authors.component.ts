@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { Authors } from '../../services/Cites/Authors';
 import { AuthorI } from '../../models/Authors';
 import { Title } from '@angular/platform-browser';
 import { Device } from '../../tools/Device';
-import { CiteI } from '../../models/Cite';
 import { BasePaginatedComponent } from '../common/BasePaginatedComponent';
 import { PagerComponent } from '../pager/pager.component';
-import { NgClass, NgFor } from '@angular/common';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-list-authors',

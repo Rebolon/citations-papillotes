@@ -509,7 +509,7 @@ const data: FixtureCiteI[] = [
   {cite: `Si nous voulons nous pardonner les uns aux autres, commençons d'abord par nous comprendre les uns les autres.`, author: `Emma Goldman`, tags: ['pardon']},
   {cite: `Ceux qui ne bougent pas, ne remarquent pas leur chaînes.`, author: `Rosa Luxembourg`, tags: ['liberté']},
   {cite: `La révolution sera la floraison de l'humanité comme l'amour est la floraison du coeur.`, author: `Louise Michel`, tags: ['amour', 'liberté']},
-  {cite: `Ne jamais se laisser abattre par des personnes ou par des événements.`, author: `Marie Curie`, tags: []},
+  {cite: `Premier principe : ne jamais se laisser abattre par des personnes ou par des événements.`, author: `Marie Curie`, tags: ['persévérance', 'caractère']},
   {cite: `Si nous faisions tout ce que nous sommes capables de faire, nous en serions abasourdis.`, author: `Thomas Edison`, tags: []},
   {cite: `Si ta volonté te lâche, dépasse-la !.`, author: `Emily Dickinson`, tags: ['ostination']},
   {cite: `Que cette année vous soit heureuse ; que la paix, le repos et la santé vous tiennent lieu de fortune.`, author: `Madame de Sévigné`, tags: []},
@@ -568,6 +568,13 @@ const data: FixtureCiteI[] = [
   {cite: `Sans mes cadeaux, Noël ne serait pas Noël.`, author: `Louisa May Alcott`, tags: ['noël']},
   {cite: `L'esprit cherche et c'est le coeur qui trouve.`, author: `George Sand`, tags: []},
   {cite: `Hâtons-nous de succomber à la tentation avant qu'elle ne s'éloigne.`, author: `Epicure`, tags: []},
+  {cite: `La joie est notre évasion hors du temps.`, author: `Simone Weil`, tags: ['joie', 'bonheur']},
+  {cite: `Dans la colère, rien ne convient mieux que le silence.`, author: `Sappho`, tags: ['colère']},
+  {cite: `Pour moi, la plus belle des choses, c'est de voir quelqu'un aimer quelqu'un.`, author: `Sappho`, tags: ['amour']},
+  {cite: `Nos actions agissent sur nous tout autant que nous agissons sur elles.`, author: `George Eliot`, tags: ['responsabilité']},
+  {cite: `Si Zeus voulait donner une reine aux fleurs, la rose régnerait sur toutes.`, author: `Sappho`, tags: ['fleur']},
+  {cite: `Chacun cherche sa route ; nous cherchons la nôtre et nous pensons que le jour où le règne de la liberté et de l'égalité era arrivé, le genre humain sera heureux.`, author: `Louise Michel`, tags: []},
+  {cite: `La plus grande douceur de la vie, c'est d'admirer ce qu'on aime.`, author: `Laure Conan`, tags: ['amour', 'contemplation']},
   // {cite: `.`, author: ``, tags: []},
 
   ];
