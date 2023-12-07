@@ -575,6 +575,11 @@ const data: FixtureCiteI[] = [
   {cite: `Si Zeus voulait donner une reine aux fleurs, la rose régnerait sur toutes.`, author: `Sappho`, tags: ['fleur']},
   {cite: `Chacun cherche sa route ; nous cherchons la nôtre et nous pensons que le jour où le règne de la liberté et de l'égalité era arrivé, le genre humain sera heureux.`, author: `Louise Michel`, tags: []},
   {cite: `La plus grande douceur de la vie, c'est d'admirer ce qu'on aime.`, author: `Laure Conan`, tags: ['amour', 'contemplation']},
+  {cite: `Le repos est un rêve ; la vie est un orage.`, author: `George Sand`, tags: []},
+  {cite: `Nous devons avoir de la persévérance et surtout de la confiance en nous-mêmes.`, author: `Marie Curie`, tags: ['persévérance', 'confiance']},
+  {cite: `Vous pouvez toujours donner quelque chose, même si c'est seulement de la gentillesse.`, author: `Anne Frank`, tags: ['générosité']},
+  {cite: `Il n'est rien de réel que le rêve et l'amour.`, author: `Anna De Noailles`, tags: []},
+  {cite: `Celui qui a bon coeur n'est jamais sot.`, author: `George Sand`, tags: ['gentillesse', 'intelligence']},
   // {cite: `.`, author: ``, tags: []},
 
   ];
