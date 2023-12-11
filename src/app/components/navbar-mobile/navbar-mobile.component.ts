@@ -1,7 +1,6 @@
-import { Component, inject } from '@angular/core';
-import { BaseNavbarComponent } from '../common/BaseNavbarComponent';
+import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Click } from '../../services/Click';
+import { BaseNavbarComponent } from '../common/BaseNavbarComponent';
 
 @Component({
   selector: 'app-navbar-mobile',

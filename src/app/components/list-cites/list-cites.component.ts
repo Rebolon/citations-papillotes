@@ -70,7 +70,6 @@ import { OnChanges } from '@angular/core';
       </div>
     </div>
   `,
-  providers: [],
   standalone: true,
   imports: [
     RouterLink,
@@ -129,13 +128,13 @@ export class ListCitesComponent
   protected fillCites(citesList: CiteI[]): void {
     this.cites = [];
     this.paginatedCites = [];
-    citesList.forEach((cite, index) => {
+    citesList.forEach((cite) => {
       this.cites.push(cite);
     });
     this.paginatedCites = this.cites.slice(0, this.itemsPerPage);
   }
 
-  setPaginatedList(ev: CiteI[]): void {
-    this.paginatedCites = ev;
+  setPaginatedList(ev: unknown[]): void {
+    this.paginatedCites = ev as CiteI[];
   }
 }

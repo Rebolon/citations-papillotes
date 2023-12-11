@@ -580,6 +580,11 @@ const data: FixtureCiteI[] = [
   {cite: `Vous pouvez toujours donner quelque chose, même si c'est seulement de la gentillesse.`, author: `Anne Frank`, tags: ['générosité']},
   {cite: `Il n'est rien de réel que le rêve et l'amour.`, author: `Anna De Noailles`, tags: []},
   {cite: `Celui qui a bon coeur n'est jamais sot.`, author: `George Sand`, tags: ['gentillesse', 'intelligence']},
+  {cite: `Il n'y a point de tableau plus charmant que celui de la famille.`, author: `Jean-Jacques Rousseau`, tags: []},
+  {cite: `Il ne faut pas regarder quel bien nous fait un ami, mais seulement le désir qu'il a de nous en faire.`, author: `Madeleine de Souvré`, tags: []},
+  {cite: `Pour moi aussi, l'amour était (ou est) toujours plus important et plus sacré que l'objet qui le suscite.`, author: `Rosa Luxemburg`, tags: ['amour', 'extrait', 'la vie']},
+  {cite: `Soyez donc des hommes, ou mieux : des surhommes ! Soyez fidèles aux buts tracés.`, author: `Marc Shelley`, tags: ['objectif']},
+  {cite: `L'avenir peut s'éveiller plus beau que le passé.`, author: `George Sand`, tags: []},
   // {cite: `.`, author: ``, tags: []},
 
   ];

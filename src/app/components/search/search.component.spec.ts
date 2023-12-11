@@ -15,12 +15,10 @@ describe('SearchComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', () => {
+  it('should render input', () => {
     const fixture = TestBed.createComponent(SearchComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain(
-      'citations app is running!',
-    );
+    expect(compiled.querySelector('input')).toContain('Rechercher...');
   });
 });

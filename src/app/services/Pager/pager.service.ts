@@ -24,7 +24,7 @@ export class PageIndexDoesNotExists extends Error {}
 export class PagerService
   implements PagerInterface, PagerNavigationInterface, PagerTemplateInterface
 {
-  private originalList: number[] = [];
+  private originalList: unknown[] | number[] = [];
   private itemPerPage = 5;
   private maxPagerItem = 5;
   private firstPage = 1;
@@ -43,12 +43,12 @@ export class PagerService
     filter((value) => !!value),
     map((value) => {
       return this.getOffsetForPage(value);
-    })
+    }),
   );
 
   constructor() {}
 
-  init(list: Array<any> | number, options?: PagerOptionsInterface): void {
+  init(list: Array<unknown> | number, options?: PagerOptionsInterface): void {
     /** Seems to be a source of bug : authors page, swith between alpha and total fails because of this
     if (this.pagerIndexList.length) {
       return
@@ -115,7 +115,7 @@ export class PagerService
     return this.nextPage;
   }
 
-  getPaginatedList(): Array<any> {
+  getPaginatedList(): Array<unknown> {
     const startOffset = this.getOffset();
     const endOffset = startOffset + this.itemPerPage;
 
@@ -220,8 +220,8 @@ export class PagerService
     return this;
   }
 
-  private setTotalPage(list: Array<any> | number): PagerService {
-    let count = typeof list === 'object' ? list.length : list;
+  private setTotalPage(list: Array<unknown> | number): PagerService {
+    const count = typeof list === 'object' ? list.length : list;
     this.totalPage = Math.ceil(count / this.itemPerPage);
 
     return this;
@@ -268,8 +268,8 @@ export class PagerService
       this.currentPage.getValue() < this.firstPage
         ? this.firstPage
         : currentPage > this.lastPage
-        ? this.lastPage
-        : currentPage
+          ? this.lastPage
+          : currentPage,
     );
 
     return this;

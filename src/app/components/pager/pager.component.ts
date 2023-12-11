@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+import { NgClass } from '@angular/common';
 import {
   Component,
   Input,
@@ -7,10 +8,9 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { PagerService } from '../../services/Pager/pager.service';
-import { PagerOptionsInterface } from '../../services/Pager/pager.interface';
 import { BehaviorSubject, filter } from 'rxjs';
-import { NgIf, NgClass, NgFor } from '@angular/common';
+import { PagerOptionsInterface } from '../../services/Pager/pager.interface';
+import { PagerService } from '../../services/Pager/pager.service';
 
 @Component({
   selector: 'app-pager',
@@ -68,14 +68,13 @@ import { NgIf, NgClass, NgFor } from '@angular/common';
     </nav>
   `,
   styleUrls: ['./pager.component.scss'],
-  providers: [],
   standalone: true,
   imports: [NgClass],
 })
 export class PagerComponent implements OnInit, OnChanges {
-  @Input() list: Array<any> | number = 0;
+  @Input() list: Array<unknown> | number = 0;
   @Input() options?: PagerOptionsInterface;
-  private paginatedList: BehaviorSubject<Array<any>> = new BehaviorSubject(
+  private paginatedList: BehaviorSubject<Array<unknown>> = new BehaviorSubject(
     this.pager.getPaginatedList()
   );
   @Output() paginatedList$ = this.paginatedList
@@ -87,12 +86,12 @@ export class PagerComponent implements OnInit, OnChanges {
   // do i need ngOnInit, or ngOnChanges is enough ?
   ngOnInit(): void {
     this.pager.init(this.list, this.options);
-    this.pager.currentOffset$.subscribe((value) => {
+    this.pager.currentOffset$.subscribe(() => {
       this.paginatedList.next(this.pager.getPaginatedList());
     });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     const list = changes['list'];
     if (!list) {
       return;

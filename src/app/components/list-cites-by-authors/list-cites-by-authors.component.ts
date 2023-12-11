@@ -1,13 +1,12 @@
 /* eslint-disable prettier/prettier */
+import { NgPlural, NgPluralCase } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { CiteI } from '../../models/Cite';
 import { Cites } from '../../services/Cites';
-import { Title } from '@angular/platform-browser';
 import { Device } from '../../tools/Device';
 import { BasePaginatedComponent } from '../common/BasePaginatedComponent';
 import { PagerComponent } from '../pager/pager.component';
-import { NgIf, NgPlural, NgPluralCase, NgFor } from '@angular/common';
-import { BehaviorSubject, filter, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-list-cites-by-authors',
@@ -56,7 +55,6 @@ import { BehaviorSubject, filter, switchMap } from 'rxjs';
       </div>
     </div>
   `,
-  providers: [],
   standalone: true,
   imports: [NgPlural, NgPluralCase, PagerComponent],
 })
@@ -90,13 +88,13 @@ export class ListCitesByAuthorsComponent
   protected fillCites(citesList: CiteI[]): void {
     this.cites = [];
     this.paginatedCites = [];
-    citesList.forEach((cite, index) => {
+    citesList.forEach((cite) => {
       this.cites.push(cite);
     });
     this.paginatedCites = this.cites.slice(0, this.itemsPerPage);
   }
 
-  setPaginatedList(ev: CiteI[]): void {
-    this.paginatedCites = ev;
+  setPaginatedList(ev: unknown[]): void {
+    this.paginatedCites = ev as CiteI[];
   }
 }

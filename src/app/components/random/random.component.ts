@@ -1,12 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { Component, OnInit, inject, runInInjectionContext } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CiteI } from '../../models/Cite';
 import { Cites } from '../../services/Cites';
 import { Click } from '../../services/Click';
 import { Title } from '@angular/platform-browser';
 import { LinkCitesByAuthorComponent } from '../link-cites-by-author/link-cites-by-author.component';
 import { AsyncPipe, NgIf } from '@angular/common';
-import { BehaviorSubject, Observable, ReplaySubject, skip, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, skip, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-random',
@@ -28,13 +28,12 @@ import { BehaviorSubject, Observable, ReplaySubject, skip, switchMap, tap } from
     }
   `,
   standalone: true,
-  providers: [],
   imports: [NgIf, AsyncPipe, LinkCitesByAuthorComponent],
 })
-export class RandomComponent implements OnInit {
+export class RandomComponent {
   private cite: BehaviorSubject<CiteI> = new BehaviorSubject({} as CiteI);
   protected cite$ = this.cite.asObservable().pipe(skip(1));
-  
+
   protected citesService: Cites = inject(Cites);
   protected click: Click = inject(Click);
   protected title: Title = inject(Title);
@@ -48,9 +47,5 @@ export class RandomComponent implements OnInit {
       .subscribe({
         next: (cite) => this.cite.next(cite),
       });
-  }
-
-  ngOnInit(): void {
-    
   }
 }

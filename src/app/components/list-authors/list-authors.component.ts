@@ -44,11 +44,11 @@ import { NgClass } from '@angular/common';
 
       <ul class="list-none">
         @for (item of paginatedAuthors; track item.getName()) {
-        <li class="p-1">
-          <a routerLink="/authors/{{ item.getName() }}"
-            >{{ item.getName() }} <small>({{ item.getCount() }})</small></a
-          >
-        </li>
+          <li class="p-1">
+            <a routerLink="/authors/{{ item.getName() }}"
+              >{{ item.getName() }} <small>({{ item.getCount() }})</small></a
+            >
+          </li>
         }
       </ul>
     </div>
@@ -68,7 +68,6 @@ import { NgClass } from '@angular/common';
       </div>
     </div>
   `,
-  providers: [],
   standalone: true,
   imports: [NgClass, RouterLink, PagerComponent],
 })
@@ -85,7 +84,7 @@ export class ListAuthorsComponent
   constructor(
     public authorService: Authors,
     protected title: Title,
-    protected device: Device
+    protected device: Device,
   ) {
     super();
     this.title.setTitle('Citations - Liste des auteurs');
@@ -140,7 +139,7 @@ export class ListAuthorsComponent
     return this.sort === 'total';
   }
 
-  setPaginatedList(ev: AuthorI[]): void {
-    this.paginatedAuthors = ev;
+  setPaginatedList(ev: unknown[]): void {
+    this.paginatedAuthors = ev as AuthorI[];
   }
 }

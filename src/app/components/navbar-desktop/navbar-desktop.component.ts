@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { BaseNavbarComponent } from '../common/BaseNavbarComponent';
 import { SearchComponent } from '../search/search.component';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navbar-desktop',

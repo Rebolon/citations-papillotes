@@ -20,7 +20,7 @@ export class PagerListParts implements PagerListPartsInterface {
       })
       .reverse();
 
-    this.pagerNumbers = this.pager.filter((value, index) => {
+    this.pagerNumbers = this.pager.filter((value) => {
       return (
         !this.pagerFirstEdges.includes(value) &&
         !this.pagerLastEdges.includes(value)

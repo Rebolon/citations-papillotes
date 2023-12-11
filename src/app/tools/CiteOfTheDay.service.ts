@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { CiteI } from '../models/Cite';
 
 export class CiteOfTheDay {
@@ -16,8 +15,8 @@ export class CiteOfTheDay {
     startYearDate.setFullYear(
       parseInt(
         new Date().getFullYear().toString(10).substr(0, substrLength) + padding,
-        0
-      )
+        0,
+      ),
     );
 
     return startYearDate.getFullYear();
@@ -54,7 +53,7 @@ export class CiteOfTheDay {
     if (currentYear === startYear) {
       years[currentYear] = CiteOfTheDay.getNumberOfDayInCurrentYear(
         aDate,
-        currentYear
+        currentYear,
       );
 
       return years;

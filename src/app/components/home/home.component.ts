@@ -1,9 +1,7 @@
-/* eslint-disable prettier/prettier */
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Cites } from '../../services/Cites';
-import { LinkCitesByAuthorComponent } from '../link-cites-by-author/link-cites-by-author.component';
-import { AsyncPipe } from '@angular/common';
 import { CiteComponent } from '../cite/cite.component';
 
 @Component({
@@ -13,13 +11,14 @@ import { CiteComponent } from '../cite/cite.component';
       <app-cite [cite]="citeOfTheDay" />
     }
   `,
-  styles: [],
-  providers: [],
   standalone: true,
-  imports: [AsyncPipe, LinkCitesByAuthorComponent, CiteComponent],
+  imports: [AsyncPipe, CiteComponent],
 })
 export class HomeComponent {
-  constructor(protected citesService: Cites, protected title: Title) {
+  constructor(
+    protected citesService: Cites,
+    protected title: Title,
+  ) {
     this.title.setTitle('Citations - Citation du jour');
   }
 }

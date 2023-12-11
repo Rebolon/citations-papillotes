@@ -11,7 +11,7 @@ export interface PagerInterface {
 }
 
 export interface PagerNavigationInterface {
-  getPaginatedList(): Array<any>;
+  getPaginatedList(): Array<unknown>;
   goToPage(pageIndex: number): number;
   goToFirstPage(): number;
   goToPreviousPage(): number;

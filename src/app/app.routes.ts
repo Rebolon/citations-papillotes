@@ -5,21 +5,21 @@ export const routes: Routes = [
     path: '',
     loadComponent: () =>
       import('./components/home/home.component').then(
-        (c) => c.HomeComponent
+        (c) => c.HomeComponent,
       ) /* */,
   },
   {
     path: 'cites',
     loadComponent: () =>
       import('./components/list-cites/list-cites.component').then(
-        (c) => c.ListCitesComponent
+        (c) => c.ListCitesComponent,
       ) /* */,
   },
   {
     path: 'authors',
     loadComponent: () =>
       import('./components/list-authors/list-authors.component').then(
-        (c) => c.ListAuthorsComponent
+        (c) => c.ListAuthorsComponent,
       ) /* */,
   },
   {
@@ -33,21 +33,21 @@ export const routes: Routes = [
     path: 'random',
     loadComponent: () =>
       import('./components/random/random.component').then(
-        (c) => c.RandomComponent
+        (c) => c.RandomComponent,
       ) /* */,
   },
   {
     path: 'search',
     loadComponent: () =>
       import('./components/list-cites/list-cites.component').then(
-        (c) => c.ListCitesComponent
+        (c) => c.ListCitesComponent,
       ) /* */,
   },
   {
     path: '**',
     loadComponent: () =>
       import('./components/pageNotFound/page-not-found.component').then(
-        (c) => c.PageNotFoundComponent
+        (c) => c.PageNotFoundComponent,
       ) /* */,
   },
 ];

@@ -1,22 +1,21 @@
+import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {
   BehaviorSubject,
   EMPTY,
-  from,
   Observable,
-  of,
   distinct,
   filter,
+  from,
   map,
+  of,
   switchMap,
   take,
   tap,
   toArray,
-  skip,
 } from 'rxjs';
 import { cites } from '../fixtures/data';
 import { Cite, CiteI } from '../models/Cite';
-import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { CiteOfTheDay } from '../tools/CiteOfTheDay.service';
 
 @Injectable()
@@ -41,7 +40,7 @@ export class Cites {
       });
     }),
     distinct(),
-    take(1) // auto unsubscribe, force complete
+    take(1), // auto unsubscribe, force complete
   );
   // local cache for the counter
   protected count = 0;
@@ -51,7 +50,7 @@ export class Cites {
       .pipe(
         tap((next) => (this.originalCites = next)),
         tap((next) => (this.count = next.length)),
-        switchMap(() => this.reset())
+        switchMap(() => this.reset()),
       )
       .subscribe();
   }
@@ -59,7 +58,7 @@ export class Cites {
   public reset(): Observable<CiteI[]> {
     return of(this.originalCites).pipe(
       filter((value) => !!value),
-      tap((next) => this.cites.next(next))
+      tap((next) => this.cites.next(next)),
     );
   }
 
@@ -82,7 +81,7 @@ export class Cites {
             item.getTags().includes(search.toLowerCase()))
         );
       }),
-      toArray()
+      toArray(),
     );
   }
 
@@ -98,7 +97,7 @@ export class Cites {
           item && item.getAuthor().toLowerCase().includes(author.toLowerCase())
         );
       }),
-      toArray()
+      toArray(),
     );
   }
 
@@ -125,7 +124,7 @@ export class Cites {
 
   getRandomCite(): Observable<CiteI> {
     return this.cites.pipe(
-      map((cites) => cites[Math.floor(Math.random() * cites.length)])
+      map((cites) => cites[Math.floor(Math.random() * cites.length)]),
     );
   }
 }

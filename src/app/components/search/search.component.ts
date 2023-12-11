@@ -6,7 +6,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { fromEvent, Subject, debounceTime, map, takeUntil, tap, Observable } from 'rxjs';
+import { fromEvent, Subject, debounceTime, map, takeUntil } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -38,10 +38,10 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
 
   constructor(
     protected activatedRouter: ActivatedRoute,
-    protected router: Router
+    protected router: Router,
   ) {}
 
-  ngOnInit(): any {
+  ngOnInit(): void {
     // reset q input when route change
     this.activatedRouter.queryParamMap.subscribe((params) => {
       if (!params.get('q')) {
@@ -53,7 +53,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   // #2 the event on which we will complete the main Observable property
-  ngOnDestroy(): any {
+  ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
@@ -66,7 +66,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
             ((event as Event).currentTarget as HTMLInputElement).value
         ),
         debounceTime(500),
-        takeUntil(this.ngUnsubscribe)
+        takeUntil(this.ngUnsubscribe),
       )
       .subscribe({
         next: (next: string) => {
