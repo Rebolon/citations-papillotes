@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  inject,
 } from '@angular/core';
 import { fromEvent, Subject, debounceTime, map, takeUntil } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,12 +13,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-search',
   template: `
-    <!-- don't know why a & input are on 2 rows whereas that if directly in app-component it's on 1 row ??? -->
-    <!--a>
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="#4A5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</a-->
     <input
       #elSearchCite
       class=""
@@ -30,26 +25,21 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild('elSearchCite', { static: true }) elSearchCite!: ElementRef;
-
-  // Memory leak prevention: better implementation than an array of Subscription on which we wll loop over
-  // (3 steps documented here)
-  // #1 the properties that will clear Observable
   protected ngUnsubscribe: Subject<void> = new Subject();
-
-  constructor(
-    protected activatedRouter: ActivatedRoute,
-    protected router: Router,
-  ) {}
+  protected activatedRouter = inject(ActivatedRoute);
+  protected router = inject(Router);
 
   ngOnInit(): void {
     // reset q input when route change
-    this.activatedRouter.queryParamMap.subscribe((params) => {
-      if (!params.get('q')) {
-        this.elSearchCite.nativeElement.value = '';
+    this.activatedRouter.queryParamMap
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((params) => {
+        if (!params.get('q')) {
+          this.elSearchCite.nativeElement.value = '';
 
-        return;
-      }
-    });
+          return;
+        }
+      });
   }
 
   // #2 the event on which we will complete the main Observable property
@@ -63,7 +53,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
       .pipe(
         map(
           (event: unknown) =>
-            ((event as Event).currentTarget as HTMLInputElement).value
+            ((event as Event).currentTarget as HTMLInputElement).value,
         ),
         debounceTime(500),
         takeUntil(this.ngUnsubscribe),

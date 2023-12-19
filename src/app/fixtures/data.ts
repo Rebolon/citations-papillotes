@@ -585,6 +585,7 @@ const data: FixtureCiteI[] = [
   {cite: `Pour moi aussi, l'amour était (ou est) toujours plus important et plus sacré que l'objet qui le suscite.`, author: `Rosa Luxemburg`, tags: ['amour', 'extrait', 'la vie']},
   {cite: `Soyez donc des hommes, ou mieux : des surhommes ! Soyez fidèles aux buts tracés.`, author: `Marc Shelley`, tags: ['objectif']},
   {cite: `L'avenir peut s'éveiller plus beau que le passé.`, author: `George Sand`, tags: []},
+  {cite: `La vie est comme un arc-en-ciel : il faut la pluie et le soleil pour en voir les couleurs.`, author: `Arunachala Ramaiya`, tags: ['bonheur']},
   // {cite: `.`, author: ``, tags: []},
 
   ];

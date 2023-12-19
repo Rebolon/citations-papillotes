@@ -1,12 +1,11 @@
 /* eslint-disable prettier/prettier */
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { CiteI } from '../../models/Cite';
+import { Title } from '@angular/platform-browser';
+import { switchMap } from 'rxjs';
 import { Cites } from '../../services/Cites';
 import { Click } from '../../services/Click';
-import { Title } from '@angular/platform-browser';
 import { LinkCitesByAuthorComponent } from '../link-cites-by-author/link-cites-by-author.component';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { BehaviorSubject, skip, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-random',
@@ -31,21 +30,14 @@ import { BehaviorSubject, skip, switchMap, tap } from 'rxjs';
   imports: [NgIf, AsyncPipe, LinkCitesByAuthorComponent],
 })
 export class RandomComponent {
-  private cite: BehaviorSubject<CiteI> = new BehaviorSubject({} as CiteI);
-  protected cite$ = this.cite.asObservable().pipe(skip(1));
-
   protected citesService: Cites = inject(Cites);
   protected click: Click = inject(Click);
   protected title: Title = inject(Title);
+  protected cite$ = this.click.refresh$
+    .pipe(switchMap(() => this.citesService.getRandomCite()));
 
   constructor(
   ) {
     this.title.setTitle('Citations - Citation aléatoire');
-
-    this.click.refresh$
-      .pipe(tap((value) => console.info('refresh subscribe', value)), switchMap(() => this.citesService.getRandomCite()))
-      .subscribe({
-        next: (cite) => this.cite.next(cite),
-      });
   }
 }

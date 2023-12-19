@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Component, Input, OnInit } from '@angular/core';
 import { CiteI } from '../../models/Cite';
 import { RouterLink } from '@angular/router';
@@ -10,6 +9,7 @@ import { PagerComponent } from '../pager/pager.component';
 import { LinkCitesByAuthorComponent } from '../link-cites-by-author/link-cites-by-author.component';
 import { NgPlural, NgPluralCase } from '@angular/common';
 import { OnChanges } from '@angular/core';
+import { SearchResultTitleComponent } from './search-result-title/search-result-title.component';
 
 @Component({
   selector: 'app-list-cites',
@@ -21,36 +21,16 @@ import { OnChanges } from '@angular/core';
         >
       </h1>
 
-      @if (q) {
-      <h2 [ngPlural]="cites.length" class="text-md text-gray-600">
-        <ng-template ngPluralCase="=0"
-          >Aucune citation trouvée pour la recherche "{{
-            q
-          }}"&nbsp;</ng-template
-        >
-        <ng-template ngPluralCase="=1"
-          >{{ cites.length }} citation trouvée pour la recherche "{{
-            q
-          }}":&nbsp;</ng-template
-        >
-        <ng-template ngPluralCase="other"
-          >{{ cites.length }} citations trouvées pour la recherche "{{
-            q
-          }}":&nbsp;</ng-template
-        >
-      </h2>
-      }
+      <app-search-result-title [q]="q" [citesCount]="cites.length" />
 
       <ul class="list-none">
         @for (item of paginatedCites; track item.getId()) {
-        <li
-          class="p-1"
-        >
-          <cite>”{{ item.getCite() }}”</cite> de
-          <app-link-cites-by-author
-            [author]="item.getAuthor()"
-          ></app-link-cites-by-author>
-        </li>
+          <li class="p-1">
+            <cite>”{{ item.getCite() }}”</cite> de
+            <app-link-cites-by-author
+              [author]="item.getAuthor()"
+            ></app-link-cites-by-author>
+          </li>
         }
       </ul>
     </div>
@@ -76,6 +56,7 @@ import { OnChanges } from '@angular/core';
     NgPlural,
     NgPluralCase,
     LinkCitesByAuthorComponent,
+    SearchResultTitleComponent,
     PagerComponent,
   ],
 })
@@ -90,7 +71,7 @@ export class ListCitesComponent
   constructor(
     public citeService: Cites,
     protected title: Title,
-    protected device: Device
+    protected device: Device,
   ) {
     super();
     this.title.setTitle('Citations - Liste des citations');

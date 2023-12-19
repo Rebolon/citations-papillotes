@@ -86,7 +86,7 @@ export class Cites {
   }
 
   public searchByAuthor(author: string): Observable<CiteI[]> {
-    if (!this.cites.getValue()) {
+    if (!this.cites.getValue() || !author) {
       return EMPTY;
     }
 
