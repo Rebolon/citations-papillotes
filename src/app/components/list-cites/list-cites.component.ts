@@ -1,14 +1,22 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CiteI } from '../../models/Cite';
-import { RouterLink } from '@angular/router';
-import { Cites } from '../../services/Cites';
+import { AsyncPipe, NgPlural, NgPluralCase } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { RouterLink } from '@angular/router';
+import {
+  Observable,
+  ReplaySubject,
+  Subject,
+  map,
+  mergeWith,
+  startWith,
+  switchMap,
+} from 'rxjs';
+import { CiteI } from '../../models/Cite';
+import { Cites } from '../../services/Cites';
 import { Device } from '../../tools/Device';
 import { BasePaginatedComponent } from '../common/BasePaginatedComponent';
-import { PagerComponent } from '../pager/pager.component';
 import { LinkCitesByAuthorComponent } from '../link-cites-by-author/link-cites-by-author.component';
-import { NgPlural, NgPluralCase } from '@angular/common';
-import { OnChanges } from '@angular/core';
+import { PagerComponent } from '../pager/pager.component';
 import { SearchResultTitleComponent } from './search-result-title/search-result-title.component';
 
 @Component({
@@ -16,15 +24,30 @@ import { SearchResultTitleComponent } from './search-result-title/search-result-
   template: `
     <div class="container mb-36">
       <h1 class="text-3xl font-bold text-stone-900 mb-2">
-        <a [queryParams]="null" routerLink="/cites"
-          >{{ citeService.countSearchFoundCites() }} Citations.</a
+        <a
+          [queryParams]="null"
+          routerLink="/cites"
+          [ngPlural]="(citesCount$ | async) ?? 0"
         >
+          <ng-template ngPluralCase="=0"
+            >{{ citesCount$ | async }} Citation.</ng-template
+          >
+          <ng-template ngPluralCase="=1"
+            >{{ citesCount$ | async }} Citation.</ng-template
+          >
+          <ng-template ngPluralCase="other"
+            >{{ citesCount$ | async }} Citations.</ng-template
+          >
+        </a>
       </h1>
 
-      <app-search-result-title [q]="q" [citesCount]="cites.length" />
+      <app-search-result-title
+        [q]="q"
+        [citesCount]="(citesCount$ | async) ?? 0"
+      />
 
       <ul class="list-none">
-        @for (item of paginatedCites; track item.getId()) {
+        @for (item of displayedPaginatedCites$ | async; track item.getId()) {
           <li class="p-1">
             <cite>”{{ item.getCite() }}”</cite> de
             <app-link-cites-by-author
@@ -42,7 +65,7 @@ import { SearchResultTitleComponent } from './search-result-title/search-result-
           id="bottom-navigation"
         >
           <app-pager
-            [list]="cites"
+            [list]="(cites$ | async) ?? []"
             [options]="{ itemPerPage: getItemsPerPage() }"
             (paginatedList$)="setPaginatedList($event)"
           ></app-pager>
@@ -58,15 +81,30 @@ import { SearchResultTitleComponent } from './search-result-title/search-result-
     LinkCitesByAuthorComponent,
     SearchResultTitleComponent,
     PagerComponent,
+    AsyncPipe,
   ],
 })
-export class ListCitesComponent
-  extends BasePaginatedComponent
-  implements OnInit, OnChanges
-{
-  @Input() q!: string;
-  protected cites: CiteI[] = [];
-  protected paginatedCites: CiteI[] = [];
+export class ListCitesComponent extends BasePaginatedComponent {
+  @Input()
+  set q(search: string) {
+    this.q$.next(search.trim());
+  }
+  private q$: ReplaySubject<string> = new ReplaySubject(1);
+  protected cites$: Observable<CiteI[]> = this.q$.pipe(
+    startWith(''),
+    switchMap((q: string) =>
+      q ? this.citeService.search(q) : this.citeService.cites$,
+    ),
+  );
+  protected citesCount$: Observable<number> = this.cites$.pipe(
+    map((cites) => cites.length),
+    startWith(0),
+  );
+  private pagerPaginatedCites$: Subject<CiteI[]> = new Subject();
+  protected displayedPaginatedCites$: Observable<CiteI[]> = this.cites$.pipe(
+    mergeWith(this.pagerPaginatedCites$),
+    map((cites) => cites.slice(0, this.itemsPerPage)),
+  );
 
   constructor(
     public citeService: Cites,
@@ -81,41 +119,7 @@ export class ListCitesComponent
     }
   }
 
-  ngOnInit(): void {
-    this.citeService.cites$.subscribe({
-      next: (next: CiteI[]) => {
-        this.fillCites(next);
-      },
-    });
-
-    this.findCitesBySearch();
-  }
-
-  ngOnChanges(): void {
-    this.findCitesBySearch();
-  }
-
-  protected findCitesBySearch() {
-    // prerender crash without the first check
-    if (this.q && this.q.trim() === '') {
-      this.citeService.reset().subscribe();
-
-      return;
-    }
-
-    this.citeService.search(this.q).subscribe((next) => this.fillCites(next));
-  }
-
-  protected fillCites(citesList: CiteI[]): void {
-    this.cites = [];
-    this.paginatedCites = [];
-    citesList.forEach((cite) => {
-      this.cites.push(cite);
-    });
-    this.paginatedCites = this.cites.slice(0, this.itemsPerPage);
-  }
-
   setPaginatedList(ev: unknown[]): void {
-    this.paginatedCites = ev as CiteI[];
+    this.pagerPaginatedCites$.next(ev as CiteI[]);
   }
 }
