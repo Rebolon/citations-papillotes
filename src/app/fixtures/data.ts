@@ -586,6 +586,9 @@ const data: FixtureCiteI[] = [
   {cite: `Soyez donc des hommes, ou mieux : des surhommes ! Soyez fidèles aux buts tracés.`, author: `Marc Shelley`, tags: ['objectif']},
   {cite: `L'avenir peut s'éveiller plus beau que le passé.`, author: `George Sand`, tags: []},
   {cite: `La vie est comme un arc-en-ciel : il faut la pluie et le soleil pour en voir les couleurs.`, author: `Arunachala Ramaiya`, tags: ['bonheur']},
+  {cite: `La famille, c'est l'amour sans regrets et sans amertume.`, author: `Ninon de Lenclos`, tags: ['famille', 'amour']},
+  {cite: `Cueillez les jours comme des fleurs et puisez-en toutes les couleurs.`, author: `Josiane Coeijmans`, tags: ['bonheur']},
+  {cite: `Faire aisément ce qui est difficile aux autres, voilà le talent ; faire ce qui est impossible au talent, voilà le génie.`, author: `Henri-Frédéric Amiel`, tags: ['talent', 'impossible']},
   // {cite: `.`, author: ``, tags: []},
 
   ];
