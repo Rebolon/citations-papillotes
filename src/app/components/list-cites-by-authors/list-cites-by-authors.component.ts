@@ -2,7 +2,7 @@
 import { AsyncPipe, NgPlural, NgPluralCase } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Observable, ReplaySubject, Subject, count, map, mergeWith, startWith, switchMap } from 'rxjs';
+import { Observable, ReplaySubject, Subject, map, mergeWith, startWith, switchMap } from 'rxjs';
 import { CiteI } from '../../models/Cite';
 import { Cites } from '../../services/Cites';
 import { Device } from '../../tools/Device';
@@ -22,7 +22,7 @@ import { PagerComponent } from '../pager/pager.component';
           >Aucune citation de "{{ author }}"&nbsp;</ng-template
         >
         <ng-template ngPluralCase="=1"
-          >{{ citesCount$ | async }} citation de "{{ author }}":&nbsp;</ng-template
+          >1 citation de "{{ author }}":&nbsp;</ng-template
         >
         <ng-template ngPluralCase="other"
           >{{ citesCount$ | async }} citations de "{{ author }}":&nbsp;</ng-template

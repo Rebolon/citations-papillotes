@@ -29,12 +29,8 @@ import { SearchResultTitleComponent } from './search-result-title/search-result-
           routerLink="/cites"
           [ngPlural]="(citesCount$ | async) ?? 0"
         >
-          <ng-template ngPluralCase="=0"
-            >{{ citesCount$ | async }} Citation.</ng-template
-          >
-          <ng-template ngPluralCase="=1"
-            >{{ citesCount$ | async }} Citation.</ng-template
-          >
+          <ng-template ngPluralCase="=0">0 Citation.</ng-template>
+          <ng-template ngPluralCase="=1">1 Citation.</ng-template>
           <ng-template ngPluralCase="other"
             >{{ citesCount$ | async }} Citations.</ng-template
           >
@@ -87,6 +83,9 @@ import { SearchResultTitleComponent } from './search-result-title/search-result-
 export class ListCitesComponent extends BasePaginatedComponent {
   @Input()
   set q(search: string) {
+    if (!search) {
+      search = '';
+    }
     this.q$.next(search.trim());
   }
   private q$: ReplaySubject<string> = new ReplaySubject(1);
