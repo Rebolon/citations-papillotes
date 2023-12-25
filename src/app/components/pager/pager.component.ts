@@ -4,11 +4,11 @@ import {
   Component,
   Input,
   OnChanges,
-  OnInit,
+  OnDestroy,
   Output,
-  SimpleChanges,
+  SimpleChanges
 } from '@angular/core';
-import { BehaviorSubject, filter } from 'rxjs';
+import { BehaviorSubject, Subscription, filter } from 'rxjs';
 import { PagerOptionsInterface } from '../../services/Pager/pager.interface';
 import { PagerService } from '../../services/Pager/pager.service';
 
@@ -70,8 +70,9 @@ import { PagerService } from '../../services/Pager/pager.service';
   styleUrls: ['./pager.component.scss'],
   standalone: true,
   imports: [NgClass],
+  providers: [PagerService] // Unwanted singleton for this service to get fresh Pager everyWhere
 })
-export class PagerComponent implements OnInit, OnChanges {
+export class PagerComponent implements OnChanges, OnDestroy {
   @Input() list: Array<unknown> | number = 0;
   @Input() options?: PagerOptionsInterface;
   private paginatedList: BehaviorSubject<Array<unknown>> = new BehaviorSubject(
@@ -80,16 +81,9 @@ export class PagerComponent implements OnInit, OnChanges {
   @Output() paginatedList$ = this.paginatedList
     .asObservable()
     .pipe(filter((value) => !!value));
+  private subscription!: Subscription;
 
   constructor(public pager: PagerService) {}
-
-  // do i need ngOnInit, or ngOnChanges is enough ?
-  ngOnInit(): void {
-    this.pager.init(this.list, this.options);
-    this.pager.currentOffset$.subscribe(() => {
-      this.paginatedList.next(this.pager.getPaginatedList());
-    });
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     const list = changes['list'];
@@ -97,11 +91,17 @@ export class PagerComponent implements OnInit, OnChanges {
       return;
     }
 
-    if (list.isFirstChange()) {
-      return;
+    if (this.subscription) {
+      this.subscription.unsubscribe()
     }
-
     this.pager.init(list.currentValue, this.options);
+    this.subscription = this.pager.currentOffset$.pipe().subscribe(() => {
+      this.paginatedList.next(this.pager.getPaginatedList());
+    });
+  }
+
+  ngOnDestroy(): void {
+      this.subscription.unsubscribe();
   }
 
   previousIsDisabled(): boolean {

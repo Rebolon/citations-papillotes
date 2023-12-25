@@ -1,17 +1,18 @@
-import { AsyncPipe, NgClass, NgPlural, NgPluralCase } from '@angular/common';
-import { Component } from '@angular/core';
+import { NgClass, NgPlural, NgPluralCase } from '@angular/common';
+import { Component, computed, signal } from '@angular/core';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import {
-  BehaviorSubject,
   Observable,
   Subject,
   map,
   mergeWith,
   startWith,
   switchMap,
+  tap
 } from 'rxjs';
-import { AuthorI } from '../../models/Authors';
+import { Author, AuthorI } from '../../models/Authors';
 import { Authors } from '../../services/Cites/Authors';
 import { Device } from '../../tools/Device';
 import { BasePaginatedComponent } from '../common/BasePaginatedComponent';
@@ -23,20 +24,20 @@ import { PagerComponent } from '../pager/pager.component';
     <div class="container mb-36">
       <h1
         class="text-3xl font-bold text-stone-900 mb-2"
-        [ngPlural]="(authorsCount$ | async) ?? 0"
-      >
+        [ngPlural]="authorsCount()">
         <ng-template ngPluralCase="=0">0 Auteur.</ng-template>
         <ng-template ngPluralCase="=1">1 Auteur.</ng-template>
         <ng-template ngPluralCase="other"
-          >{{ authorsCount$ | async }} Auteurs.</ng-template>
+          >{{ authorsCount() }} Auteurs.</ng-template
+        >
       </h1>
 
       <button
         [ngClass]="{
-          'font-semibold': (isSortByText() | async) === true,
-          'font-normal': (isSortByText() | async) === false
+          'font-semibold': isSortByText() === true,
+          'font-normal': isSortByText() === false
         }"
-        [disabled]="isSortByText() | async"
+        [disabled]="isSortByText()"
         (click)="sortByAuthor()"
         class="bg-gray-100 text-violet-800 text-xs inline-flex items-center px-2.5 py-0.5 rounded-full mr-2"
         title="Trier par nom"
@@ -46,10 +47,10 @@ import { PagerComponent } from '../pager/pager.component';
 
       <button
         [ngClass]="{
-          'font-semibold': (isSortByTotal() | async),
-          'font-normal': (isSortByTotal() | async)
+          'font-semibold': isSortByTotal(),
+          'font-normal': isSortByTotal()
         }"
-        [disabled]="isSortByTotal() | async"
+        [disabled]="isSortByTotal()"
         (click)="sortByCount()"
         class="bg-gray-100 text-violet-800 text-xs inline-flex items-center px-2.5 py-0.5 rounded-full"
         title="Trier par total de citations"
@@ -58,10 +59,7 @@ import { PagerComponent } from '../pager/pager.component';
       </button>
 
       <ul class="list-none">
-        @for (
-          item of displayedPaginatedAuthors$ | async;
-          track item.getName()
-        ) {
+        @for (item of displayedPaginatedAuthors(); track item.getName()) {
           <li class="p-1">
             <a routerLink="/authors/{{ item.getName() }}"
               >{{ item.getName() }} <small>({{ item.getCount() }})</small></a
@@ -78,7 +76,7 @@ import { PagerComponent } from '../pager/pager.component';
           id="bottom-navigation"
         >
           <app-pager
-            [list]="(authors$ | async) ?? []"
+            [list]="authors()"
             [options]="{ itemPerPage: getItemsPerPage() }"
             (paginatedList$)="setPaginatedList($event)"
           ></app-pager>
@@ -87,18 +85,14 @@ import { PagerComponent } from '../pager/pager.component';
     </div>
   `,
   standalone: true,
-  imports: [
-    NgClass,
-    NgPlural,
-    NgPluralCase,
-    RouterLink,
-    PagerComponent,
-    AsyncPipe,
-  ],
+  imports: [NgClass, NgPlural, NgPluralCase, RouterLink, PagerComponent],
 })
 export class ListAuthorsComponent extends BasePaginatedComponent {
-  protected sort$: BehaviorSubject<string> = new BehaviorSubject('text');
-  protected authors$: Observable<AuthorI[]> = this.sort$.asObservable().pipe(
+  private sort = signal<'text' | 'total'>('text');
+  protected readonly isSortByText = computed(() => this.sort() === 'text');
+  protected readonly isSortByTotal = computed(() => this.sort() === 'total');
+  protected authors = signal([] as AuthorI[]);
+  private authors$: Observable<AuthorI[]> = toObservable(this.sort).pipe(
     switchMap((sort) =>
       sort === 'text'
         ? this.authorService.authors$
@@ -116,16 +110,24 @@ export class ListAuthorsComponent extends BasePaginatedComponent {
             ),
           ),
     ),
+    tap((authors) => this.authors.set(authors)),
+    takeUntilDestroyed(),
   );
-  protected authorsCount$: Observable<number> = this.authors$.pipe(
+  protected authorsCount = signal(0);
+  private authorsCount$: Observable<number> = this.authors$.pipe(
     map((authors) => authors.length),
     startWith(0),
+    tap((count) => this.authorsCount.set(count)),
+    takeUntilDestroyed(),
   );
   private pagerPaginatedAuthors$: Subject<AuthorI[]> = new Subject();
-  protected displayedPaginatedAuthors$: Observable<AuthorI[]> =
+  protected displayedPaginatedAuthors = signal([] as AuthorI[]);
+  private displayedPaginatedAuthors$: Observable<AuthorI[]> =
     this.authors$.pipe(
       mergeWith(this.pagerPaginatedAuthors$),
       map((authors) => authors.slice(0, this.itemsPerPage)),
+      tap((authors) => this.displayedPaginatedAuthors.set(authors)),
+      takeUntilDestroyed(),
     );
   protected override currentPage!: number;
   protected override itemsPerPage = 11;
@@ -140,25 +142,23 @@ export class ListAuthorsComponent extends BasePaginatedComponent {
     if (device.isMobile()) {
       this.itemsPerPage = 8;
     }
-  }
-
-  isSortByText(): Observable<boolean> {
-    return this.sort$.pipe(map((sort) => sort === 'text'));
-  }
-
-  isSortByTotal(): Observable<boolean> {
-    return this.sort$.pipe(map((sort) => sort === 'total'));
+    this.authors$.subscribe();
+    this.authorsCount$.subscribe();
+    this.displayedPaginatedAuthors$.subscribe();
   }
 
   sortByAuthor(): void {
-    this.sort$.next('text');
+    this.sort.set('text');
   }
 
   sortByCount(): void {
-    this.sort$.next('total');
+    this.sort.set('total');
   }
 
   setPaginatedList(ev: unknown[]): void {
-    this.pagerPaginatedAuthors$.next(ev as AuthorI[]);
+    // To prevent this check, maybe use Type
+    if (ev[0] && (ev[0] instanceof Author || !ev[0])) {
+      this.pagerPaginatedAuthors$.next(ev as AuthorI[]);
+    }
   }
 }

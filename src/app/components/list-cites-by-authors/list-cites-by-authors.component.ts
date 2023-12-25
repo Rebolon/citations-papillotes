@@ -1,21 +1,22 @@
 /* eslint-disable prettier/prettier */
-import { AsyncPipe, NgPlural, NgPluralCase } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { NgPlural, NgPluralCase } from '@angular/common';
+import { Component, Input, signal } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Observable, ReplaySubject, Subject, map, mergeWith, startWith, switchMap } from 'rxjs';
-import { CiteI } from '../../models/Cite';
+import { Observable, ReplaySubject, Subject, map, mergeWith, startWith, switchMap, tap } from 'rxjs';
+import { Cite, CiteI } from '../../models/Cite';
 import { Cites } from '../../services/Cites';
 import { Device } from '../../tools/Device';
 import { BasePaginatedComponent } from '../common/BasePaginatedComponent';
 import { PagerComponent } from '../pager/pager.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-list-cites-by-authors',
   template: `
     <div class="container mb-36">
-      @if (author$ | async; as author) {
+      @if (authorOfCites(); as author) {
       <h1
-        [ngPlural]="(citesCount$ | async) ?? 0"
+        [ngPlural]="citesCount()"
         class="text-3xl font-bold text-stone-900 mb-2"
       >
         <ng-template ngPluralCase="=0"
@@ -25,13 +26,13 @@ import { PagerComponent } from '../pager/pager.component';
           >1 citation de "{{ author }}":&nbsp;</ng-template
         >
         <ng-template ngPluralCase="other"
-          >{{ citesCount$ | async }} citations de "{{ author }}":&nbsp;</ng-template
+          >{{ citesCount() }} citations de "{{ author }}":&nbsp;</ng-template
         >
       </h1>
       }
 
       <ul class="list-none">
-        @for (item of displayedPaginatedCites$ | async; track item.getId()) {
+        @for (item of displayedPaginatedCites(); track item.getId()) {
         <li
           class="p-1"
         >
@@ -48,7 +49,7 @@ import { PagerComponent } from '../pager/pager.component';
           id="bottom-navigation"
         >
           <app-pager
-            [list]="(cites$ | async) ?? []"
+            [list]="cites()"
             [options]="{ itemPerPage: getItemsPerPage() }"
             (paginatedList$)="setPaginatedList($event)"
           ></app-pager>
@@ -57,23 +58,43 @@ import { PagerComponent } from '../pager/pager.component';
     </div>
   `,
   standalone: true,
-  imports: [AsyncPipe, NgPlural, NgPluralCase, PagerComponent],
+  imports: [NgPlural, NgPluralCase, PagerComponent],
 })
 export class ListCitesByAuthorsComponent
   extends BasePaginatedComponent
 {
   @Input({ required: true })
   set author(author: string) {
+    if (!author) {
+      author = '';
+    }
+    this.authorOfCites.set(author);
     this.author$.next(author);
   };
-  author$: ReplaySubject<string> = new ReplaySubject(1);
-  cites$: Observable<CiteI[]> = this.author$.pipe(switchMap((author) => this.citeService.searchByAuthor(author)), startWith([]));
-  citesCount$: Observable<number> = this.cites$.pipe(map((cites) => cites.length), startWith(0));
-  pagerPaginatedCites$: Subject<CiteI[]> = new Subject();
-  displayedPaginatedCites$: Observable<CiteI[]> = this.cites$.pipe(
+  protected authorOfCites = signal('');
+  private author$: ReplaySubject<string> = new ReplaySubject(1);
+  protected cites = signal([] as CiteI[]);
+  private cites$: Observable<CiteI[]> = this.author$.pipe(
+    switchMap((author) => this.citeService.searchByAuthor(author)),
+    startWith([]),
+    tap((cites) => this.cites.set(cites)),
+    takeUntilDestroyed(),
+  );
+  protected citesCount = signal(0);
+  private citesCount$: Observable<number> = this.cites$.pipe(
+    map((cites) => cites.length),
+    startWith(0),
+    tap((count) => this.citesCount.set(count)),
+    takeUntilDestroyed(),
+  );
+  private pagerPaginatedCites$: Subject<CiteI[]> = new Subject();
+  protected displayedPaginatedCites = signal([] as CiteI[]);
+  private displayedPaginatedCites$: Observable<CiteI[]> = this.cites$.pipe(
     mergeWith(this.pagerPaginatedCites$),
-    map((cites) => cites.slice(0, this.itemsPerPage)
-  ));
+    map((cites) => cites.slice(0, this.itemsPerPage)),
+    tap((cites) => this.displayedPaginatedCites.set(cites)),
+    takeUntilDestroyed(),
+  );
 
   constructor(
     public citeService: Cites,
@@ -86,9 +107,16 @@ export class ListCitesByAuthorsComponent
     if (device.isMobile()) {
       this.itemsPerPage = 4;
     }
+
+    this.cites$.subscribe();
+    this.citesCount$.subscribe();
+    this.displayedPaginatedCites$.subscribe();
   }
 
   setPaginatedList(ev: unknown[]): void {
-    this.pagerPaginatedCites$.next(ev as CiteI[]);
+    // To prevent this check, maybe use Type
+    if (ev[0] && (ev[0] instanceof Cite || !ev[0])) {
+      this.pagerPaginatedCites$.next(ev as CiteI[]);
+    }
   }
 }
