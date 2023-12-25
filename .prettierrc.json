@@ -1,5 +1,6 @@
 {
   "tabWidth": 2,
+  "bracketSameLine": true,
   "attributeGroups": [
     "$ANGULAR_STRUCTURAL_DIRECTIVE",
     "$ANGULAR_TWO_WAY_BINDING",
