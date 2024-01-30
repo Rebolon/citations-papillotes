@@ -1,17 +1,16 @@
 import { NgPlural, NgPluralCase } from '@angular/common';
-import { Component, Input, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, Signal, computed, input } from '@angular/core';
+import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import {
-  Observable,
   ReplaySubject,
   Subject,
+  filter,
   map,
   mergeWith,
   startWith,
   switchMap,
-  tap,
 } from 'rxjs';
 import { Cite, CiteI } from '../../models/Cite';
 import { Cites } from '../../services/Cites';
@@ -39,7 +38,7 @@ import { SearchResultTitleComponent } from './search-result-title/search-result-
         </a>
       </h1>
 
-      <app-search-result-title [q]="q" [citesCount]="citesCount()" />
+      <app-search-result-title [q]="q()" [citesCount]="citesCount()" />
 
       <ul class="list-none">
         @for (item of displayedPaginatedCites(); track item.getId()) {
@@ -79,37 +78,44 @@ import { SearchResultTitleComponent } from './search-result-title/search-result-
   ],
 })
 export class ListCitesComponent extends BasePaginatedComponent {
-  @Input()
-  set q(search: string) {
-    if (!search) {
-      search = '';
-    }
-    this.q$.next(search.trim());
-  }
+  q = input('', {
+    transform: (value: string) => (value ? value.trim() : ''),
+  });
   private q$: ReplaySubject<string> = new ReplaySubject(1);
-  protected cites = signal([] as CiteI[]);
-  private cites$: Observable<CiteI[]> = this.q$.pipe(
-    startWith(''),
-    switchMap((q: string) =>
-      q ? this.citeService.search(q) : this.citeService.cites$,
-    ),
-    tap((cites: CiteI[]) => this.cites.set(cites)),
-    takeUntilDestroyed(),
+  protected cites: Signal<CiteI[]> = computed<CiteI[]>(
+    () => this.citesSource() ?? ([] as CiteI[]),
   );
-  protected citesCount = signal(0);
-  private citesCount$: Observable<number> = this.cites$.pipe(
-    map((cites: CiteI[]) => cites.length),
-    startWith(0),
-    tap((count: number) => this.citesCount.set(count)),
-    takeUntilDestroyed(),
+  private citesSource = toSignal(
+    toObservable(this.q).pipe(
+      startWith(''),
+      switchMap((q: string) =>
+        q ? this.citeService.search(q) : this.citeService.cites$,
+      ),
+      takeUntilDestroyed(),
+    ),
+  );
+  protected citesCount: Signal<number> = computed(
+    () => this.citesCountSource() ?? 0,
+  );
+  private citesCountSource = toSignal(
+    toObservable(this.citesSource).pipe(
+      filter((value): value is CiteI[] => !!value),
+      map((cites: CiteI[]) => cites.length),
+      startWith(0),
+      takeUntilDestroyed(),
+    ),
   );
   private pagerPaginatedCites$: Subject<CiteI[]> = new Subject();
-  protected displayedPaginatedCites = signal([] as CiteI[]);
-  private displayedPaginatedCites$: Observable<CiteI[]> = this.cites$.pipe(
-    mergeWith(this.pagerPaginatedCites$),
-    map((cites: CiteI[]) => cites.slice(0, this.itemsPerPage)),
-    tap((cites: CiteI[]) => this.displayedPaginatedCites.set(cites)),
-    takeUntilDestroyed(),
+  protected displayedPaginatedCites: Signal<CiteI[]> = computed(
+    () => this.displayedPaginatedCitesSource() ?? ([] as CiteI[]),
+  );
+  private displayedPaginatedCitesSource = toSignal(
+    toObservable(this.citesSource).pipe(
+      filter((value): value is CiteI[] => !!value),
+      mergeWith(this.pagerPaginatedCites$),
+      map((cites: CiteI[]) => cites.slice(0, this.itemsPerPage)),
+      takeUntilDestroyed(),
+    ),
   );
 
   constructor(
@@ -123,9 +129,6 @@ export class ListCitesComponent extends BasePaginatedComponent {
     if (device.isMobile()) {
       this.itemsPerPage = 4;
     }
-    this.cites$.subscribe();
-    this.citesCount$.subscribe();
-    this.displayedPaginatedCites$.subscribe();
   }
 
   setPaginatedList(ev: unknown[]): void {
