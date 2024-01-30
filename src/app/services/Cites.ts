@@ -27,7 +27,7 @@ export class Cites {
     // won't alter every subcriber that has saved the data
     // map(next => rfdc()(next)), // @todo find why it destroy the original object : Cite
     // become a simple object & the proto is not copied
-    map((next) => {
+    map((next: CiteI[]) => {
       return next.map((cite) => {
         const newCite = new Cite();
         newCite
@@ -48,8 +48,8 @@ export class Cites {
   public constructor(protected router: ActivatedRoute) {
     cites
       .pipe(
-        tap((next) => (this.originalCites = next)),
-        tap((next) => (this.count = next.length)),
+        tap((next: CiteI[]) => (this.originalCites = next)),
+        tap((next: CiteI[]) => (this.count = next.length)),
         switchMap(() => this.reset()),
       )
       .subscribe();
@@ -57,8 +57,8 @@ export class Cites {
 
   public reset(): Observable<CiteI[]> {
     return of(this.originalCites).pipe(
-      filter((value) => !!value),
-      tap((next) => this.cites.next(next)),
+      filter((value: CiteI[]) => !!value),
+      tap((next: CiteI[]) => this.cites.next(next)),
     );
   }
 
@@ -68,8 +68,8 @@ export class Cites {
     }
 
     return of(this.cites.getValue()).pipe(
-      switchMap((next) => from(next)),
-      filter((item) => {
+      switchMap((next: CiteI[]) => from(next)),
+      filter((item: CiteI) => {
         if (!search) {
           return true;
         }
@@ -91,8 +91,8 @@ export class Cites {
     }
 
     return of(this.cites.getValue()).pipe(
-      switchMap((next) => from(next)),
-      filter((item) => {
+      switchMap((next: CiteI[]) => from(next)),
+      filter((item: CiteI) => {
         return (
           item && item.getAuthor().toLowerCase().includes(author.toLowerCase())
         );
@@ -119,12 +119,14 @@ export class Cites {
   }
 
   getCiteOfTheDay(): Observable<CiteI> {
-    return this.cites.pipe(map((cites) => CiteOfTheDay.getCiteOfTheDay(cites)));
+    return this.cites.pipe(
+      map((cites: CiteI[]) => CiteOfTheDay.getCiteOfTheDay(cites)),
+    );
   }
 
   getRandomCite(): Observable<CiteI> {
     return this.cites.pipe(
-      map((cites) => cites[Math.floor(Math.random() * cites.length)]),
+      map((cites: CiteI[]) => cites[Math.floor(Math.random() * cites.length)]),
     );
   }
 }

@@ -14,5 +14,5 @@ export abstract class BasePaginatedComponent {
     return this.itemsPerPage;
   }
 
-  abstract setPaginatedList(ev: any[]): void;
+  abstract setPaginatedList(ev: unknown[]): void;
 }

@@ -39,10 +39,7 @@ import { SearchResultTitleComponent } from './search-result-title/search-result-
         </a>
       </h1>
 
-      <app-search-result-title
-        [q]="q"
-        [citesCount]="citesCount()"
-      />
+      <app-search-result-title [q]="q" [citesCount]="citesCount()" />
 
       <ul class="list-none">
         @for (item of displayedPaginatedCites(); track item.getId()) {
@@ -96,22 +93,22 @@ export class ListCitesComponent extends BasePaginatedComponent {
     switchMap((q: string) =>
       q ? this.citeService.search(q) : this.citeService.cites$,
     ),
-    tap((cites) => this.cites.set(cites)),
+    tap((cites: CiteI[]) => this.cites.set(cites)),
     takeUntilDestroyed(),
   );
   protected citesCount = signal(0);
   private citesCount$: Observable<number> = this.cites$.pipe(
-    map((cites) => cites.length),
+    map((cites: CiteI[]) => cites.length),
     startWith(0),
-    tap((count) => this.citesCount.set(count)),
+    tap((count: number) => this.citesCount.set(count)),
     takeUntilDestroyed(),
   );
   private pagerPaginatedCites$: Subject<CiteI[]> = new Subject();
   protected displayedPaginatedCites = signal([] as CiteI[]);
   private displayedPaginatedCites$: Observable<CiteI[]> = this.cites$.pipe(
     mergeWith(this.pagerPaginatedCites$),
-    map((cites) => cites.slice(0, this.itemsPerPage)),
-    tap((cites) => this.displayedPaginatedCites.set(cites)),
+    map((cites: CiteI[]) => cites.slice(0, this.itemsPerPage)),
+    tap((cites: CiteI[]) => this.displayedPaginatedCites.set(cites)),
     takeUntilDestroyed(),
   );
 

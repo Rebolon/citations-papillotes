@@ -15,6 +15,7 @@ import {
 import { Injectable } from '@angular/core';
 import { Cites } from '../Cites';
 import { Author, AuthorI } from '../../models/Authors';
+import { CiteI } from '../../models/Cite';
 
 @Injectable()
 export class Authors {
@@ -26,13 +27,13 @@ export class Authors {
     // won't alter every subcriber that has saved the data
     // map(next => rfdc({proto: true})(next)), // @todo find why it destroy the original object : Author
     // become a simple object & the proto is not copied
-    map((next) => {
+    map((next: AuthorI[]) => {
       return next.map((author) => {
         return new Author(author.getName(), author.getCount());
       });
     }),
     distinct(),
-    take(1) // auto unsubscribe, force complete
+    take(1), // auto unsubscribe, force complete
   );
   // local cache for the counter
   protected count = 0;
@@ -42,9 +43,9 @@ export class Authors {
 
     citeService.cites$
       .pipe(
-        switchMap((next) => from(next)),
-        map((next) => next.getAuthor()),
-        map((next) => {
+        switchMap((next: CiteI[]) => from(next)),
+        map((next: CiteI) => next.getAuthor()),
+        map((next: string) => {
           let author: AuthorI;
           if (authors.find((item) => item.getName() === next)) {
             const index = authors.findIndex((item) => item.getName() === next);
@@ -61,11 +62,13 @@ export class Authors {
         // prevent going further until cites is not fully loaded
         skipUntil(citeService.cites$),
         // build to 2 streams : one with proverbe and another with the rest to improve the sort
-        groupBy((next) => next.getName().toLowerCase().includes('proverbe')),
-        mergeMap((group) =>
+        groupBy((next: AuthorI) =>
+          next.getName().toLowerCase().includes('proverbe'),
+        ),
+        mergeMap((group: Observable<AuthorI>) =>
           group.pipe(
             toArray(),
-            map((next) => {
+            map((next: AuthorI[]) => {
               return next.sort((a, b) => {
                 const aParts = a.getName().split(' ');
                 const bParts = b.getName().split(' ');
@@ -94,14 +97,14 @@ export class Authors {
 
                 return 0;
               });
-            })
-          )
+            }),
+          ),
         ),
         concatAll(),
         toArray(),
-        take(1) // auto unsubscribe, force complete
+        take(1), // auto unsubscribe, force complete
       )
-      .subscribe((next) => {
+      .subscribe((next: unknown) => { // @todo why unknown here whereas toArray() define return as AuthorI[] ?
         this.authors.next(next as AuthorI[]);
       });
   }

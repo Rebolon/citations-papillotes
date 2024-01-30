@@ -1,24 +1,26 @@
 import { NgPlural, NgPluralCase } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { computed } from '@angular/core';
+import { input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-search-result-title',
   template: `
-    @if (q) {
-      <h2 [ngPlural]="citesCount" class="text-md text-gray-600">
+    @if (q()) {
+      <h2 [ngPlural]="count()" class="text-md text-gray-600">
         <ng-template ngPluralCase="=0"
           >Aucune citation trouvée pour la recherche "{{
-            q
+            q()
           }}"&nbsp;</ng-template
         >
         <ng-template ngPluralCase="=1"
-          >{{ citesCount }} citation trouvée pour la recherche "{{
-            q
+          >{{ count() }} citation trouvée pour la recherche "{{
+            q()
           }}":&nbsp;</ng-template
         >
         <ng-template ngPluralCase="other"
-          >{{ citesCount }} citations trouvées pour la recherche "{{
-            q
+          >{{ count() }} citations trouvées pour la recherche "{{
+            q()
           }}":&nbsp;</ng-template
         >
       </h2>
@@ -28,6 +30,8 @@ import { Component, Input } from '@angular/core';
   imports: [NgPlural, NgPluralCase],
 })
 export class SearchResultTitleComponent {
-  @Input({ required: true }) citesCount: number = 0;
-  @Input() q!: string;
+  citesCount = input.required<number>();
+  q = input<string>();
+
+  protected count = computed(() => this.citesCount() ?? 0);
 }
