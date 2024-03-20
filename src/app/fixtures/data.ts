@@ -600,6 +600,10 @@ const data: FixtureCiteI[] = [
   {cite: `En amour, on plaît plutôt par d' agréables défauts que par des qualités essentielles.`, author: `Ninon de Lenclos`, tags: []},
   {cite: `L'amour, c'est l'idéal de l'égalité.`, author: `George Sand`, tags: []},
   {cite: `L'énergie bien appliquée et dirigée permet de tout accomplir.`, author: `Nellie Bly`, tags: []},
+  {cite: `La jeunesse est une ivresse continuelle ; c'est la fièvre de la santé ; c'est la folie de la raison.`, author: `François de la Rochefoucauld`, tags: ['jeunesse']},
+  {cite: `Soyez gais, moquez-vous de tout.`, author: `Rosa de Luxemburg`, tags: []},
+  {cite: `L'énergie appliquée à juste titre peut accomplir n'importe quoi.`, author: `Nelly Bly`, tags: []},
+  {cite: `Une vie réussie est un rêve d'enfance réalisé à l'âge mûr.`, author: `Proverbe marocain`, tags: []},
   // {cite: `.`, author: ``, tags: []},
 
   ];
