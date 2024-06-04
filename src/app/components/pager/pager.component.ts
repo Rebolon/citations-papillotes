@@ -39,7 +39,7 @@ import { PagerService } from '../../services/Pager/pager.service';
           </a>
         </li>
 
-        @for (item of pager.getPagerItemList().getNumbers(); track item) {
+        @for (item of pager.getPagerItemList().getNumbers(); track item.index) {
         <li class="w-12"
         >
           <a
