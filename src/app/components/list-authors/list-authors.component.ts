@@ -46,8 +46,7 @@ import { PagerComponent } from '../pager/pager.component';
         [disabled]="isSortByText()"
         (click)="sortByAuthor()"
         class="bg-gray-100 text-violet-800 text-xs inline-flex items-center px-2.5 py-0.5 rounded-full mr-2"
-        title="Trier par nom"
-      >
+        title="Trier par nom">
         Trier par nom
       </button>
 
@@ -59,8 +58,7 @@ import { PagerComponent } from '../pager/pager.component';
         [disabled]="isSortByTotal()"
         (click)="sortByCount()"
         class="bg-gray-100 text-violet-800 text-xs inline-flex items-center px-2.5 py-0.5 rounded-full"
-        title="Trier par total de citations"
-      >
+        title="Trier par total de citations">
         Trier par total
       </button>
 
@@ -79,13 +77,11 @@ import { PagerComponent } from '../pager/pager.component';
       <div class="w-full">
         <section
           class="block fixed inset-x-0 bottom-10 z-10 bg-white"
-          id="bottom-navigation"
-        >
+          id="bottom-navigation">
           <app-pager
             [list]="authors()"
             [options]="{ itemPerPage: getItemsPerPage() }"
-            (paginatedList$)="setPaginatedList($event)"
-          ></app-pager>
+            (paginatedList$)="setPaginatedList($event)"></app-pager>
         </section>
       </div>
     </div>

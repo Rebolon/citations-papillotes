@@ -1,8 +1,21 @@
-/* eslint-disable prettier/prettier */
 import { NgPlural, NgPluralCase } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  signal,
+} from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Observable, ReplaySubject, Subject, map, mergeWith, startWith, switchMap, tap } from 'rxjs';
+import {
+  Observable,
+  ReplaySubject,
+  Subject,
+  map,
+  mergeWith,
+  startWith,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { Cite, CiteI } from '../../models/Cite';
 import { Cites } from '../../services/Cites';
 import { Device } from '../../tools/Device';
@@ -52,8 +65,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
           <app-pager
             [list]="cites()"
             [options]="{ itemPerPage: getItemsPerPage() }"
-            (paginatedList$)="setPaginatedList($event)"
-          ></app-pager>
+            (paginatedList$)="setPaginatedList($event)"></app-pager>
         </section>
       </div>
     </div>
@@ -61,9 +73,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   standalone: true,
   imports: [NgPlural, NgPluralCase, PagerComponent],
 })
-export class ListCitesByAuthorsComponent
-  extends BasePaginatedComponent
-{
+export class ListCitesByAuthorsComponent extends BasePaginatedComponent {
   @Input({ required: true })
   set author(author: string) {
     if (!author) {
@@ -100,7 +110,7 @@ export class ListCitesByAuthorsComponent
   constructor(
     public citeService: Cites,
     protected title: Title,
-    protected device: Device
+    protected device: Device,
   ) {
     super();
     this.title.setTitle('Citations - Liste des citations');
