@@ -1,6 +1,16 @@
 import { NgPlural, NgPluralCase } from '@angular/common';
-import { Component, Signal, computed, input } from '@angular/core';
-import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Signal,
+  computed,
+  input,
+} from '@angular/core';
+import {
+  takeUntilDestroyed,
+  toObservable,
+  toSignal,
+} from '@angular/core/rxjs-interop';
 import { Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import {
@@ -22,6 +32,7 @@ import { SearchResultTitleComponent } from './search-result-title/search-result-
 
 @Component({
   selector: 'app-list-cites',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="container mb-36">
       <h1 class="text-3xl font-bold text-stone-900 mb-2">

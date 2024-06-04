@@ -1,11 +1,12 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Cites } from '../../services/Cites';
 import { CiteComponent } from '../cite/cite.component';
 
 @Component({
   selector: 'app-home',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if (citesService.getCiteOfTheDay() | async; as citeOfTheDay) {
       <app-cite [cite]="citeOfTheDay" />

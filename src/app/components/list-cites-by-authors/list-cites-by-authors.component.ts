@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { NgPlural, NgPluralCase } from '@angular/common';
-import { Component, Input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Observable, ReplaySubject, Subject, map, mergeWith, startWith, switchMap, tap } from 'rxjs';
 import { Cite, CiteI } from '../../models/Cite';
@@ -12,6 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-list-cites-by-authors',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="container mb-36">
       @if (authorOfCites(); as author) {

@@ -1,10 +1,11 @@
 import { NgPlural, NgPluralCase } from '@angular/common';
-import { computed } from '@angular/core';
+import { ChangeDetectionStrategy, computed } from '@angular/core';
 import { input } from '@angular/core';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-search-result-title',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if (q()) {
       <h2 [ngPlural]="count()" class="text-md text-gray-600">

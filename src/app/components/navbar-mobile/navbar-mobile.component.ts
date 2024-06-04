@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { BaseNavbarComponent } from '../common/BaseNavbarComponent';
 
 @Component({
   selector: 'app-navbar-mobile',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section
       class="md:hidden block fixed inset-x-0 bottom-0 z-10 bg-white shadow"

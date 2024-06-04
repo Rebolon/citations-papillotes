@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavbarMobileComponent } from './components/navbar-mobile/navbar-mobile.component';
 import { RouterOutlet } from '@angular/router';
@@ -6,6 +6,7 @@ import { NavbarDesktopComponent } from './components/navbar-desktop/navbar-deskt
 
 @Component({
   selector: 'app-root',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="container min-h-screen flex flex-col" id="app">
       <header class="top-0 fixed bg-white w-full">

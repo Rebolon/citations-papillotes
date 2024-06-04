@@ -1,8 +1,11 @@
 /* eslint-disable prettier/prettier */
 import { NgClass } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
+  input,
   Input,
+  InputSignal,
   OnChanges,
   OnDestroy,
   Output,
@@ -14,6 +17,7 @@ import { PagerService } from '../../services/Pager/pager.service';
 
 @Component({
   selector: 'app-pager',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <nav>
       @if (hasList()) {
@@ -74,6 +78,7 @@ import { PagerService } from '../../services/Pager/pager.service';
 })
 export class PagerComponent implements OnChanges, OnDestroy {
   @Input() list: Array<unknown> | number = 0;
+  //protected list: InputSignal<Array<unknown> | number> = input.required<Array<unknown>|number>();
   @Input() options?: PagerOptionsInterface;
   private paginatedList: BehaviorSubject<Array<unknown>> = new BehaviorSubject(
     this.pager.getPaginatedList()
@@ -117,6 +122,7 @@ export class PagerComponent implements OnChanges, OnDestroy {
   }
 
   hasList(): boolean {
+    // === 'object') {
     if (typeof this.list === 'object') {
       return this.pager.getTotalPage() > 1;
     }

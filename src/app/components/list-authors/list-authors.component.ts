@@ -1,5 +1,10 @@
 import { NgClass, NgPlural, NgPluralCase } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
@@ -10,7 +15,7 @@ import {
   mergeWith,
   startWith,
   switchMap,
-  tap
+  tap,
 } from 'rxjs';
 import { Author, AuthorI } from '../../models/Authors';
 import { Authors } from '../../services/Cites/Authors';
@@ -20,6 +25,7 @@ import { PagerComponent } from '../pager/pager.component';
 
 @Component({
   selector: 'app-list-authors',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="container mb-36">
       <h1

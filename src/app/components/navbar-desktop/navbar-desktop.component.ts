@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { BaseNavbarComponent } from '../common/BaseNavbarComponent';
 import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-navbar-desktop',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <nav class="flex items-center justify-between p-6 container mx-auto">
       <a routerLink="/" title="Citation du jour" aria-label="Citation du jour">

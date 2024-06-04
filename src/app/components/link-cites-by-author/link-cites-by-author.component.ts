@@ -1,8 +1,9 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-link-cites-by-author',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <a
       routerLink="/authors/{{ author() }}"

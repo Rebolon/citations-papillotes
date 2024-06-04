@@ -1,19 +1,20 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   ElementRef,
-  OnDestroy,
   OnInit,
   ViewChild,
   inject,
-  DestroyRef
 } from '@angular/core';
-import { fromEvent, Subject, debounceTime, map, takeUntil } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router } from '@angular/router';
+import { debounceTime, fromEvent, map } from 'rxjs';
 
 @Component({
   selector: 'app-search',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <input
       #elSearchCite

@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { switchMap } from 'rxjs';
 import { Cites } from '../../services/Cites';
@@ -9,6 +9,7 @@ import { LinkCitesByAuthorComponent } from '../link-cites-by-author/link-cites-b
 
 @Component({
   selector: 'app-random',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if (cite$ | async; as cite) {
       <h1
