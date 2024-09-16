@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {
   PagerInterface,
-  PagerListInterface,
-  PagerListPartsInterface,
+  PagerItemInterface,
+  PagerDisplayedItemsInterface,
   PagerNavigationInterface,
   PagerOptionsInterface,
   PagerTemplateInterface,
@@ -34,8 +34,8 @@ export class PagerService
   private nextPage = 1;
   private currentPage = new BehaviorSubject(1);
   private pagerIndexList: Array<number> = [];
-  private pagerItemList: PagerListPartsInterface =
-    {} as PagerListPartsInterface;
+  private pagerItemList: PagerDisplayedItemsInterface =
+    {} as PagerDisplayedItemsInterface;
   public currentPage$ = this.currentPage
     .asObservable()
     .pipe(filter((value) => !!value));
@@ -45,8 +45,6 @@ export class PagerService
       return this.getOffsetForPage(value);
     }),
   );
-
-  constructor() {}
 
   init(list: Array<unknown> | number, options?: PagerOptionsInterface): void {
     /** Seems to be a source of bug : authors page, swith between alpha and total fails because of this
@@ -200,7 +198,7 @@ export class PagerService
     return this.pagerIndexList;
   }
 
-  getPagerItemList(): PagerListPartsInterface {
+  getPagerItemList(): PagerDisplayedItemsInterface {
     return this.pagerItemList;
   }
 
@@ -353,8 +351,8 @@ export class PagerService
     return this;
   }
 
-  private buildPagerList(): PagerListPartsInterface {
-    let pager: Array<PagerListInterface> = [];
+  private buildPagerList(): PagerDisplayedItemsInterface {
+    let pager: Array<PagerItemInterface> = [];
 
     if (this.pagerIndexList.length) {
       this.pagerIndexList.forEach((item) => {

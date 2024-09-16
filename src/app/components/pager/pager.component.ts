@@ -3,6 +3,8 @@ import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
+  inject,
   input,
   Input,
   InputSignal,
@@ -14,6 +16,7 @@ import {
 import { BehaviorSubject, Subscription, filter } from 'rxjs';
 import { PagerOptionsInterface } from '../../services/Pager/pager.interface';
 import { PagerService } from '../../services/Pager/pager.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-pager',
@@ -76,19 +79,21 @@ import { PagerService } from '../../services/Pager/pager.service';
   imports: [NgClass],
   providers: [PagerService] // Unwanted singleton for this service to get fresh Pager everyWhere
 })
-export class PagerComponent implements OnChanges, OnDestroy {
+export class PagerComponent implements OnChanges {
   @Input() list: Array<unknown> | number = 0;
   //protected list: InputSignal<Array<unknown> | number> = input.required<Array<unknown>|number>();
   @Input() options?: PagerOptionsInterface;
-  private paginatedList: BehaviorSubject<Array<unknown>> = new BehaviorSubject(
+  readonly #destroyRef = inject(DestroyRef);
+  readonly pager: PagerService = inject(PagerService);
+  #paginatedList: BehaviorSubject<Array<unknown>> = new BehaviorSubject(
     this.pager.getPaginatedList()
   );
-  @Output() paginatedList$ = this.paginatedList
+  @Output() paginatedList$ = this.#paginatedList
     .asObservable()
-    .pipe(filter((value) => !!value));
-  private subscription!: Subscription;
-
-  constructor(public pager: PagerService) {}
+    .pipe(
+      takeUntilDestroyed(),
+      filter((value) => !!value)
+    );
 
   ngOnChanges(changes: SimpleChanges): void {
     const list = changes['list'];
@@ -96,17 +101,11 @@ export class PagerComponent implements OnChanges, OnDestroy {
       return;
     }
 
-    if (this.subscription) {
-      this.subscription.unsubscribe()
-    }
+    // 2 lines that are bad part of the code for instance
     this.pager.init(list.currentValue, this.options);
-    this.subscription = this.pager.currentOffset$.pipe().subscribe(() => {
-      this.paginatedList.next(this.pager.getPaginatedList());
+    this.pager.currentOffset$.pipe().subscribe(() => {
+      this.#paginatedList.next(this.pager.getPaginatedList());
     });
-  }
-
-  ngOnDestroy(): void {
-      this.subscription.unsubscribe();
   }
 
   previousIsDisabled(): boolean {
@@ -122,8 +121,7 @@ export class PagerComponent implements OnChanges, OnDestroy {
   }
 
   hasList(): boolean {
-    // === 'object') {
-    if (typeof this.list === 'object') {
+    if (typeof this.list === 'object' || typeof this.list === 'number') {
       return this.pager.getTotalPage() > 1;
     }
 

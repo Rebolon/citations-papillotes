@@ -1,12 +1,12 @@
-import { PagerListInterface, PagerListPartsInterface } from './pager.interface';
+import { PagerItemInterface, PagerDisplayedItemsInterface } from './pager.interface';
 
-export class PagerListParts implements PagerListPartsInterface {
-  private pager: Array<PagerListInterface> = [];
-  private pagerFirstEdges: Array<PagerListInterface> = [];
-  private pagerLastEdges: Array<PagerListInterface> = [];
-  private pagerNumbers: Array<PagerListInterface> = [];
+export class PagerListParts implements PagerDisplayedItemsInterface {
+  private pager: Array<PagerItemInterface> = [];
+  private pagerFirstEdges: Array<PagerItemInterface> = [];
+  private pagerLastEdges: Array<PagerItemInterface> = [];
+  private pagerNumbers: Array<PagerItemInterface> = [];
 
-  constructor(pager: Array<PagerListInterface>) {
+  constructor(pager: Array<PagerItemInterface>) {
     this.pager = pager;
     this.pagerFirstEdges = this.pager.filter((value, index) => {
       return index < 2;
@@ -28,19 +28,19 @@ export class PagerListParts implements PagerListPartsInterface {
     });
   }
 
-  getAll(): Array<PagerListInterface> {
+  getAll(): Array<PagerItemInterface> {
     return this.pager;
   }
 
-  getFirstEdges(): Array<PagerListInterface> {
+  getFirstEdges(): Array<PagerItemInterface> {
     return this.pagerFirstEdges;
   }
 
-  getLastEdges(): Array<PagerListInterface> {
+  getLastEdges(): Array<PagerItemInterface> {
     return this.pagerLastEdges;
   }
 
-  getNumbers(): Array<PagerListInterface> {
+  getNumbers(): Array<PagerItemInterface> {
     return this.pagerNumbers;
   }
 }

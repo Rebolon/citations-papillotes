@@ -21,16 +21,16 @@ export interface PagerNavigationInterface {
 
 export interface PagerTemplateInterface {
   getPagerIndexList(): Array<number>;
-  getPagerItemList(): PagerListPartsInterface;
+  getPagerItemList(): PagerDisplayedItemsInterface;
 }
 
-export interface PagerListPartsInterface {
-  getFirstEdges(): Array<PagerListInterface>;
-  getLastEdges(): Array<PagerListInterface>;
-  getNumbers(): Array<PagerListInterface>;
-  getAll(): Array<PagerListInterface>;
+export interface PagerDisplayedItemsInterface {
+  getFirstEdges(): Array<PagerItemInterface>;
+  getLastEdges(): Array<PagerItemInterface>;
+  getNumbers(): Array<PagerItemInterface>;
+  getAll(): Array<PagerItemInterface>;
 }
-export interface PagerListInterface {
+export interface PagerItemInterface {
   index: number;
   label: string;
 }
