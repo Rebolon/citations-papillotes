@@ -36,11 +36,7 @@ import { SearchResultTitleComponent } from './search-result-title/search-result-
   template: `
     <div class="container mb-36">
       <h1 class="text-3xl font-bold text-stone-900 mb-2">
-        <a
-          [queryParams]="null"
-          routerLink="/cites"
-          [ngPlural]="citesCount()"
-        >
+        <a [queryParams]="null" routerLink="/cites" [ngPlural]="citesCount()">
           <ng-template ngPluralCase="=0">0 Citation.</ng-template>
           <ng-template ngPluralCase="=1">1 Citation.</ng-template>
           <ng-template ngPluralCase="other"
@@ -56,8 +52,7 @@ import { SearchResultTitleComponent } from './search-result-title/search-result-
           <li class="p-1">
             <cite>”{{ item.getCite() }}”</cite> de
             <app-link-cites-by-author
-              [author]="item.getAuthor()"
-            ></app-link-cites-by-author>
+              [author]="item.getAuthor()"></app-link-cites-by-author>
           </li>
         }
       </ul>
@@ -67,13 +62,11 @@ import { SearchResultTitleComponent } from './search-result-title/search-result-
       <div class="w-full">
         <section
           class="block fixed inset-x-0 bottom-10 z-10 bg-white"
-          id="bottom-navigation"
-        >
+          id="bottom-navigation">
           <app-pager
             [list]="cites()"
             [options]="{ itemPerPage: getItemsPerPage() }"
-            (paginatedList$)="setPaginatedList($event)"
-          ></app-pager>
+            (onPaginatedListChange)="setPaginatedList($event)"></app-pager>
         </section>
       </div>
     </div>
@@ -142,9 +135,10 @@ export class ListCitesComponent extends BasePaginatedComponent {
     }
   }
 
-  setPaginatedList(ev: unknown[]): void {
+  setPaginatedList(ev: unknown): void {
     // To prevent this check, maybe use Type
-    if (ev[0] && (ev[0] instanceof Cite || !ev[0])) {
+    const event = ev as unknown[];
+    if (event[0] && (event[0] instanceof Cite || !event[0])) {
       this.pagerPaginatedCites$.next(ev as CiteI[]);
     }
   }

@@ -2,6 +2,7 @@ import { NgPlural, NgPluralCase } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   Input,
   signal,
 } from '@angular/core';
@@ -65,7 +66,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
           <app-pager
             [list]="cites()"
             [options]="{ itemPerPage: getItemsPerPage() }"
-            (paginatedList$)="setPaginatedList($event)"></app-pager>
+            (onPaginatedListChange)="setPaginatedList($event)"></app-pager>
         </section>
       </div>
     </div>
@@ -124,9 +125,10 @@ export class ListCitesByAuthorsComponent extends BasePaginatedComponent {
     this.displayedPaginatedCites$.subscribe();
   }
 
-  setPaginatedList(ev: unknown[]): void {
+  setPaginatedList(ev: unknown): void {
     // To prevent this check, maybe use Type
-    if (ev[0] && (ev[0] instanceof Cite || !ev[0])) {
+    const event = ev as unknown[];
+    if (event[0] && (event[0] instanceof Cite || !event[0])) {
       this.pagerPaginatedCites$.next(ev as CiteI[]);
     }
   }

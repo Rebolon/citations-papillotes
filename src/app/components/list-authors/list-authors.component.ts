@@ -81,7 +81,7 @@ import { PagerComponent } from '../pager/pager.component';
           <app-pager
             [list]="authors()"
             [options]="{ itemPerPage: getItemsPerPage() }"
-            (paginatedList$)="setPaginatedList($event)"></app-pager>
+            (onPaginatedListChange))="setPaginatedList($event)"></app-pager>
         </section>
       </div>
     </div>
@@ -157,9 +157,10 @@ export class ListAuthorsComponent extends BasePaginatedComponent {
     this.sort.set('total');
   }
 
-  setPaginatedList(ev: unknown[]): void {
+  setPaginatedList(ev: unknown): void {
     // To prevent this check, maybe use Type
-    if (ev[0] && (ev[0] instanceof Author || !ev[0])) {
+    const event = ev as unknown[];
+    if (event[0] && (event[0] instanceof Author || !event[0])) {
       this.pagerPaginatedAuthors$.next(ev as AuthorI[]);
     }
   }

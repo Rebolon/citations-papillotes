@@ -10,7 +10,8 @@ import {
   input,
   InputSignal,
   output,
-  Signal
+  Signal,
+  Output
 } from '@angular/core';
 import { PagerOptionsInterface } from '../../services/Pager/pager.interface';
 import { PagerService } from '../../services/Pager/pager.service';
