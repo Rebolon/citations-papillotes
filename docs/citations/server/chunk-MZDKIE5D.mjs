@@ -1,0 +1,2 @@
+import './polyfills.server.mjs';
+import{Ga as a,ba as o,gc as c,hb as r,mb as s}from"./chunk-VAZWQI7N.mjs";import"./chunk-46FXLK2C.mjs";var u=(()=>{let t=class t{constructor(n){this.title=n,this.title.setTitle("Citations - Page non trouv\xE9e")}};t.\u0275fac=function(i){return new(i||t)(a(c))},t.\u0275cmp=o({type:t,selectors:[["app-page-not-found"]],standalone:!0,features:[s],decls:1,vars:0,template:function(i,p){i&1&&r(0,"Lost In Space ?")},encapsulation:2,changeDetection:0});let e=t;return e})();export{u as PageNotFoundComponent};
