@@ -1,8 +1,22 @@
-/* eslint-disable prettier/prettier */
 import { NgPlural, NgPluralCase } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Input,
+  signal,
+} from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Observable, ReplaySubject, Subject, map, mergeWith, startWith, switchMap, tap } from 'rxjs';
+import {
+  Observable,
+  ReplaySubject,
+  Subject,
+  map,
+  mergeWith,
+  startWith,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { Cite, CiteI } from '../../models/Cite';
 import { Cites } from '../../services/Cites';
 import { Device } from '../../tools/Device';
@@ -52,8 +66,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
           <app-pager
             [list]="cites()"
             [options]="{ itemPerPage: getItemsPerPage() }"
-            (paginatedList$)="setPaginatedList($event)"
-          ></app-pager>
+            (onPaginatedListChange)="setPaginatedList($event)"></app-pager>
         </section>
       </div>
     </div>
@@ -61,9 +74,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   standalone: true,
   imports: [NgPlural, NgPluralCase, PagerComponent],
 })
-export class ListCitesByAuthorsComponent
-  extends BasePaginatedComponent
-{
+export class ListCitesByAuthorsComponent extends BasePaginatedComponent {
   @Input({ required: true })
   set author(author: string) {
     if (!author) {
@@ -100,7 +111,7 @@ export class ListCitesByAuthorsComponent
   constructor(
     public citeService: Cites,
     protected title: Title,
-    protected device: Device
+    protected device: Device,
   ) {
     super();
     this.title.setTitle('Citations - Liste des citations');
@@ -114,9 +125,10 @@ export class ListCitesByAuthorsComponent
     this.displayedPaginatedCites$.subscribe();
   }
 
-  setPaginatedList(ev: unknown[]): void {
+  setPaginatedList(ev: unknown): void {
     // To prevent this check, maybe use Type
-    if (ev[0] && (ev[0] instanceof Cite || !ev[0])) {
+    const event = ev as unknown[];
+    if (event[0] && (event[0] instanceof Cite || !event[0])) {
       this.pagerPaginatedCites$.next(ev as CiteI[]);
     }
   }

@@ -1,22 +1,21 @@
 /* eslint-disable prettier/prettier */
 import { NgClass } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
-  Component,
   DestroyRef,
   inject,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
   input,
-  Input,
   InputSignal,
-  OnChanges,
-  OnDestroy,
-  Output,
-  SimpleChanges
+  output,
+  Signal,
+  Output
 } from '@angular/core';
-import { BehaviorSubject, Subscription, filter } from 'rxjs';
 import { PagerOptionsInterface } from '../../services/Pager/pager.interface';
 import { PagerService } from '../../services/Pager/pager.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { outputFromObservable, outputToObservable, takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-pager',
@@ -79,34 +78,16 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   imports: [NgClass],
   providers: [PagerService] // Unwanted singleton for this service to get fresh Pager everyWhere
 })
-export class PagerComponent implements OnChanges {
-  @Input() list: Array<unknown> | number = 0;
-  //protected list: InputSignal<Array<unknown> | number> = input.required<Array<unknown>|number>();
-  @Input() options?: PagerOptionsInterface;
-  readonly #destroyRef = inject(DestroyRef);
-  readonly pager: PagerService = inject(PagerService);
-  #paginatedList: BehaviorSubject<Array<unknown>> = new BehaviorSubject(
-    this.pager.getPaginatedList()
-  );
-  @Output() paginatedList$ = this.#paginatedList
-    .asObservable()
-    .pipe(
-      takeUntilDestroyed(),
-      filter((value) => !!value)
-    );
-
-  ngOnChanges(changes: SimpleChanges): void {
-    const list = changes['list'];
-    if (!list) {
-      return;
-    }
-
-    // 2 lines that are bad part of the code for instance
-    this.pager.init(list.currentValue, this.options);
-    this.pager.currentOffset$.pipe().subscribe(() => {
-      this.#paginatedList.next(this.pager.getPaginatedList());
-    });
-  }
+export class PagerComponent {
+  pager = inject(PagerService)
+  list: InputSignal<Array<unknown> | number> = input.required<Array<unknown>|number>();
+  options: InputSignal<PagerOptionsInterface|undefined> = input<PagerOptionsInterface>();
+  #paginatedList: Signal<Array<unknown>> = computed(() => {
+    this.pager.init(this.list(), this.options());
+    return this.pager.getPaginatedList();
+  });
+  #paginatedList$ = toObservable(this.#paginatedList).pipe(takeUntilDestroyed());
+  onPaginatedListChange = outputFromObservable(this.#paginatedList$)
 
   previousIsDisabled(): boolean {
     return this.pager.getCurrentPage() === this.pager.getPreviousPage();
@@ -121,7 +102,7 @@ export class PagerComponent implements OnChanges {
   }
 
   hasList(): boolean {
-    if (typeof this.list === 'object' || typeof this.list === 'number') {
+    if (typeof this.list() === 'object') {
       return this.pager.getTotalPage() > 1;
     }
 

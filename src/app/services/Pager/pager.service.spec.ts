@@ -40,7 +40,7 @@ describe('PagerService', () => {
 
   it('should define pager item list', () => {
     const tested = new PagerService();
-    let list = [];
+    const list = [];
     for (let i = 0; i < 150; i++) {
       list.push(1);
     }
@@ -70,7 +70,7 @@ describe('PagerService', () => {
     tested.init(150);
     tested.goToNextPage();
 
-    expect(tested.currentPage()).toEqual(2);
+    expect(tested.getCurrentPage()).toEqual(2);
     expect(tested.getFirstPage()).toEqual(1);
     expect(tested.getLastPage()).toEqual(30);
     expect(tested.getNextPage()).toEqual(3);
@@ -79,7 +79,7 @@ describe('PagerService', () => {
 
     tested.goToNextPage();
 
-    expect(tested.currentPage()).toEqual(3);
+    expect(tested.getCurrentPage()).toEqual(3);
     expect(tested.getFirstPage()).toEqual(1);
     expect(tested.getLastPage()).toEqual(30);
     expect(tested.getNextPage()).toEqual(4);
@@ -88,7 +88,7 @@ describe('PagerService', () => {
 
     tested.goToPreviousPage();
 
-    expect(tested.currentPage()).toEqual(2);
+    expect(tested.getCurrentPage()).toEqual(2);
     expect(tested.getFirstPage()).toEqual(1);
     expect(tested.getLastPage()).toEqual(30);
     expect(tested.getNextPage()).toEqual(3);
@@ -101,7 +101,7 @@ describe('PagerService', () => {
     tested.init(150);
     tested.goToLastPage();
 
-    expect(tested.currentPage()).toEqual(30);
+    expect(tested.getCurrentPage()).toEqual(30);
     expect(tested.getFirstPage()).toEqual(1);
     expect(tested.getLastPage()).toEqual(30);
     expect(tested.getNextPage()).toEqual(30);
@@ -110,7 +110,7 @@ describe('PagerService', () => {
 
     tested.goToFirstPage();
 
-    expect(tested.currentPage()).toEqual(1);
+    expect(tested.getCurrentPage()).toEqual(1);
     expect(tested.getFirstPage()).toEqual(1);
     expect(tested.getLastPage()).toEqual(30);
     expect(tested.getNextPage()).toEqual(2);
@@ -124,7 +124,7 @@ describe('PagerService', () => {
     tested.goToLastPage();
     tested.goToNextPage();
 
-    expect(tested.currentPage()).toEqual(30);
+    expect(tested.getCurrentPage()).toEqual(30);
     expect(tested.getFirstPage()).toEqual(1);
     expect(tested.getLastPage()).toEqual(30);
     expect(tested.getNextPage()).toEqual(30);
@@ -134,7 +134,7 @@ describe('PagerService', () => {
     tested.goToFirstPage();
     tested.goToPreviousPage();
 
-    expect(tested.currentPage()).toEqual(1);
+    expect(tested.getCurrentPage()).toEqual(1);
     expect(tested.getFirstPage()).toEqual(1);
     expect(tested.getLastPage()).toEqual(30);
     expect(tested.getNextPage()).toEqual(2);
@@ -147,7 +147,7 @@ describe('PagerService', () => {
     tested.init(150);
     tested.goToPage(5);
 
-    expect(tested.currentPage()).toEqual(5);
+    expect(tested.getCurrentPage()).toEqual(5);
     expect(tested.getNextPage()).toEqual(6);
     expect(tested.getPreviousPage()).toEqual(4);
     expect(tested.getOffset()).toEqual(20);
