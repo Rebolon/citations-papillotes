@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { RandomComponent } from './random.component';
-import { Cites } from '../../services/Cites';
-import { RouterTestingModule } from '@angular/router/testing';
-import { ActivatedRoute } from '@angular/router';
-import { Click } from '../../services/Click';
+import { RandomComponent } from "./random.component";
+import { Cites } from "../../services/Cites";
+import { RouterTestingModule } from "@angular/router/testing";
+import { ActivatedRoute } from "@angular/router";
+import { Click } from "../../services/Click";
 
-describe('RandomComponent', () => {
+describe("RandomComponent", () => {
   let component: RandomComponent;
   let fixture: ComponentFixture<RandomComponent>;
 
@@ -32,7 +32,7 @@ describe('RandomComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

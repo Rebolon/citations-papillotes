@@ -1,0 +1,1 @@
+import{Da as a,Ya as p,f as n,ia as o,kb as i}from"./chunk-D654P62Y.mjs";n();o();i();var s=(()=>{class e{static \u0275fac=function(t){return new(t||e)};static \u0275cmp=a({type:e,selectors:[["app-page-not-found"]],decls:1,vars:0,template:function(t,r){t&1&&p(0,"Lost In Space ?")},encapsulation:2,changeDetection:0})}return e})();export{s as PageNotFoundComponent};

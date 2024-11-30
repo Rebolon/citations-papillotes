@@ -1,15 +1,16 @@
-import { Cites } from './Cites';
-import { ActivatedRoute } from '@angular/router';
+import { Cites } from "./Cites";
+import { ActivatedRoute } from "@angular/router";
 
-describe('Authors', () => {
+describe("Authors", () => {
   let service: Cites;
 
   beforeEach(() => {
+    // @todo fix this since we use inject instead of constructor for DI
     const activatedRoute = {} as ActivatedRoute;
-    service = new Cites(activatedRoute);
+    service = new Cites(activatedoute);
   });
 
-  it('list Cites', (done: DoneFn) => {
+  it("list Cites", (done: DoneFn) => {
     const tested = service;
     tested.cites$.subscribe({
       next: (cites) => {

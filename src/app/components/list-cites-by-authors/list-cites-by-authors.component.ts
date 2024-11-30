@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { NgPlural, NgPluralCase } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, signal, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Observable, ReplaySubject, Subject, map, mergeWith, startWith, switchMap, tap } from 'rxjs';
 import { Cite, CiteI } from '../../models/Cite';
@@ -13,6 +13,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-list-cites-by-authors',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [NgPlural, NgPluralCase, PagerComponent],
   template: `
     <div class="container mb-36">
       @if (authorOfCites(); as author) {
@@ -58,12 +59,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
       </div>
     </div>
   `,
-  standalone: true,
-  imports: [NgPlural, NgPluralCase, PagerComponent],
 })
 export class ListCitesByAuthorsComponent
   extends BasePaginatedComponent
 {
+  citeService = inject(Cites);
+  protected title = inject(Title);
+  protected device = inject(Device);
+
   @Input({ required: true })
   set author(author: string) {
     if (!author) {
@@ -97,12 +100,13 @@ export class ListCitesByAuthorsComponent
     takeUntilDestroyed(),
   );
 
-  constructor(
-    public citeService: Cites,
-    protected title: Title,
-    protected device: Device
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     super();
+    const device = this.device;
+
     this.title.setTitle('Citations - Liste des citations');
     this.itemsPerPage = 10;
     if (device.isMobile()) {

@@ -604,6 +604,8 @@ const data: FixtureCiteI[] = [
   {cite: `Soyez gais, moquez-vous de tout.`, author: `Rosa de Luxemburg`, tags: []},
   {cite: `L'énergie appliquée à juste titre peut accomplir n'importe quoi.`, author: `Nelly Bly`, tags: []},
   {cite: `Une vie réussie est un rêve d'enfance réalisé à l'âge mûr.`, author: `Proverbe marocain`, tags: []},
+  {cite: `Le mal est à l'amour ce que le mystère est à l'intelligence.`, author: `Simone Weil`, tags: ['mal']},
+  {cite: `Ce que nous sommes est le résultat de ce que nous avons pensé.`, author: `Bouddha`, tags: ['soi', 'pensée']},
   // {cite: `.`, author: ``, tags: []},
 
   ];

@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { NavbarMobileComponent } from './navbar-mobile.component';
-import { Click } from '../../services/Click';
-import { RouterTestingModule } from '@angular/router/testing';
-import { ActivatedRoute } from '@angular/router';
+import { NavbarMobileComponent } from "./navbar-mobile.component";
+import { Click } from "../../services/Click";
+import { RouterTestingModule } from "@angular/router/testing";
+import { ActivatedRoute } from "@angular/router";
 
-describe('NavbarMobileComponent', () => {
+describe("NavbarMobileComponent", () => {
   let component: NavbarMobileComponent;
   let fixture: ComponentFixture<NavbarMobileComponent>;
 
@@ -30,7 +30,7 @@ describe('NavbarMobileComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

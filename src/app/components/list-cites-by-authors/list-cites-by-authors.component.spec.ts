@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ListCitesByAuthorsComponent } from './list-cites-by-authors.component';
-import { Cites } from '../../services/Cites';
-import { RouterTestingModule } from '@angular/router/testing';
-import { ActivatedRoute } from '@angular/router';
-import { Device } from '../../tools/Device';
+import { ListCitesByAuthorsComponent } from "./list-cites-by-authors.component";
+import { Cites } from "../../services/Cites";
+import { RouterTestingModule } from "@angular/router/testing";
+import { ActivatedRoute } from "@angular/router";
+import { Device } from "../../tools/Device";
 
-describe('ListCiteByAuthorsComponent', () => {
+describe("ListCiteByAuthorsComponent", () => {
   let component: ListCitesByAuthorsComponent;
   let fixture: ComponentFixture<ListCitesByAuthorsComponent>;
 
@@ -23,7 +23,7 @@ describe('ListCiteByAuthorsComponent', () => {
           },
         },
       ],
-   }).compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -32,7 +32,7 @@ describe('ListCiteByAuthorsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

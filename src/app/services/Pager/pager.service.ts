@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   PagerInterface,
   PagerItemInterface,
@@ -6,9 +6,9 @@ import {
   PagerNavigationInterface,
   PagerOptionsInterface,
   PagerTemplateInterface,
-} from './pager.interface';
-import { PagerListParts } from './pager-list-parts';
-import { BehaviorSubject, filter, map } from 'rxjs';
+} from "./pager.interface";
+import { PagerListParts } from "./pager-list-parts";
+import { BehaviorSubject, filter, map } from "rxjs";
 
 export class TotalPageNotSet extends Error {}
 export class FirstPageNotSet extends Error {}
@@ -19,7 +19,7 @@ export class PagerAlreadyInitialized extends Error {}
 export class PageIndexDoesNotExists extends Error {}
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class PagerService
   implements PagerInterface, PagerNavigationInterface, PagerTemplateInterface
@@ -52,7 +52,7 @@ export class PagerService
       return
     }*/
 
-    if (typeof list !== 'object') {
+    if (typeof list !== "object") {
       this.originalList = new Array(list).fill(0);
     } else {
       this.originalList = list;
@@ -207,11 +207,11 @@ export class PagerService
       return this;
     }
 
-    if (typeof options.itemPerPage !== 'undefined') {
+    if (typeof options.itemPerPage !== "undefined") {
       this.itemPerPage = options.itemPerPage;
     }
 
-    if (typeof options.maxPagerItem !== 'undefined') {
+    if (typeof options.maxPagerItem !== "undefined") {
       this.maxPagerItem = options.maxPagerItem;
     }
 
@@ -219,7 +219,7 @@ export class PagerService
   }
 
   private setTotalPage(list: Array<unknown> | number): PagerService {
-    const count = typeof list === 'object' ? list.length : list;
+    const count = typeof list === "object" ? list.length : list;
     this.totalPage = Math.ceil(count / this.itemPerPage);
 
     return this;
@@ -369,21 +369,21 @@ export class PagerService
 
     pager.unshift({
       index: this.getPreviousPage(),
-      label: '<',
+      label: "<",
     });
 
     pager.unshift({
       index: this.getFirstPage(),
-      label: '<<',
+      label: "<<",
     });
 
     pager.push({
       index: this.getNextPage(),
-      label: '>',
+      label: ">",
     });
     pager.push({
       index: this.getLastPage(),
-      label: '>>',
+      label: ">>",
     });
 
     this.pagerItemList = new PagerListParts(pager);

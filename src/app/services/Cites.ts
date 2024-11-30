@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Injectable, inject } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import {
   BehaviorSubject,
   EMPTY,
@@ -13,13 +13,15 @@ import {
   take,
   tap,
   toArray,
-} from 'rxjs';
-import { cites } from '../fixtures/data';
-import { Cite, CiteI } from '../models/Cite';
-import { CiteOfTheDay } from '../tools/CiteOfTheDay.service';
+} from "rxjs";
+import { cites } from "../fixtures/data";
+import { Cite, CiteI } from "../models/Cite";
+import { CiteOfTheDay } from "../tools/CiteOfTheDay.service";
 
 @Injectable()
 export class Cites {
+  protected router = inject(ActivatedRoute);
+
   protected originalCites: CiteI[] = [];
   protected cites: BehaviorSubject<CiteI[]> = new BehaviorSubject<CiteI[]>([]);
   public cites$: Observable<CiteI[]> = this.cites.asObservable().pipe(
@@ -45,7 +47,8 @@ export class Cites {
   // local cache for the counter
   protected count = 0;
 
-  public constructor(protected router: ActivatedRoute) {
+  public constructor() {
+    // @todo migrate all this to Signal pattern
     cites
       .pipe(
         tap((next: CiteI[]) => (this.originalCites = next)),
@@ -106,7 +109,7 @@ export class Cites {
     // @todo i would like to remove ActivatedRoute From this service
     if (
       //this.router.snapshot.queryParams &&
-      this.router.snapshot?.queryParams['q']
+      this.router.snapshot?.queryParams["q"]
     ) {
       return this.count;
     }

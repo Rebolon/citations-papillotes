@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { switchMap } from 'rxjs';
 import { Cites } from '../../services/Cites';
 import { Click } from '../../services/Click';
@@ -10,6 +9,7 @@ import { LinkCitesByAuthorComponent } from '../link-cites-by-author/link-cites-b
 @Component({
   selector: 'app-random',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [AsyncPipe, LinkCitesByAuthorComponent],
   template: `
     @if (cite$ | async; as cite) {
       <h1
@@ -27,18 +27,10 @@ import { LinkCitesByAuthorComponent } from '../link-cites-by-author/link-cites-b
       </p>
     }
   `,
-  standalone: true,
-  imports: [NgIf, AsyncPipe, LinkCitesByAuthorComponent],
 })
 export class RandomComponent {
   protected citesService: Cites = inject(Cites);
   protected click: Click = inject(Click);
-  protected title: Title = inject(Title);
   protected cite$ = this.click.refresh$
     .pipe(switchMap(() => this.citesService.getRandomCite()));
-
-  constructor(
-  ) {
-    this.title.setTitle('Citations - Citation aléatoire');
-  }
 }

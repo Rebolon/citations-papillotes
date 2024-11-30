@@ -1,8 +1,8 @@
-import { Authors } from './Authors';
-import { Cites } from '../Cites';
-import { ActivatedRoute } from '@angular/router';
+import { Authors } from "./Authors";
+import { Cites } from "../Cites";
+import { ActivatedRoute } from "@angular/router";
 
-describe('Authors', () => {
+describe("Authors", () => {
   let service: Authors;
 
   beforeEach(() => {
@@ -11,7 +11,7 @@ describe('Authors', () => {
     service = new Authors(cites);
   });
 
-  it('list Authors', (done: DoneFn) => {
+  it("list Authors", (done: DoneFn) => {
     const tested = service;
     tested.authors$.subscribe({
       next: (authors) => {

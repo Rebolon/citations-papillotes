@@ -1,2 +1,1 @@
-import './polyfills.server.mjs';
-import{a}from"./chunk-BXS3P4CB.mjs";import"./chunk-SXMGQKQF.mjs";import"./chunk-NYTTZ2DX.mjs";import"./chunk-FRX2FGT6.mjs";import"./chunk-CAQQ2R7W.mjs";import"./chunk-EDMIJCTO.mjs";import"./chunk-IACZO57R.mjs";import"./chunk-VAZWQI7N.mjs";import"./chunk-46FXLK2C.mjs";export{a as default};
+import{a as u}from"./chunk-DCIRAK3D.mjs";import"./chunk-D7SNIHEO.mjs";import"./chunk-ZUF7CGOC.mjs";import"./chunk-SR625U76.mjs";import"./chunk-52Y72HIO.mjs";import{da as t,f as e,fa as o,ga as p,ha as a,ia as r}from"./chunk-D654P62Y.mjs";e();r();a();export{u as default,p as \u0275destroyAngularServerApp,t as \u0275extractRoutesAndCreateRouteTree,o as \u0275getOrCreateAngularServerApp};

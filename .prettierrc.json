@@ -1,6 +1,7 @@
 {
   "tabWidth": 2,
   "bracketSameLine": true,
+  "singleQuote": false,
   "attributeGroups": [
     "$ANGULAR_STRUCTURAL_DIRECTIVE",
     "$ANGULAR_TWO_WAY_BINDING",

@@ -1,9 +1,9 @@
 {
-  "routes": [
-    "/",
-    "/authors",
-    "/cites",
-    "/random",
-    "/search"
-  ]
+  "routes": {
+    "/": {},
+    "/authors": {},
+    "/cites": {},
+    "/random": {},
+    "/search": {}
+  }
 }

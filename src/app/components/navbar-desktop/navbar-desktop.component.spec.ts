@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { NavbarDesktopComponent } from './navbar-desktop.component';
-import { Click } from '../../services/Click';
-import { ActivatedRoute } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
+import { NavbarDesktopComponent } from "./navbar-desktop.component";
+import { Click } from "../../services/Click";
+import { ActivatedRoute } from "@angular/router";
+import { RouterTestingModule } from "@angular/router/testing";
 
-describe('NavbarDesktopComponent', () => {
+describe("NavbarDesktopComponent", () => {
   let component: NavbarDesktopComponent;
   let fixture: ComponentFixture<NavbarDesktopComponent>;
 
@@ -30,7 +30,7 @@ describe('NavbarDesktopComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

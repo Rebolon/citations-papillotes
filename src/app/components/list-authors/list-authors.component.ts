@@ -1,13 +1,13 @@
-import { NgClass, NgPlural, NgPluralCase } from '@angular/common';
+import { NgClass, NgPlural, NgPluralCase } from "@angular/common";
 import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   signal,
-} from '@angular/core';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { Title } from '@angular/platform-browser';
-import { RouterLink } from '@angular/router';
+} from "@angular/core";
+import { takeUntilDestroyed, toObservable } from "@angular/core/rxjs-interop";
+import { RouterLink } from "@angular/router";
 import {
   Observable,
   Subject,
@@ -16,16 +16,17 @@ import {
   startWith,
   switchMap,
   tap,
-} from 'rxjs';
-import { Author, AuthorI } from '../../models/Authors';
-import { Authors } from '../../services/Cites/Authors';
-import { Device } from '../../tools/Device';
-import { BasePaginatedComponent } from '../common/BasePaginatedComponent';
-import { PagerComponent } from '../pager/pager.component';
+} from "rxjs";
+import { Author, AuthorI } from "../../models/Authors";
+import { Authors } from "../../services/Cites/Authors";
+import { Device } from "../../tools/Device";
+import { BasePaginatedComponent } from "../common/BasePaginatedComponent";
+import { PagerComponent } from "../pager/pager.component";
 
 @Component({
-  selector: 'app-list-authors',
+  selector: "app-list-authors",
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [NgClass, NgPlural, NgPluralCase, RouterLink, PagerComponent],
   template: `
     <div class="container mb-36">
       <h1
@@ -46,8 +47,7 @@ import { PagerComponent } from '../pager/pager.component';
         [disabled]="isSortByText()"
         (click)="sortByAuthor()"
         class="bg-gray-100 text-violet-800 text-xs inline-flex items-center px-2.5 py-0.5 rounded-full mr-2"
-        title="Trier par nom"
-      >
+        title="Trier par nom">
         Trier par nom
       </button>
 
@@ -59,8 +59,7 @@ import { PagerComponent } from '../pager/pager.component';
         [disabled]="isSortByTotal()"
         (click)="sortByCount()"
         class="bg-gray-100 text-violet-800 text-xs inline-flex items-center px-2.5 py-0.5 rounded-full"
-        title="Trier par total de citations"
-      >
+        title="Trier par total de citations">
         Trier par total
       </button>
 
@@ -79,28 +78,27 @@ import { PagerComponent } from '../pager/pager.component';
       <div class="w-full">
         <section
           class="block fixed inset-x-0 bottom-10 z-10 bg-white"
-          id="bottom-navigation"
-        >
+          id="bottom-navigation">
           <app-pager
             [list]="authors()"
             [options]="{ itemPerPage: getItemsPerPage() }"
-            (paginatedList$)="setPaginatedList($event)"
-          ></app-pager>
+            (paginatedList$)="setPaginatedList($event)"></app-pager>
         </section>
       </div>
     </div>
   `,
-  standalone: true,
-  imports: [NgClass, NgPlural, NgPluralCase, RouterLink, PagerComponent],
 })
 export class ListAuthorsComponent extends BasePaginatedComponent {
-  private sort = signal<'text' | 'total'>('text');
-  protected readonly isSortByText = computed(() => this.sort() === 'text');
-  protected readonly isSortByTotal = computed(() => this.sort() === 'total');
+  authorService = inject(Authors);
+  protected device = inject(Device);
+
+  private sort = signal<"text" | "total">("text");
+  protected readonly isSortByText = computed(() => this.sort() === "text");
+  protected readonly isSortByTotal = computed(() => this.sort() === "total");
   protected authors = signal([] as AuthorI[]);
   private authors$: Observable<AuthorI[]> = toObservable(this.sort).pipe(
     switchMap((sort) =>
-      sort === 'text'
+      sort === "text"
         ? this.authorService.authors$
         : this.authorService.authors$.pipe(
             map((authors: AuthorI[]) =>
@@ -135,30 +133,29 @@ export class ListAuthorsComponent extends BasePaginatedComponent {
       tap((authors) => this.displayedPaginatedAuthors.set(authors)),
       takeUntilDestroyed(),
     );
-  protected override currentPage!: number;
+  protected override currentPage: number = 0;
   protected override itemsPerPage = 11;
 
-  constructor(
-    public authorService: Authors,
-    protected title: Title,
-    protected device: Device,
-  ) {
+  constructor() {
     super();
-    this.title.setTitle('Citations - Liste des auteurs');
+    const device = this.device;
+
     if (device.isMobile()) {
       this.itemsPerPage = 8;
     }
+
+    // @todo move this to signal to prevent manual subscribe
     this.authors$.subscribe();
     this.authorsCount$.subscribe();
     this.displayedPaginatedAuthors$.subscribe();
   }
 
   sortByAuthor(): void {
-    this.sort.set('text');
+    this.sort.set("text");
   }
 
   sortByCount(): void {
-    this.sort.set('total');
+    this.sort.set("total");
   }
 
   setPaginatedList(ev: unknown[]): void {
