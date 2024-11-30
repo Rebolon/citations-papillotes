@@ -7,13 +7,13 @@ import {
   OnInit,
   ViewChild,
   inject,
-} from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, Router } from '@angular/router';
-import { debounceTime, fromEvent, map } from 'rxjs';
+} from "@angular/core";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { ActivatedRoute, Router } from "@angular/router";
+import { debounceTime, fromEvent, map } from "rxjs";
 
 @Component({
-  selector: 'app-search',
+  selector: "app-search",
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <input
@@ -21,13 +21,11 @@ import { debounceTime, fromEvent, map } from 'rxjs';
       class=""
       id="search_input"
       type="text"
-      placeholder="Rechercher..."
-    />
+      placeholder="Rechercher..." />
   `,
-  standalone: true,
 })
 export class SearchComponent implements AfterViewInit, OnInit {
-  @ViewChild('elSearchCite', { static: true }) elSearchCite!: ElementRef;
+  @ViewChild("elSearchCite", { static: true }) elSearchCite!: ElementRef;
   protected activatedRouter = inject(ActivatedRoute);
   protected router = inject(Router);
   #destroyRef = inject(DestroyRef);
@@ -37,8 +35,8 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.activatedRouter.queryParamMap
       .pipe(takeUntilDestroyed(this.#destroyRef))
       .subscribe((params) => {
-        if (!params.get('q')) {
-          this.elSearchCite.nativeElement.value = '';
+        if (!params.get("q")) {
+          this.elSearchCite.nativeElement.value = "";
 
           return;
         }
@@ -46,7 +44,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit(): void {
-    fromEvent(this.elSearchCite.nativeElement, 'keyup')
+    fromEvent(this.elSearchCite.nativeElement, "keyup")
       .pipe(
         map(
           (event: unknown) =>
@@ -57,7 +55,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
       )
       .subscribe({
         next: (next: string) => {
-          this.router.navigate(['/search'], { queryParams: { q: next } });
+          this.router.navigate(["/search"], { queryParams: { q: next } });
         },
       });
   }

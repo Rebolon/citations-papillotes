@@ -1,13 +1,13 @@
-import { CiteI } from '../models/Cite';
+import { CiteI } from "../models/Cite";
 
 export class CiteOfTheDay {
   static getStartYear(citesCount: number): number {
     let startPoint = 1;
-    let padding = '';
+    let padding = "";
     let substrLength = 4;
     while (citesCount > startPoint * 365 && startPoint <= 10000) {
       startPoint *= 10;
-      padding += '0';
+      padding += "0";
       substrLength--;
     }
 

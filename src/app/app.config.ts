@@ -44,6 +44,6 @@ export const appConfig: ApplicationConfig = {
     Click,
     Title,
     PagerService,
-    Device,
+    Device, provideClientHydration(withEventReplay()),
   ],
 };

@@ -1,52 +1,58 @@
-import { Routes } from '@angular/router';
+import { Routes } from "@angular/router";
 
 export const routes: Routes = [
   {
-    path: '',
+    path: "",
+    title: "Citations - Citation du jour",
     loadComponent: () =>
-      import('./components/home/home.component').then(
+      import("./components/home/home.component").then(
         (c) => c.HomeComponent,
       ) /* */,
   },
   {
-    path: 'cites',
+    path: "cites",
+    title: "Citations - Liste des citations",
     loadComponent: () =>
-      import('./components/list-cites/list-cites.component').then(
+      import("./components/list-cites/list-cites.component").then(
         (c) => c.ListCitesComponent,
       ) /* */,
   },
   {
-    path: 'authors',
+    path: "authors",
+    title: "Citations - Liste des auteurs",
     loadComponent: () =>
-      import('./components/list-authors/list-authors.component').then(
+      import("./components/list-authors/list-authors.component").then(
         (c) => c.ListAuthorsComponent,
       ) /* */,
   },
   {
-    path: 'authors/:author',
+    path: "cites-by-authors/:author",
+    title: "Citations - Liste des citations par auteur",
     loadComponent: () =>
       import(
-        './components/list-cites-by-authors/list-cites-by-authors.component'
+        "./components/list-cites-by-authors/list-cites-by-authors.component"
       ).then((c) => c.ListCitesByAuthorsComponent) /* */,
   },
   {
-    path: 'random',
+    path: "random",
+    title: "Citations - Citation aléatoire",
     loadComponent: () =>
-      import('./components/random/random.component').then(
+      import("./components/random/random.component").then(
         (c) => c.RandomComponent,
       ) /* */,
   },
   {
-    path: 'search',
+    path: "search",
     loadComponent: () =>
-      import('./components/list-cites/list-cites.component').then(
+      import("./components/list-cites/list-cites.component").then(
         (c) => c.ListCitesComponent,
       ) /* */,
   },
   {
-    path: '**',
+    path: "**",
+    title: "Citations - Page non trouvée",
     loadComponent: () =>
-      import('./components/pageNotFound/page-not-found.component').then(
+      import("./components/pageNotFound/page-not-found.component").then(
         (c) => c.PageNotFoundComponent,
       ) /* */,
   },

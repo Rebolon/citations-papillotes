@@ -7,6 +7,7 @@ import { NavbarDesktopComponent } from './components/navbar-desktop/navbar-deskt
 @Component({
   selector: 'app-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [NavbarDesktopComponent, RouterOutlet, NavbarMobileComponent],
   template: `
     <div class="container min-h-screen flex flex-col" id="app">
       <header class="top-0 fixed bg-white w-full">
@@ -22,11 +23,7 @@ import { NavbarDesktopComponent } from './components/navbar-desktop/navbar-deskt
       </footer>
     </div>
   `,
-  standalone: true,
-  imports: [NavbarDesktopComponent, RouterOutlet, NavbarMobileComponent],
 })
 export class AppComponent {
-  constructor(public title: Title) {
-    this.title.setTitle('Liste de Citations');
-  }
+  title = 'Liste de Citations'
 }

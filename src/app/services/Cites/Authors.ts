@@ -11,14 +11,16 @@ import {
   switchMap,
   take,
   toArray,
-} from 'rxjs';
-import { Injectable } from '@angular/core';
-import { Cites } from '../Cites';
-import { Author, AuthorI } from '../../models/Authors';
-import { CiteI } from '../../models/Cite';
+} from "rxjs";
+import { Injectable, inject } from "@angular/core";
+import { Cites } from "../Cites";
+import { Author, AuthorI } from "../../models/Authors";
+import { CiteI } from "../../models/Cite";
 
 @Injectable()
 export class Authors {
+  protected citeService = inject(Cites);
+
   protected authors: BehaviorSubject<AuthorI[]> = new BehaviorSubject<
     AuthorI[]
   >([]);
@@ -38,7 +40,10 @@ export class Authors {
   // local cache for the counter
   protected count = 0;
 
-  public constructor(protected citeService: Cites) {
+  public constructor() {
+    // @todo migrate all to Signal pattern from Josh Morony service pattern
+    const citeService = this.citeService;
+
     const authors: AuthorI[] = [];
 
     citeService.cites$
@@ -63,20 +68,20 @@ export class Authors {
         skipUntil(citeService.cites$),
         // build to 2 streams : one with proverbe and another with the rest to improve the sort
         groupBy((next: AuthorI) =>
-          next.getName().toLowerCase().includes('proverbe'),
+          next.getName().toLowerCase().includes("proverbe"),
         ),
         mergeMap((group: Observable<AuthorI>) =>
           group.pipe(
             toArray(),
             map((next: AuthorI[]) => {
               return next.sort((a, b) => {
-                const aParts = a.getName().split(' ');
-                const bParts = b.getName().split(' ');
+                const aParts = a.getName().split(" ");
+                const bParts = b.getName().split(" ");
                 const aLastname =
-                  (aParts.length > 1 ? aParts.pop() : aParts.shift()) ?? '';
+                  (aParts.length > 1 ? aParts.pop() : aParts.shift()) ?? "";
                 const aFirstname = aParts[0];
                 const bLastname =
-                  (bParts.length > 1 ? bParts.pop() : bParts.shift()) ?? '';
+                  (bParts.length > 1 ? bParts.pop() : bParts.shift()) ?? "";
                 const bFirstname = bParts[0];
 
                 if (aLastname.toLowerCase() < bLastname.toLowerCase()) {
@@ -104,7 +109,8 @@ export class Authors {
         toArray(),
         take(1), // auto unsubscribe, force complete
       )
-      .subscribe((next: unknown) => { // @todo why unknown here whereas toArray() define return as AuthorI[] ?
+      .subscribe((next: unknown) => {
+        // @todo why unknown here whereas toArray() define return as AuthorI[] ?
         this.authors.next(next as AuthorI[]);
       });
   }

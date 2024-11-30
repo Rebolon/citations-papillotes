@@ -1,4 +1,7 @@
-import { PagerItemInterface, PagerDisplayedItemsInterface } from './pager.interface';
+import {
+  PagerItemInterface,
+  PagerDisplayedItemsInterface,
+} from "./pager.interface";
 
 export class PagerListParts implements PagerDisplayedItemsInterface {
   private pager: Array<PagerItemInterface> = [];

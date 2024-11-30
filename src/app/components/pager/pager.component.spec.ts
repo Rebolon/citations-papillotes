@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PagerComponent } from './pager.component';
+import { PagerComponent } from "./pager.component";
 
-describe('PagerComponent', () => {
+describe("PagerComponent", () => {
   let component: PagerComponent;
   let fixture: ComponentFixture<PagerComponent>;
 
@@ -16,7 +16,7 @@ describe('PagerComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

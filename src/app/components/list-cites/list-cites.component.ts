@@ -1,18 +1,19 @@
-import { NgPlural, NgPluralCase } from '@angular/common';
+import { NgPlural, NgPluralCase } from "@angular/common";
 import {
   ChangeDetectionStrategy,
   Component,
   Signal,
   computed,
+  inject,
   input,
-} from '@angular/core';
+} from "@angular/core";
 import {
   takeUntilDestroyed,
   toObservable,
   toSignal,
-} from '@angular/core/rxjs-interop';
-import { Title } from '@angular/platform-browser';
-import { RouterLink } from '@angular/router';
+} from "@angular/core/rxjs-interop";
+import { Title } from "@angular/platform-browser";
+import { RouterLink } from "@angular/router";
 import {
   ReplaySubject,
   Subject,
@@ -21,26 +22,30 @@ import {
   mergeWith,
   startWith,
   switchMap,
-} from 'rxjs';
-import { Cite, CiteI } from '../../models/Cite';
-import { Cites } from '../../services/Cites';
-import { Device } from '../../tools/Device';
-import { BasePaginatedComponent } from '../common/BasePaginatedComponent';
-import { LinkCitesByAuthorComponent } from '../link-cites-by-author/link-cites-by-author.component';
-import { PagerComponent } from '../pager/pager.component';
-import { SearchResultTitleComponent } from './search-result-title/search-result-title.component';
+} from "rxjs";
+import { Cite, CiteI } from "../../models/Cite";
+import { Cites } from "../../services/Cites";
+import { Device } from "../../tools/Device";
+import { BasePaginatedComponent } from "../common/BasePaginatedComponent";
+import { LinkCitesByAuthorComponent } from "../link-cites-by-author/link-cites-by-author.component";
+import { PagerComponent } from "../pager/pager.component";
+import { SearchResultTitleComponent } from "./search-result-title/search-result-title.component";
 
 @Component({
-  selector: 'app-list-cites',
+  selector: "app-list-cites",
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    RouterLink,
+    NgPlural,
+    NgPluralCase,
+    LinkCitesByAuthorComponent,
+    SearchResultTitleComponent,
+    PagerComponent,
+  ],
   template: `
     <div class="container mb-36">
       <h1 class="text-3xl font-bold text-stone-900 mb-2">
-        <a
-          [queryParams]="null"
-          routerLink="/cites"
-          [ngPlural]="citesCount()"
-        >
+        <a [queryParams]="null" routerLink="/cites" [ngPlural]="citesCount()">
           <ng-template ngPluralCase="=0">0 Citation.</ng-template>
           <ng-template ngPluralCase="=1">1 Citation.</ng-template>
           <ng-template ngPluralCase="other"
@@ -56,8 +61,7 @@ import { SearchResultTitleComponent } from './search-result-title/search-result-
           <li class="p-1">
             <cite>”{{ item.getCite() }}”</cite> de
             <app-link-cites-by-author
-              [author]="item.getAuthor()"
-            ></app-link-cites-by-author>
+              [author]="item.getAuthor()"></app-link-cites-by-author>
           </li>
         }
       </ul>
@@ -67,30 +71,22 @@ import { SearchResultTitleComponent } from './search-result-title/search-result-
       <div class="w-full">
         <section
           class="block fixed inset-x-0 bottom-10 z-10 bg-white"
-          id="bottom-navigation"
-        >
+          id="bottom-navigation">
           <app-pager
             [list]="cites()"
             [options]="{ itemPerPage: getItemsPerPage() }"
-            (paginatedList$)="setPaginatedList($event)"
-          ></app-pager>
+            (paginatedList$)="setPaginatedList($event)"></app-pager>
         </section>
       </div>
     </div>
   `,
-  standalone: true,
-  imports: [
-    RouterLink,
-    NgPlural,
-    NgPluralCase,
-    LinkCitesByAuthorComponent,
-    SearchResultTitleComponent,
-    PagerComponent,
-  ],
 })
 export class ListCitesComponent extends BasePaginatedComponent {
-  q = input('', {
-    transform: (value: string) => (value ? value.trim() : ''),
+  protected device = inject(Device);
+  protected citeService = inject(Cites);
+
+  q = input("", {
+    transform: (value: string) => (value ? value.trim() : ""),
   });
   private q$: ReplaySubject<string> = new ReplaySubject(1);
   protected cites: Signal<CiteI[]> = computed<CiteI[]>(
@@ -98,7 +94,7 @@ export class ListCitesComponent extends BasePaginatedComponent {
   );
   private citesSource = toSignal(
     toObservable(this.q).pipe(
-      startWith(''),
+      startWith(""),
       switchMap((q: string) =>
         q ? this.citeService.search(q) : this.citeService.cites$,
       ),
@@ -129,13 +125,11 @@ export class ListCitesComponent extends BasePaginatedComponent {
     ),
   );
 
-  constructor(
-    public citeService: Cites,
-    protected title: Title,
-    protected device: Device,
-  ) {
+  // eslint-disable-next-line prettier/prettier
+  constructor() {
     super();
-    this.title.setTitle('Citations - Liste des citations');
+    const device = this.device;
+
     this.itemsPerPage = 12;
     if (device.isMobile()) {
       this.itemsPerPage = 4;

@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LinkCitesByAuthorComponent } from './link-cites-by-author.component';
-import { ActivatedRoute } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Cites } from '../../services/Cites';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { LinkCitesByAuthorComponent } from "./link-cites-by-author.component";
+import { ActivatedRoute } from "@angular/router";
+import { RouterTestingModule } from "@angular/router/testing";
+import { Cites } from "../../services/Cites";
 
-describe('LinkCitesByAuthorComponent', () => {
+describe("LinkCitesByAuthorComponent", () => {
   let component: LinkCitesByAuthorComponent;
   let fixture: ComponentFixture<LinkCitesByAuthorComponent>;
 
@@ -29,7 +29,7 @@ describe('LinkCitesByAuthorComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

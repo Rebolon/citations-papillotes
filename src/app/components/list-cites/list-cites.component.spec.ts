@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ListCitesComponent } from './list-cites.component';
-import { Cites } from '../../services/Cites';
-import { RouterTestingModule } from '@angular/router/testing';
-import { ActivatedRoute } from '@angular/router';
-import { Device } from '../../tools/Device';
+import { ListCitesComponent } from "./list-cites.component";
+import { Cites } from "../../services/Cites";
+import { RouterTestingModule } from "@angular/router/testing";
+import { ActivatedRoute } from "@angular/router";
+import { Device } from "../../tools/Device";
 
-describe('ListCitesComponent', () => {
+describe("ListCitesComponent", () => {
   let component: ListCitesComponent;
   let fixture: ComponentFixture<ListCitesComponent>;
 
@@ -32,7 +32,7 @@ describe('ListCitesComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

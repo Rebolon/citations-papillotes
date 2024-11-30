@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component, input } from "@angular/core";
+import { RouterLink } from "@angular/router";
 
 @Component({
-  selector: 'app-link-cites-by-author',
+  selector: "app-link-cites-by-author",
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [RouterLink],
   template: `
     <a
       routerLink="/authors/{{ author() }}"
@@ -12,8 +13,6 @@ import { RouterLink } from '@angular/router';
       {{ author() }}
     </a>
   `,
-  standalone: true,
-  imports: [RouterLink],
 })
 export class LinkCitesByAuthorComponent {
   author = input.required<string>();

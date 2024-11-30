@@ -1,25 +1,18 @@
-import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { Cites } from '../../services/Cites';
-import { CiteComponent } from '../cite/cite.component';
+import { AsyncPipe } from "@angular/common";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
+import { Cites } from "../../services/Cites";
+import { CiteComponent } from "../cite/cite.component";
 
 @Component({
-  selector: 'app-home',
+  selector: "app-home",
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [AsyncPipe, CiteComponent],
   template: `
     @if (citesService.getCiteOfTheDay() | async; as citeOfTheDay) {
       <app-cite [cite]="citeOfTheDay" />
     }
   `,
-  standalone: true,
-  imports: [AsyncPipe, CiteComponent],
 })
 export class HomeComponent {
-  constructor(
-    protected citesService: Cites,
-    protected title: Title,
-  ) {
-    this.title.setTitle('Citations - Citation du jour');
-  }
+  protected citesService = inject(Cites);
 }

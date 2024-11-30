@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { PageIndexDoesNotExists, PagerService } from './pager.service';
+import { PageIndexDoesNotExists, PagerService } from "./pager.service";
 
-describe('PagerService', () => {
+describe("PagerService", () => {
   let service: PagerService;
 
   beforeEach(() => {
@@ -10,11 +10,11 @@ describe('PagerService', () => {
     service = TestBed.inject(PagerService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 
-  it('should init Pager with number', () => {
+  it("should init Pager with number", () => {
     const tested = new PagerService();
     tested.init(150);
     expect(tested.getFirstPage()).toEqual(1);
@@ -24,7 +24,7 @@ describe('PagerService', () => {
     expect(tested.getOffset()).toEqual(0);
   });
 
-  it('should init Pager with array', () => {
+  it("should init Pager with array", () => {
     const tested = new PagerService();
     let list = [];
     for (let i = 0; i < 150; i++) {
@@ -38,7 +38,7 @@ describe('PagerService', () => {
     expect(tested.getOffset()).toEqual(0);
   });
 
-  it('should define pager item list', () => {
+  it("should define pager item list", () => {
     const tested = new PagerService();
     let list = [];
     for (let i = 0; i < 150; i++) {
@@ -48,16 +48,16 @@ describe('PagerService', () => {
 
     expect(tested.getPagerItemList().getAll().length).toEqual(9);
     expect(tested.getPagerItemList().getAll()[0].index).toEqual(1);
-    expect(tested.getPagerItemList().getAll()[0].label).toEqual('<<');
+    expect(tested.getPagerItemList().getAll()[0].label).toEqual("<<");
     expect(tested.getPagerItemList().getAll()[1].index).toEqual(1);
-    expect(tested.getPagerItemList().getAll()[1].label).toEqual('<');
+    expect(tested.getPagerItemList().getAll()[1].label).toEqual("<");
     expect(tested.getPagerItemList().getAll()[7].index).toEqual(2);
-    expect(tested.getPagerItemList().getAll()[7].label).toEqual('>');
+    expect(tested.getPagerItemList().getAll()[7].label).toEqual(">");
     expect(tested.getPagerItemList().getAll()[8].index).toEqual(30);
-    expect(tested.getPagerItemList().getAll()[8].label).toEqual('>>');
+    expect(tested.getPagerItemList().getAll()[8].label).toEqual(">>");
   });
 
-  it('should manage options', () => {
+  it("should manage options", () => {
     const tested = new PagerService();
     tested.init(150, { itemPerPage: 10, firstPage: 1, maxPagerItem: 10 });
     expect(tested.getFirstPage()).toEqual(1);
@@ -65,7 +65,7 @@ describe('PagerService', () => {
     expect(tested.getPagerItemList().getAll().length).toEqual(14);
   });
 
-  it('should navigate to next page or previous', () => {
+  it("should navigate to next page or previous", () => {
     const tested = new PagerService();
     tested.init(150);
     tested.goToNextPage();
@@ -96,7 +96,7 @@ describe('PagerService', () => {
     expect(tested.getOffset()).toEqual(5);
   });
 
-  it('should navigate to last page or first', () => {
+  it("should navigate to last page or first", () => {
     const tested = new PagerService();
     tested.init(150);
     tested.goToLastPage();
@@ -118,7 +118,7 @@ describe('PagerService', () => {
     expect(tested.getOffset()).toEqual(0);
   });
 
-  it('should not be able to navigate out of first or last', () => {
+  it("should not be able to navigate out of first or last", () => {
     const tested = new PagerService();
     tested.init(150);
     tested.goToLastPage();
@@ -142,7 +142,7 @@ describe('PagerService', () => {
     expect(tested.getOffset()).toEqual(0);
   });
 
-  it('should navigte to specific page', () => {
+  it("should navigte to specific page", () => {
     const tested = new PagerService();
     tested.init(150);
     tested.goToPage(5);
@@ -157,7 +157,7 @@ describe('PagerService', () => {
     }).toThrow(new PageIndexDoesNotExists());
   });
 
-  it('should get right offset page', () => {
+  it("should get right offset page", () => {
     const tested = new PagerService();
     tested.init(150);
 
