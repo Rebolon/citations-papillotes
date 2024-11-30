@@ -606,6 +606,7 @@ const data: FixtureCiteI[] = [
   {cite: `Une vie réussie est un rêve d'enfance réalisé à l'âge mûr.`, author: `Proverbe marocain`, tags: []},
   {cite: `Le mal est à l'amour ce que le mystère est à l'intelligence.`, author: `Simone Weil`, tags: ['mal']},
   {cite: `Ce que nous sommes est le résultat de ce que nous avons pensé.`, author: `Bouddha`, tags: ['soi', 'pensée']},
+  {cite: `Lart n'est nullement nécessaire. Tout ce qu'il faut pour rendre ce monde plus habitable, c'est l'amour.`, author: `Isadora Duncan`, tags: ['amour']},
   // {cite: `.`, author: ``, tags: []},
 
   ];
