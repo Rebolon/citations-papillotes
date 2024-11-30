@@ -1,0 +1,1 @@
+import{$a as p,Ea as a,f as n,ja as o,nb as i}from"./chunk-6SRRDQHX.mjs";n();o();i();var s=(()=>{class e{static \u0275fac=function(t){return new(t||e)};static \u0275cmp=a({type:e,selectors:[["app-page-not-found"]],decls:1,vars:0,template:function(t,r){t&1&&p(0,"Lost In Space ?")},encapsulation:2,changeDetection:0})}return e})();export{s as PageNotFoundComponent};

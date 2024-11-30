@@ -22,11 +22,18 @@ import { Authors } from "../../services/Cites/Authors";
 import { Device } from "../../tools/Device";
 import { BasePaginatedComponent } from "../common/BasePaginatedComponent";
 import { PagerComponent } from "../pager/pager.component";
+import { LinkCitesByAuthorComponent } from "../link-cites-by-author/link-cites-by-author.component";
 
 @Component({
   selector: "app-list-authors",
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgClass, NgPlural, NgPluralCase, RouterLink, PagerComponent],
+  imports: [
+    NgClass,
+    NgPlural,
+    NgPluralCase,
+    LinkCitesByAuthorComponent,
+    PagerComponent,
+  ],
   template: `
     <div class="container mb-36">
       <h1
@@ -66,9 +73,8 @@ import { PagerComponent } from "../pager/pager.component";
       <ul class="list-none">
         @for (item of displayedPaginatedAuthors(); track item.getName()) {
           <li class="p-1">
-            <a routerLink="/authors/{{ item.getName() }}"
-              >{{ item.getName() }} <small>({{ item.getCount() }})</small></a
-            >
+            <app-link-cites-by-author
+              [author]="item.getName()"><small>({{ item.getCount() }})</small></app-link-cites-by-author>
           </li>
         }
       </ul>

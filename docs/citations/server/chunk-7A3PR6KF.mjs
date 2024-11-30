@@ -1,0 +1,1 @@
+import{B as i,N as s,f as r,ja as a,k as t,la as c,nb as f}from"./chunk-6SRRDQHX.mjs";r();a();s();f();var m=(()=>{class e{refresh=new t(!1);refresh$=this.refresh.asObservable().pipe(i(250));click(){this.refresh.next(!0)}static \u0275fac=function(o){return new(o||e)};static \u0275prov=c({token:e,factory:e.\u0275fac})}return e})();export{m as a};

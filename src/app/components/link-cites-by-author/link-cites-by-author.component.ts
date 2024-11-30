@@ -7,11 +7,12 @@ import { RouterLink } from "@angular/router";
   imports: [RouterLink],
   template: `
     <a
-      routerLink="/authors/{{ author() }}"
+      routerLink="/cites-by-authors/{{ author() }}"
       title="Liste des citations de {{ author() }}"
       attr.aria-label="Liste des citations de {{ author() }}">
       {{ author() }}
     </a>
+    <ng-content></ng-content>
   `,
 })
 export class LinkCitesByAuthorComponent {

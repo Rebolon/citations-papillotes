@@ -1,0 +1,1 @@
+import{F as t,Z as i,j as r}from"./chunk-NIGT2CQE.js";var f=(()=>{class e{refresh=new r(!1);refresh$=this.refresh.asObservable().pipe(t(250));click(){this.refresh.next(!0)}static \u0275fac=function(a){return new(a||e)};static \u0275prov=i({token:e,factory:e.\u0275fac})}return e})();export{f as a};
