@@ -1,6 +1,6 @@
 import { mergeApplicationConfig, ApplicationConfig } from "@angular/core";
 import { appConfig } from "./app.config";
-import { provideServerRendering, withRoutes } from '@angular/ssr';
+import { provideServerRendering, withRoutes } from "@angular/ssr";
 import { serverRoutes } from "./app.routes.server";
 
 const serverConfig: ApplicationConfig = {
@@ -8,6 +8,3 @@ const serverConfig: ApplicationConfig = {
 };
 
 export const config = mergeApplicationConfig(appConfig, serverConfig);
-
-// @ts-expect-error - mock for prerender
-global.navigator = {};
