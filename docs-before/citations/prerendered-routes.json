@@ -1,0 +1,9 @@
+{
+  "routes": [
+    "/",
+    "/authors",
+    "/cites",
+    "/random",
+    "/search"
+  ]
+}
