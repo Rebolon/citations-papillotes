@@ -1,10 +1,12 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable, PLATFORM_ID } from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
 
 @Injectable()
 export class Device {
+  private platformId = inject(PLATFORM_ID);
+
   isMobile(): boolean {
-    // This check is for prerender prevent errors
-    return Object.keys(navigator).length
+    return isPlatformBrowser(this.platformId) && Object.keys(navigator).length
       ? navigator.userAgent.includes("Mobile")
       : false;
   }

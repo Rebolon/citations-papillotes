@@ -1,18 +1,13 @@
 import { mergeApplicationConfig, ApplicationConfig } from "@angular/core";
-import { provideServerRendering } from "@angular/platform-server";
 import { appConfig } from "./app.config";
-import { provideServerRoutesConfig } from "@angular/ssr";
+import { provideServerRendering, withRoutes } from '@angular/ssr';
 import { serverRoutes } from "./app.routes.server";
 
 const serverConfig: ApplicationConfig = {
-  providers: [
-    provideServerRendering(),
-    provideServerRoutesConfig(serverRoutes),
-  ],
+  providers: [provideServerRendering(withRoutes(serverRoutes))],
 };
 
 export const config = mergeApplicationConfig(appConfig, serverConfig);
 
-// mock for prerender
-// @ts-ignore
+// @ts-expect-error - mock for prerender
 global.navigator = {};
