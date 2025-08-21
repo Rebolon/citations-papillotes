@@ -7,34 +7,34 @@ export default {
   routes: undefined,
   entryPointToBrowserMapping: {
   "src/app/components/home/home.component.ts": [
-    "chunk-NKEOTNKR.js",
-    "chunk-HHR2LUHR.js"
+    "chunk-3NPK73PV.js",
+    "chunk-OSTB4PJW.js"
   ],
   "src/app/components/list-cites/list-cites.component.ts": [
-    "chunk-AKZJRJKX.js",
-    "chunk-3NCNARNJ.js",
-    "chunk-HHR2LUHR.js"
+    "chunk-KO64DIUF.js",
+    "chunk-VWBF3JJ4.js",
+    "chunk-OSTB4PJW.js"
   ],
   "src/app/components/list-authors/list-authors.component.ts": [
-    "chunk-U3UJAD3I.js",
-    "chunk-3NCNARNJ.js",
-    "chunk-HHR2LUHR.js"
+    "chunk-EUXEF3DS.js",
+    "chunk-VWBF3JJ4.js",
+    "chunk-OSTB4PJW.js"
   ],
   "src/app/components/list-cites-by-authors/list-cites-by-authors.component.ts": [
-    "chunk-NOFH3SHK.js",
-    "chunk-3NCNARNJ.js"
+    "chunk-X6BVLXV3.js",
+    "chunk-VWBF3JJ4.js"
   ],
   "src/app/components/random/random.component.ts": [
-    "chunk-P5LKB6JI.js",
-    "chunk-HHR2LUHR.js"
+    "chunk-3RYGNIWL.js",
+    "chunk-OSTB4PJW.js"
   ],
   "src/app/components/pageNotFound/page-not-found.component.ts": [
-    "chunk-B33Q45NB.js"
+    "chunk-X4PAPP5N.js"
   ]
 },
   assets: {
-    'index.csr.html': {size: 4343, hash: '2ce450edc5babb6647578ff1de700f0f8b2b583cdae0b06a4986b1d046962016', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
-    'index.server.html': {size: 3181, hash: 'aa5351171705ef4953a2afe1db31a90e6603982b0e34d47ade68517d37eb8461', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
+    'index.csr.html': {size: 4284, hash: '21c1ff8ef188bc26d8023f109a3b7cb10b3b7fac5d8bb362a66251de312773a6', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
+    'index.server.html': {size: 3122, hash: '1bfe0a73da18184f1df002fb2d04b9590d1806c3d05149f432596fcc75258820', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
     'styles-DCLCEWXX.css': {size: 8905, hash: 'DMmkLeYjqHI', text: () => import('./assets-chunks/styles-DCLCEWXX_css.mjs').then(m => m.default)}
   },
 };
